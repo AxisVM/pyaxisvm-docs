@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="EN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>axisvm.com.axapp &mdash; PyAxisVM v1.0.5-git documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme_override.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> PyAxisVM
+          </a>
+              <div class="version">
+                v1.0.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks.html">Notebooks</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../downloads.html">Downloadable Examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyAxisVM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>axisvm.com.axapp</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for axisvm.com.axapp</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">axisvm</span>
+
+<span class="kn">from</span> <span class="nn">.core.wrap</span> <span class="kn">import</span> <span class="n">AxWrapper</span>
+<span class="kn">from</span> <span class="nn">.axmodel</span> <span class="kn">import</span> <span class="n">IAxisVMModel</span><span class="p">,</span> <span class="n">IAxisVMModels</span>
+<span class="kn">from</span> <span class="nn">.axcatalog</span> <span class="kn">import</span> <span class="n">IAxisVMCatalog</span>
+
+
+<div class="viewcode-block" id="IAxisVMApplication"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMApplication</span><span class="p">(</span><span class="n">AxWrapper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for the `IAxisVMApplication` COM interface.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">IAxisVMModel</span><span class="p">(</span><span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">new_model</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a pointer object to the `IAxisVMApplication` COM interface of </span>
+<span class="sd">        the embedding AxisVM instance.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMModels` COM interface.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">IAxisVMModels</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Models</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a pointer object to the `IAxisVMModel` COM interface of the</span>
+<span class="sd">        active model in AxisVM.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        As of now, AxisVM only supports one active model at once, but this may </span>
+<span class="sd">        change later. Nontheless, the interface is designed as if it was able to handle</span>
+<span class="sd">        multiple active models.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span>
+
+    <span class="nd">@model</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the active model.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">IAxisVMModel</span><span class="p">(</span><span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">value</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">new_model</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">LoadFromFile</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;File </span><span class="si">{}</span><span class="s2"> not found!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Invalid input : </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+<div class="viewcode-block" id="IAxisVMApplication.new_model"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.new_model">[docs]</a>    <span class="k">def</span> <span class="nf">new_model</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMModel</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates new model and returns a pointer object to its `IAxisVMModel` </span>
+<span class="sd">        COM interface. Optinally, it saves the model, given that a valid file</span>
+<span class="sd">        path is provided.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span></div>
+
+<div class="viewcode-block" id="IAxisVMApplication.UnLoadCOMclients"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.UnLoadCOMclients">[docs]</a>    <span class="k">def</span> <span class="nf">UnLoadCOMclients</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;        </span>
+<span class="sd">        Stops, unloads and releases memory taken by COM clients (addons, plugins </span>
+<span class="sd">        and addon-plugins), then closes the application. </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Returns 1 if succesful.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">UnLoadCOMclients</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IAxisVMApplication.BringToFront"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.BringToFront">[docs]</a>    <span class="k">def</span> <span class="nf">BringToFront</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Bring AxisVM above other opened applications.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            1 if succesful, 0 otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">BringToFront</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IAxisVMApplication.ChangeUnitSystem"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.ChangeUnitSystem">[docs]</a>    <span class="k">def</span> <span class="nf">ChangeUnitSystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Bring AxisVM above other opened applications.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            1 if succesful, 0 otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="IAxisVMApplication.CustomFunction"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.CustomFunction">[docs]</a>    <span class="k">def</span> <span class="nf">CustomFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">jsonIN</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">jsonOUT</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function was introduced to allow for new functions and features which will</span>
+<span class="sd">        be fully implemented in a future version of the COM server. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        customId : str</span>
+<span class="sd">            Custom function index.</span>
+
+<span class="sd">        jsonIN : str</span>
+<span class="sd">            Input parameters in JSON format.</span>
+
+<span class="sd">        jsonOUT : str</span>
+<span class="sd">            Output parameters in JSON format.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        jsonOUT : str</span>
+<span class="sd">            Output parameters in JSON format.</span>
+
+<span class="sd">        int </span>
+<span class="sd">            Number of fields in JSON output if call is successful, otherwise an error code</span>
+<span class="sd">            `errJSONpropertyMissing` or `errNotImplemented`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">CustomFunction</span><span class="p">(</span><span class="n">customId</span><span class="p">,</span> <span class="n">jsonIN</span><span class="p">,</span> <span class="n">jsonOUT</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">jsonOUT</span><span class="p">,</span> <span class="n">r</span></div>
+
+<div class="viewcode-block" id="IAxisVMApplication.DisableMainForm"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.DisableMainForm">[docs]</a>    <span class="k">def</span> <span class="nf">DisableMainForm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disable all controls on AxisVM form including the selection toolbar.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">EnableMainForm</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IAxisVMApplication.EnableMainForm"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.EnableMainForm">[docs]</a>    <span class="k">def</span> <span class="nf">EnableMainForm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enable all controls on AxisVM form.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">EnableMainForm</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IAxisVMApplication.HandleMessages"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.HandleMessages">[docs]</a>    <span class="k">def</span> <span class="nf">HandleMessages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles the messages in AxisVM and the COM client while the COM client is</span>
+<span class="sd">        blocking the thread being executed. It is used as the body of a loop, that will</span>
+<span class="sd">        continue to run till an external event sets a flag. The flag is set in the COM</span>
+<span class="sd">        client usually through an event such as</span>
+<span class="sd">        IAxisVMModelsEvents.SelectionProcessingChanged, when for example it is</span>
+<span class="sd">        called with NewStatus = false (signalling the fact that the user has ended the</span>
+<span class="sd">        selection process). While the thread being executed is blocked, the COM client</span>
+<span class="sd">        will still receive events indirectly through HandleMessages, making it possible</span>
+<span class="sd">        to process those events and ultimately to set the flag that will unblock the</span>
+<span class="sd">        thread which was blocked through the loop.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">HandleMessages</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IAxisVMApplication.MessageDlg"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.MessageDlg">[docs]</a>    <span class="k">def</span> <span class="nf">MessageDlg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dlgtype</span><span class="p">,</span> <span class="n">buttons</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shows a message dialog in AxisVM.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : str</span>
+<span class="sd">            Title of the dialog window.</span>
+
+<span class="sd">        message : str</span>
+<span class="sd">            Message text of the dialog window.</span>
+
+<span class="sd">        dlgtype : `EMessageDialogType`</span>
+<span class="sd">            Dialog type.</span>
+
+<span class="sd">        buttons : int</span>
+<span class="sd">            This value can be calculated by adding up the `EMessageDialogButton` values </span>
+<span class="sd">            of the required buttons( e.g. for showing YES and NO buttons; values is: </span>
+<span class="sd">            mdbNo + mdbYes).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            The value of the button the user clicked</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">MessageDlg</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">dlgtype</span><span class="p">,</span> <span class="n">buttons</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IAxisVMApplication.Quit"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.Quit">[docs]</a>    <span class="k">def</span> <span class="nf">Quit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;        </span>
+<span class="sd">        Stops, unloads and releases memory taken by COM clients (addons, plugins </span>
+<span class="sd">        and addon-plugins), then closes the application. </span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        It also releases the Python resources associated with the COM connection.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
+        <span class="nb">delattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_wrapped&#39;</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ApplicationClose</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determines how AxisVM should close if other clients are connected; if it</span>
+<span class="sd">        should show a message or disable AxisVM closing while COM client runs.</span>
+
+<span class="sd">        Read and write property.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">ApplicationClose</span>
+
+    <span class="nd">@ApplicationClose</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">ApplicationClose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determines how AxisVM should close if other clients are connected; if it</span>
+<span class="sd">        should show a message or disable AxisVM closing while COM client runs.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : `EApplicationClose`</span>
+<span class="sd">            See the docs of `EApplicationClose` for the details.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">ApplicationClose</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">AskCloseOnLastReleased</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determines whether the COM server shutdown displays a query to close the</span>
+<span class="sd">        AxisVM application as well. </span>
+
+<span class="sd">        Read and write property</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">AskCloseOnLastReleased</span>
+
+    <span class="nd">@AskCloseOnLastReleased</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">AskCloseOnLastReleased</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determines whether the COM server shutdown displays a query to close the</span>
+<span class="sd">        AxisVM application as well. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : bool</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">AskCloseOnLastReleased</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">AskSaveOnLastReleased</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If True, on any attempt to shutdown the COM server a dialog window pops up, </span>
+<span class="sd">        to warn us to save our model. </span>
+
+<span class="sd">        Read and write property</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        ----- </span>
+<span class="sd">        The model should be saved after modification or if newer version of</span>
+<span class="sd">        AxisVM is used.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">AskSaveOnLastReleased</span>
+
+    <span class="nd">@AskSaveOnLastReleased</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">AskSaveOnLastReleased</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If True, on any attempt to shutdown the COM server a dialog window pops up, </span>
+<span class="sd">        to warn us to save our model. </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">AskSaveOnLastReleased</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">AxisVMPlatform</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get AxisVM version type (32/64bit).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            32 bit AxisVM -&gt; 0</span>
+
+<span class="sd">            64 bit AxisVM -&gt; 1</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">AxisVMPlatform</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Catalog</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMCatalog</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get AxisVM catalog interface for standard materials and cross-sections.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">IAxisVMCatalog</span><span class="p">(</span><span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Catalog</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">LTWH</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">L</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MainFormWindowLeft</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MainFormWindowTop</span><span class="p">,</span>
+                      <span class="bp">self</span><span class="o">.</span><span class="n">MainFormWindowWidth</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MainFormWindowHeight</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">L</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">H</span>
+
+    <span class="k">def</span> <span class="nf">_get_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the representation methods (internal helper).&quot;&quot;&quot;</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">platform</span> <span class="o">=</span> <span class="s1">&#39;32&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">AxisVMPlatform</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;64&#39;</span>
+        <span class="n">platform</span> <span class="o">+=</span> <span class="s1">&#39; bit&#39;</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;AxisVM Platform&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">LibraryMajorVersion</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">LibraryMinorVersion</span><span class="p">)</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;AxisVM Version&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Version</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Type Library Version&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">attrs</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2022, Bence Balogh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

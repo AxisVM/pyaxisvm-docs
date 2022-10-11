@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="EN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started &mdash; PyAxisVM v1.0.5-git documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme_override.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> PyAxisVM
+          </a>
+              <div class="version">
+                v1.0.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloadable Examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples Gallery</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyAxisVM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Getting Started</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h1>
+<section id="installation-and-testing">
+<h2>Installation and testing<a class="headerlink" href="#installation-and-testing" title="Permalink to this heading">¶</a></h2>
+<section id="register-axisvm-s-type-library">
+<h3>Register AxisVM’s Type Library<a class="headerlink" href="#register-axisvm-s-type-library" title="Permalink to this heading">¶</a></h3>
+<p>If this is not your first time using <strong>AxisVM</strong> through a COM interface on your machine, you should already have a registered type library and you can skip this step. Otherwise, follow the instructions at the beginning of the <em><strong>AxisVM API Reference Guide</strong></em>.</p>
+</section>
+<section id="install-pyaxisvm">
+<h3>Install PyAxisVM<a class="headerlink" href="#install-pyaxisvm" title="Permalink to this heading">¶</a></h3>
+<p>This is optional, but we suggest you to create a dedicated virtual enviroment at all times to avoid conflicts with your other projects. Create a folder, open a command shell in that folder and use the following command</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; python -m venv venv_name</span>
+</pre></div>
+</div>
+<p>Once the enviroment is created, activate it via typing</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; .\venv_name\Scripts\activate</span>
+</pre></div>
+</div>
+<p>The <strong>AxisVM</strong> python package can be installed (either in a virtual enviroment or globally) from PyPI using <code class="docutils literal notranslate"><span class="pre">pip</span></code> on Python &gt;= 3.6:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; pip install axisvm</span>
+</pre></div>
+</div>
+</section>
+<section id="launch-axisvm-from-python">
+<h3>Launch AxisVM from Python<a class="headerlink" href="#launch-axisvm-from-python" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">axisvm.com.client</span></code> submodule implements various tools to handle the client side operations of creating a COM connection. Import the module and start a new application instance with the <code class="docutils literal notranslate"><span class="pre">start_AxisVM</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="n">axapp</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To test the connection, you can query the path of the executable being run by typing <code class="docutils literal notranslate"><span class="pre">axapp.FullExePath</span></code>.</p>
+</section>
+</section>
+<section id="how-to-use-the-api">
+<h2>How to use the API<a class="headerlink" href="#how-to-use-the-api" title="Permalink to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pyaxisvm</span></code> has two layers. The first one is the raw type library extracted from AxisVM using the <code class="docutils literal notranslate"><span class="pre">comptypes</span></code> package. We are working on an online version of it, until that the documentation of this layer is only available in pdf format, that you should already posess at the moment of reading this notebook. If you don’t have it yet, go to our website, and look for it under downloads. Be careful to download the documentation that matches the version of your AxisVM instance.</p>
+<section id="basic-api-usage">
+<h3>Basic API usage<a class="headerlink" href="#basic-api-usage" title="Permalink to this heading">¶</a></h3>
+<p>Firts of all, we need a runnning AxisVM either in the background, or with the graphical interface.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="n">axvm</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As a consequence of the hierarchical structure of the models in AxisVM, every model creation proccess starts with nodes. To create nodes we need an interface to the nodes of the application. This is achieved by the <code class="docutils literal notranslate"><span class="pre">IAxisVMNodes</span></code> class of the type library. If you look it up in the pdf document, you will see this:</p>
+<p><img alt="IAxisVMNodes" src="_images/IAxisVMNodes.png" /></p>
+<p>Just like other interfaces, the documentation of <code class="docutils literal notranslate"><span class="pre">IAxisVMNodes</span></code> begins with listing the enumerations and records specific to nodes. Below these, you can see the functions of the interface.</p>
+<p><img alt="Functions" src="_images/IAxisVMNodes_Functions.png" /></p>
+<p>After all the functions, the documentation of the interface is finished by listing the properties of the interface.</p>
+<p><img alt="Properties" src="_images/IAxisVMNodes_Properties.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="n">axvm</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">modelId</span> <span class="o">=</span> <span class="n">axvm</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">axvm</span><span class="o">.</span><span class="n">Models</span><span class="p">[</span><span class="n">modelId</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Right below the <code class="docutils literal notranslate"><span class="pre">Add</span></code> function, there is the <code class="docutils literal notranslate"><span class="pre">AddWithDOF</span></code>, with the following documentation:</p>
+<p><img alt="Properties" src="_images/IAxisVMNodes_AddWithDof.png" /></p>
+<p>It tells, that the function needs to be called with specifying three scalar values and a fourth one specifying a DOF component. The enumeration <code class="docutils literal notranslate"><span class="pre">EDegreeOfFreedom</span></code> was listed at the beginning of the documentation of the interface.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.tlb</span> <span class="kn">import</span> <span class="n">dofFree</span>
+<span class="n">id1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dofFree</span><span class="p">)</span>
+<span class="n">id2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dofFree</span><span class="p">)</span>
+<span class="n">id3</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dofFree</span><span class="p">)</span>
+<span class="n">id4</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dofFree</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After the session has ended, close the application by</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">axvm</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2022, Bence Balogh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="EN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyAxisVM - The official python package for AxisVM &mdash; PyAxisVM v1.0.5-git documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme_override.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Notebooks" href="notebooks.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> PyAxisVM
+          </a>
+              <div class="version">
+                v1.0.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloadable Examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples Gallery</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">PyAxisVM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>PyAxisVM - The official python package for <strong>AxisVM</strong></li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<img alt="_images/AxisVM_logo.bmp" src="_images/AxisVM_logo.bmp" />
+<section id="pyaxisvm-the-official-python-package-for-axisvm">
+<h1>PyAxisVM - The official python package for <strong>AxisVM</strong><a class="headerlink" href="#pyaxisvm-the-official-python-package-for-axisvm" title="Permalink to this heading">¶</a></h1>
+<hr class="docutils" />
+<img alt="_images/gt40.png" src="_images/gt40.png" />
+<p>The <strong>PyAxisVM</strong> project offers a high-level interface to <strong>AxisVM</strong>,
+making its operations available directly from Python. It builds on top of
+Microsoft’s COM technology and supports all the features of the original
+<strong>AxisVM</strong> COM type library, making you able to</p>
+<ul class="simple">
+<li><p>build, manipulate and analyse <strong>AxisVM</strong> models</p></li>
+<li><p>find better solutions with iterative methods</p></li>
+<li><p>combine the power of <strong>AxisVM</strong> with third-party Python libraries</p></li>
+<li><p>build extension modules</p></li>
+</ul>
+<p>On top of that, <strong>PyAxisVM</strong> enhances the type library with Python’s slicing
+mechanism, context management and more, that enables writing clean, concise,
+and readable code.</p>
+<section id="getting-started">
+<span id="getting-started"></span><h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h2>
+<section id="installation-and-testing">
+<h3>Installation and testing<a class="headerlink" href="#installation-and-testing" title="Permalink to this heading">¶</a></h3>
+<section id="register-axisvm-s-type-library">
+<h4>Register AxisVM’s Type Library<a class="headerlink" href="#register-axisvm-s-type-library" title="Permalink to this heading">¶</a></h4>
+<p>If this is not your first time using <strong>AxisVM</strong> through a COM interface on your machine, you should already have a registered type library and you can skip this step. Otherwise, follow the instructions at the beginning of the <em><strong>AxisVM API Reference Guide</strong></em>.</p>
+</section>
+<section id="install-pyaxisvm">
+<h4>Install PyAxisVM<a class="headerlink" href="#install-pyaxisvm" title="Permalink to this heading">¶</a></h4>
+<p>This is optional, but we suggest you to create a dedicated virtual enviroment at all times to avoid conflicts with your other projects. Create a folder, open a command shell in that folder and use the following command</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; python -m venv venv_name</span>
+</pre></div>
+</div>
+<p>Once the enviroment is created, activate it via typing</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; .\venv_name\Scripts\activate</span>
+</pre></div>
+</div>
+<p>The <strong>AxisVM</strong> python package can be installed (either in a virtual enviroment or globally) from PyPI using <code class="docutils literal notranslate"><span class="pre">pip</span></code> on Python &gt;= 3.6:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; pip install axisvm</span>
+</pre></div>
+</div>
+</section>
+<section id="launch-axisvm-from-python">
+<h4>Launch AxisVM from Python<a class="headerlink" href="#launch-axisvm-from-python" title="Permalink to this heading">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">axisvm.com.client</span></code> submodule implements various tools to handle the client side operations of creating a COM connection. Import the module and start a new application instance with the <code class="docutils literal notranslate"><span class="pre">start_AxisVM</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="n">axapp</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To test the connection, you can query the path of the executable being run by typing <code class="docutils literal notranslate"><span class="pre">axapp.FullExePath</span></code>.</p>
+</section>
+</section>
+<section id="how-to-use-the-api">
+<h3>How to use the API<a class="headerlink" href="#how-to-use-the-api" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pyaxisvm</span></code> has two layers. The first one is the raw type library extracted from AxisVM using the <code class="docutils literal notranslate"><span class="pre">comptypes</span></code> package. We are working on an online version of it, until that the documentation of this layer is only available in pdf format, that you should already posess at the moment of reading this notebook. If you don’t have it yet, go to our website, and look for it under downloads. Be careful to download the documentation that matches the version of your AxisVM instance.</p>
+<section id="basic-api-usage">
+<h4>Basic API usage<a class="headerlink" href="#basic-api-usage" title="Permalink to this heading">¶</a></h4>
+<p>Firts of all, we need a runnning AxisVM either in the background, or with the graphical interface.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="n">axvm</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As a consequence of the hierarchical structure of the models in AxisVM, every model creation proccess starts with nodes. To create nodes we need an interface to the nodes of the application. This is achieved by the <code class="docutils literal notranslate"><span class="pre">IAxisVMNodes</span></code> class of the type library. If you look it up in the pdf document, you will see this:</p>
+<p><img alt="IAxisVMNodes" src="_images/IAxisVMNodes.png" /></p>
+<p>Just like other interfaces, the documentation of <code class="docutils literal notranslate"><span class="pre">IAxisVMNodes</span></code> begins with listing the enumerations and records specific to nodes. Below these, you can see the functions of the interface.</p>
+<p><img alt="Functions" src="_images/IAxisVMNodes_Functions.png" /></p>
+<p>After all the functions, the documentation of the interface is finished by listing the properties of the interface.</p>
+<p><img alt="Properties" src="_images/IAxisVMNodes_Properties.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="n">axvm</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">modelId</span> <span class="o">=</span> <span class="n">axvm</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">axvm</span><span class="o">.</span><span class="n">Models</span><span class="p">[</span><span class="n">modelId</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Right below the <code class="docutils literal notranslate"><span class="pre">Add</span></code> function, there is the <code class="docutils literal notranslate"><span class="pre">AddWithDOF</span></code>, with the following documentation:</p>
+<p><img alt="Properties" src="_images/IAxisVMNodes_AddWithDof.png" /></p>
+<p>It tells, that the function needs to be called with specifying three scalar values and a fourth one specifying a DOF component. The enumeration <code class="docutils literal notranslate"><span class="pre">EDegreeOfFreedom</span></code> was listed at the beginning of the documentation of the interface.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.tlb</span> <span class="kn">import</span> <span class="n">dofFree</span>
+<span class="n">id1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dofFree</span><span class="p">)</span>
+<span class="n">id2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dofFree</span><span class="p">)</span>
+<span class="n">id3</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dofFree</span><span class="p">)</span>
+<span class="n">id4</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dofFree</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After the session has ended, close the application by</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">axvm</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="tips-and-tricks">
+<h2>Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Permalink to this heading">¶</a></h2>
+<p>This page sums up the changes in syntax, compared to the ‘raw’ usage of the COM type library. Everything the API provides out of the box is still available and is working as ever, but the syntax of Python provides a few shortcuts to make coding easier.</p>
+<section id="collections-and-slicing">
+<h3>Collections and Slicing<a class="headerlink" href="#collections-and-slicing" title="Permalink to this heading">¶</a></h3>
+<p>When accessing items of collection-like COM classes (like <code class="docutils literal notranslate"><span class="pre">IAxisVMDomains</span></code>, <code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces</span></code>, anything having an <code class="docutils literal notranslate"><span class="pre">Item</span></code> method), you can use the slicing mechanism of Python. Suppose that we have an <code class="docutils literal notranslate"><span class="pre">IAxisVMModel</span></code>  instance called <code class="docutils literal notranslate"><span class="pre">axm</span></code>. The model has several domains, each of them having the property <code class="docutils literal notranslate"><span class="pre">Weight</span></code>. Let say we want to calculate the weight of all domains. The out of box solution for this would be something like</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">Count</span><span class="p">):</span>
+    <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">Weight</span><span class="p">)</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or using a list comprehension</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weight</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">Weight</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">Count</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>or maybe even this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surfaces</span> <span class="o">=</span> <span class="p">[</span><span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">Count</span><span class="p">)]</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span> <span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">surfaces</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Anyhow, although there is nothing inherently wrong with these approaches, they clearly doesn’t measure up to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># if you are new to this, the colon means &#39;all indices in range&#39;</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">[:]</span><span class="o">.</span><span class="n">Weight</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weight</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">Weight</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or maybe</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weight</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span> <span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Notice how the loops here are carried out over the collection object itself. This is because collection types implement the so-called iterator protocol.</p>
+<p>It is also possible to provide negative indices:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">Weight</span> <span class="c1"># equivalent to axm.Surfaces[axm.Surfaces.Count].Weight</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">Weight</span> <span class="c1"># equivalent to axm.Surfaces[axm.Surfaces.Count - 1].Weight</span>
+</pre></div>
+</div>
+<p>Without further due, some other use cases that exploit Python’s slicing mechanism:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">Weight</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">Weight</span>  <span class="c1"># equivalent to axm.Surfaces[1, 2, 3].Weight</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">Weight</span>  <span class="c1"># equivalent to axm.Surfaces[1, 3, 5, 7].Weight</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">Weight</span>  <span class="c1"># equivalent to axm.Surfaces[8, 6, 4, 2].Weight</span>
+</pre></div>
+</div>
+<p>Furthermore, instead of typing <code class="docutils literal notranslate"><span class="pre">axm.Surfaces.Count</span></code>, you can use <code class="docutils literal notranslate"><span class="pre">len(axm.Surfaces)</span></code> to get the number of surfaces in the model.</p>
+<p><strong>Be aware here, that the index of the first item in any iterable COM object is 1, opposed to the zero-indexed nature of Python.</strong></p>
+</section>
+<section id="context-management">
+<h3>Context Management<a class="headerlink" href="#context-management" title="Permalink to this heading">¶</a></h3>
+<p>If you have some experience with AxisVM and COM, you know about the methods <code class="docutils literal notranslate"><span class="pre">BeginUpdate</span></code> and <code class="docutils literal notranslate"><span class="pre">EndUpdate</span></code>. With python, you don’t need to care about this, instead you can simply use the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement like this</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">axm</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="c1"># do some modification here on the model</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="accessing-the-type-library">
+<h3>Accessing the Type Library<a class="headerlink" href="#accessing-the-type-library" title="Permalink to this heading">¶</a></h3>
+<p>When a new instace of <code class="docutils literal notranslate"><span class="pre">IAxisVMApplication</span></code> is created, the type library is generated on demand. After that, the type library can be accessed as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">axisvm.com.tlb</span> <span class="k">as</span> <span class="nn">axtlb</span>
+</pre></div>
+</div>
+</section>
+<section id="daemon-true">
+<h3><code class="docutils literal notranslate"><span class="pre">daemon=True</span></code><a class="headerlink" href="#daemon-true" title="Permalink to this heading">¶</a></h3>
+<p>When creating a new interface, you can do it like</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="n">axvm</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The keyword argument <code class="docutils literal notranslate"><span class="pre">daemon=True</span></code> is a simple shortcut, equivalent to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="kn">import</span> <span class="nn">axisvm.com.tlb</span> <span class="k">as</span> <span class="nn">axtlb</span>
+<span class="n">axapp</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axapp</span><span class="o">.</span><span class="n">CloseOnLastReleased</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">axapp</span><span class="o">.</span><span class="n">AskCloseOnLastReleased</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">axapp</span><span class="o">.</span><span class="n">AskSaveOnLastReleased</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">axapp</span><span class="o">.</span><span class="n">ApplicationClose</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">acEnableNoWarning</span>
+</pre></div>
+</div>
+<p>As a result of these settings, if the COM server is shut down, AxisVM shuts down either, hence the term <code class="docutils literal notranslate"><span class="pre">daemon</span></code>. Shutting down the COM server can be done with typing</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">axapp</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html">Tutorials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_notebooks/console.html">Linear Analysis of Bernoulli Frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_notebooks/membrane.html">Simply supported beam as a membrane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_notebooks/plate1.html">Basic Example with Plates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_notebooks/plate2.html">Navier Plate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_python.html">Python API Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_client.html">Client-Side Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_axisvm.html">Python COM Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#application">Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#model">Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#calculation">Calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#nodes">Nodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#lines-and-members">Lines and Members</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#surfaces-and-domains">Surfaces and Domains</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloadable Examples</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples Gallery</a></li>
+</ul>
+</div>
+<section id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="notebooks.html" class="btn btn-neutral float-right" title="Notebooks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2022, Bence Balogh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

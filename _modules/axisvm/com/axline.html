@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="EN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>axisvm.com.axline &mdash; PyAxisVM v1.0.5-git documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme_override.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> PyAxisVM
+          </a>
+              <div class="version">
+                v1.0.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks.html">Notebooks</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../downloads.html">Downloadable Examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyAxisVM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>axisvm.com.axline</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for axisvm.com.axline</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span>
+
+<span class="kn">import</span> <span class="nn">awkward</span> <span class="k">as</span> <span class="nn">ak</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span> <span class="k">as</span> <span class="n">Array</span>
+<span class="kn">from</span> <span class="nn">polymesh.topo</span> <span class="kn">import</span> <span class="n">TopologyArray</span>
+<span class="kn">from</span> <span class="nn">dewloosh.plotly</span> <span class="kn">import</span> <span class="n">plot_lines_3d</span>
+
+<span class="kn">import</span> <span class="nn">axisvm</span>
+
+<span class="kn">from</span> <span class="nn">.core.abc</span> <span class="kn">import</span> <span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">AxisVMModelItems</span>
+<span class="kn">from</span> <span class="nn">.core.utils</span> <span class="kn">import</span> <span class="n">RMatrix3x3toNumPy</span><span class="p">,</span> <span class="n">RStiffness2dict</span>
+<span class="kn">from</span> <span class="nn">.attr</span> <span class="kn">import</span> <span class="n">AxisVMAttributes</span>
+
+
+<span class="n">linetype_to_str</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Truss&#39;</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;Beam&#39;</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;Rib&#39;</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;Spring&#39;</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;Gap&#39;</span><span class="p">,</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;Edge&#39;</span><span class="p">,</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="s1">&#39;Hole&#39;</span><span class="p">,</span>
+    <span class="mi">7</span><span class="p">:</span> <span class="s1">&#39;SimpleLine&#39;</span><span class="p">,</span>
+    <span class="mi">8</span><span class="p">:</span> <span class="s1">&#39;NNLink&#39;</span><span class="p">,</span>
+    <span class="mi">9</span><span class="p">:</span> <span class="s1">&#39;LLLink&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">springdir_to_str</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Global&#39;</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;Geometry&#39;</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;PointReference&#39;</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;VectorReference&#39;</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;ElementRelative&#39;</span><span class="p">,</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;NodeRelative&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">trusstype_to_str</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;TensionAndCompression&#39;</span><span class="p">,</span>  <span class="c1"># linear behaviour</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;TensionOnly&#39;</span><span class="p">,</span>  <span class="c1"># tension only</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;CompressionOnly&#39;</span><span class="p">,</span>  <span class="c1"># compression only</span>
+<span class="p">}</span>
+
+<span class="n">gaptype_to_str</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;ActiveInTension&#39;</span><span class="p">,</span>  <span class="c1"># gap active in tension only</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;ActiveInCompression&#39;</span><span class="p">,</span>  <span class="c1"># gap active in compression only</span>
+<span class="p">}</span>
+
+<span class="n">geomtype_to_str</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;StraightLine&#39;</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;CircleArc&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">line_data_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NodeId1&#39;</span><span class="p">,</span> <span class="s1">&#39;NodeId2&#39;</span><span class="p">,</span> <span class="s1">&#39;GeomType&#39;</span><span class="p">,</span> <span class="s1">&#39;CircleArc&#39;</span><span class="p">]</span>
+
+<span class="n">line_attr_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LineType&#39;</span><span class="p">,</span> <span class="s1">&#39;MaterialIndex&#39;</span><span class="p">,</span> <span class="s1">&#39;StartCrossSectionIndex&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;EndCrossSectionIndex&#39;</span><span class="p">,</span> <span class="s1">&#39;AutoEccentricityType&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">get_line_attributes</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                        <span class="n">rec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxisVMAttributes</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Turns a collection of RLineAttr records into dictionaries compatible</span>
+<span class="sd">    with `awkward` and `pandas`.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">fields</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">line_attr_fields</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">fields</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line_attr_fields</span><span class="p">,</span> <span class="n">fields</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">rec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">_get_attributes_raw</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rec</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">xyz</span><span class="p">(</span><span class="n">p</span><span class="p">):</span> <span class="k">return</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">z</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">xyz2</span><span class="p">(</span><span class="n">p</span><span class="p">):</span> <span class="k">return</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">xx</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">yy</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">zz</span><span class="p">]</span>
+    
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">if</span> <span class="s1">&#39;LineType&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;LineType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">linetype_to_str</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">LineType</span><span class="p">],</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;MaterialIndex&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;MaterialIndex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">MaterialIndex</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;StartCrossSectionIndex&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;StartCrossSectionIndex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">StartCrossSectionIndex</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;EndCrossSectionIndex&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;EndCrossSectionIndex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">EndCrossSectionIndex</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;AutoEccentricityType&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;AutoEccentricityType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">AutoEccentricityType</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;StartEccentricity&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;StartEccentricity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">RMatrix3x3toNumPy</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">StartEccentricity</span><span class="p">),</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;EndEccentricity&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;EndEccentricity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">RMatrix3x3toNumPy</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">EndEccentricity</span><span class="p">),</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;TrussType&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;TrussType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">trusstype_to_str</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">TrussType</span><span class="p">],</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;Resistance&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Resistance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">Resistance</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="s1">&#39;ServiceClass&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ServiceClass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">ServiceClass</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;kdef&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;kdef&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">kdef</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;kx&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;kx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">kx</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;Domain1&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Domain1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">Domain1</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;Domain2&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Domain2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">Domain2</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        
+    <span class="k">if</span> <span class="s1">&#39;GapType&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;GapType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">gaptype_to_str</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">GapType</span><span class="p">],</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;ActiveStiffness&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ActiveStiffness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">ActiveStiffness</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;InactiveStiffness&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;InactiveStiffness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">InactiveStiffness</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;InitialOpening&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;InitialOpening&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">InitialOpening</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;MinPenetration&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;MinPenetration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">MinPenetration</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;MaxPenetration&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;MaxPenetration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">MaxPenetration</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;AdjustmentRatio&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;AdjustmentRatio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">AdjustmentRatio</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;SpringDirection&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;SpringDirection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">springdir_to_str</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">SpringDirection</span><span class="p">],</span> <span class="n">rec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;Stiffnesses&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Stiffnesses&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">RStiffness2dict</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">Stiffnesses</span><span class="p">),</span> <span class="n">rec</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">AxisVMAttributes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="IAxisVMLine"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axline.IAxisVMLine">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMLine</span><span class="p">(</span><span class="n">AxisVMModelItem</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMLine` COM interface.&quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">StartNode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">EndNode</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">line_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_line_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">line_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_line_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrix</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">record</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">records</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the representation methods (internal helper).&quot;&quot;&quot;</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Length&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Length</span><span class="p">,</span> <span class="n">axisvm</span><span class="o">.</span><span class="n">FLOAT_FORMAT</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Volume&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Volume</span><span class="p">,</span> <span class="n">axisvm</span><span class="o">.</span><span class="n">FLOAT_FORMAT</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Weight&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">axisvm</span><span class="o">.</span><span class="n">FLOAT_FORMAT</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">attrs</span>
+
+    <span class="k">def</span> <span class="nf">topology</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopologyArray</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">TopologyArray</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">StartNode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">EndNode</span><span class="p">]))</span>
+
+    <span class="k">def</span> <span class="nf">transformation_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">MemberId</span><span class="p">]</span><span class="o">.</span><span class="n">transformation_matrix</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="IAxisVMLines"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axline.IAxisVMLines">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMLines</span><span class="p">(</span><span class="n">AxisVMModelItems</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMLines` COM interface.&quot;&quot;&quot;</span>
+
+    <span class="n">__itemcls__</span> <span class="o">=</span> <span class="n">IAxisVMLine</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">frames</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrices</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">line_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_line_attributes</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">line_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_line_data</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrices</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">records</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_line_data</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">topology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopologyArray</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">wrapped</span>
+            <span class="k">return</span> <span class="n">TopologyArray</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">StartNode</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">EndNode</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">inds</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">lines</span><span class="o">.</span><span class="n">Count</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">def</span> <span class="nf">fnc</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="p">[</span><span class="n">lines</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">StartNode</span><span class="p">,</span> <span class="n">lines</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">EndNode</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">TopologyArray</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">fnc</span><span class="p">,</span> <span class="n">inds</span><span class="p">))))</span>
+
+    <span class="k">def</span> <span class="nf">transformation_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Count</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">mids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">BulkGetMemberIds</span><span class="p">(</span><span class="n">ids</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Members</span><span class="p">[</span><span class="n">mids</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">transformation_matrix</span><span class="p">()</span>
+        <span class="n">uids</span><span class="p">,</span> <span class="n">imap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">mids</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">mtr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">transformation_matrices</span><span class="p">(</span><span class="n">uids</span><span class="p">)</span>
+        <span class="n">imap</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">mtr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">imap</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">_get_line_data_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Count</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">BulkGetLineData</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_line_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxisVMAttributes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fields</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">line_data_fields</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">fields</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line_data_fields</span><span class="p">,</span> <span class="n">fields</span><span class="p">))</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_line_data_raw</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rec</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="s1">&#39;NodeId1&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;NodeId1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">NodeId1</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;NodeId2&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;NodeId2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">NodeId2</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;GeomType&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;GeomType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">geomtype_to_str</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">GeomType</span><span class="p">],</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;CircleArc&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">xyz</span><span class="p">(</span><span class="n">p</span><span class="p">):</span> <span class="k">return</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">z</span><span class="p">]</span>
+
+            <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">ca</span><span class="p">):</span> <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">Center</span><span class="o">=</span><span class="n">xyz</span><span class="p">(</span><span class="n">ca</span><span class="o">.</span><span class="n">Center</span><span class="p">),</span>
+                <span class="n">NormalVector</span><span class="o">=</span><span class="n">xyz</span><span class="p">(</span><span class="n">ca</span><span class="o">.</span><span class="n">NormalVector</span><span class="p">),</span>
+                <span class="n">Alfa</span><span class="o">=</span><span class="n">ca</span><span class="o">.</span><span class="n">Alfa</span>
+            <span class="p">)</span>
+            <span class="k">def</span> <span class="nf">CircleArc</span><span class="p">(</span><span class="n">r</span><span class="p">):</span> <span class="k">return</span> <span class="n">foo</span><span class="p">(</span>
+                <span class="n">r</span><span class="o">.</span><span class="n">CircleArc</span><span class="p">)</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">GeomType</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;CircleArc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">CircleArc</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">AxisVMAttributes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_line_attributes_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Count</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">BulkGetAttr</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_attributes_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxisVMAttributes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_line_attributes_raw</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_line_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxisVMAttributes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">get_line_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxisVMAttributes</span><span class="p">:</span>
+        <span class="n">dfields</span><span class="p">,</span> <span class="n">afields</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">fields</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">afields</span> <span class="o">=</span> <span class="n">line_attr_fields</span>
+            <span class="n">dfields</span> <span class="o">=</span> <span class="n">line_data_fields</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">fields</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">afields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line_attr_fields</span><span class="p">,</span> <span class="n">fields</span><span class="p">))</span>
+                <span class="n">dfields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line_data_fields</span><span class="p">,</span> <span class="n">fields</span><span class="p">))</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">afields</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_line_attributes</span><span class="p">(</span>
+                <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">afields</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfields</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_line_data</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">dfields</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">AxisVMAttributes</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
+        <span class="n">topo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">plot_lines_3d</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">topo</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2022, Bence Balogh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

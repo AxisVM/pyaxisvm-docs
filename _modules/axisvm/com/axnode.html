@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="EN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>axisvm.com.axnode &mdash; PyAxisVM v1.0.5-git documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme_override.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> PyAxisVM
+          </a>
+              <div class="version">
+                v1.0.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks.html">Notebooks</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../downloads.html">Downloadable Examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyAxisVM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>axisvm.com.axnode</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for axisvm.com.axnode</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">axisvm.com.tlb</span> <span class="k">as</span> <span class="nn">axtlb</span>
+
+<span class="kn">from</span> <span class="nn">.core.wrap</span> <span class="kn">import</span> <span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">AxisVMModelItems</span>
+<span class="kn">from</span> <span class="nn">.axsurface</span> <span class="kn">import</span> <span class="n">SurfaceMixin</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;IAxisVMNode&#39;</span><span class="p">,</span> <span class="s1">&#39;IAxisVMNodes&#39;</span><span class="p">]</span>
+
+
+<span class="n">NoneType</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">IAxisVMNode</span><span class="p">(</span><span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMNode` COM interface.&quot;&quot;&quot;</span>
+    <span class="o">...</span>
+
+
+<div class="viewcode-block" id="IAxisVMNodes"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axnode.IAxisVMNodes">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMNodes</span><span class="p">(</span><span class="n">AxisVMModelItems</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMNodes` COM interface.&quot;&quot;&quot;</span>
+
+    <span class="n">__itemcls__</span> <span class="o">=</span> <span class="n">IAxisVMNode</span>
+
+<div class="viewcode-block" id="IAxisVMNodes.get_record"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_record">[docs]</a>    <span class="k">def</span> <span class="nf">get_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RNode</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RNode</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of node records or a single record, which can be specified </span>
+<span class="sd">        by keyword arguments. It can be used to turn an arbitrary specification</span>
+<span class="sd">        of nodes in an embedded situation into a list of node recirds.</span>
+<span class="sd">        For that reason it includes trivial keys. Individual elements</span>
+<span class="sd">        can be specified, but the result is always a list. If there are</span>
+<span class="sd">        no valid specifiers, then</span>
+<span class="sd">            (1) if argument &#39;all&#39; is provided, all of the nodes of the</span>
+<span class="sd">                model are returned</span>
+<span class="sd">            (2) if interactive == True, function either gets the selected</span>
+<span class="sd">                nodes from AxisVM, or if there is none, a selection \</span>
+<span class="sd">                dialog shows up in AxisVM and the function is called again \</span>
+<span class="sd">                with valid specifiers emerging from any of these scenarios.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        **kwargs : dict, Optional</span>
+<span class="sd">            Possible keyword arguments:</span>
+<span class="sd">            </span>
+<span class="sd">                node : a single node, returns a sigle record</span>
+<span class="sd">                </span>
+<span class="sd">                nodes : a list of nodes, returns a list of records</span>
+<span class="sd">                </span>
+<span class="sd">                ID : int, a single nodeID</span>
+<span class="sd">                </span>
+<span class="sd">                IDs : list of int, a sequence of nodeIDs</span>
+<span class="sd">                </span>
+<span class="sd">                UID : int, a single nodeUID</span>
+<span class="sd">                </span>
+<span class="sd">                UIDs : list of int, a sequence of nodeUIDs</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Union[axtlb.RNode, List[axtlb.RNode]]</span>
+<span class="sd">            A single record, or a list of records, depending on the input.</span>
+<span class="sd">            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;node&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="s1">&#39;nodes&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;nodes&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s1">&#39;ID&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetNode</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ID&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="k">elif</span> <span class="s1">&#39;IDs&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetNode</span><span class="p">(</span><span class="n">ID</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                         <span class="k">for</span> <span class="n">ID</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;IDs&#39;</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="s1">&#39;UID&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">ID</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">IndexOfUID</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;UID&#39;</span><span class="p">))</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetNode</span><span class="p">(</span><span class="n">ID</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="k">elif</span> <span class="s1">&#39;UIDs&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">IDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">IndexOfUID</span><span class="p">(</span><span class="n">UID</span><span class="p">)</span>
+                       <span class="k">for</span> <span class="n">UID</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;UIDs&#39;</span><span class="p">)]</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetNode</span><span class="p">(</span><span class="n">ID</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">ID</span> <span class="ow">in</span> <span class="n">IDs</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="s2">&quot;Ivalid specification of nodes!&quot;</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nodes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected</span><span class="p">(</span><span class="n">interactive</span><span class="o">=</span><span class="n">interactive</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">nodes</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s1">&#39;all&#39;</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                    <span class="n">nNode</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Count</span>
+                    <span class="n">nodeIDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nNode</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+                    <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_record</span><span class="p">(</span><span class="n">IDs</span><span class="o">=</span><span class="n">nodeIDs</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">nodes</span></div>
+
+<div class="viewcode-block" id="IAxisVMNodes.select"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shows up a selectiondialog for nodes in AxisVM and returns the selected</span>
+<span class="sd">        nodes if succesful.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        clear : boolean, Optional</span>
+<span class="sd">            Clears selection if True. Default is True.</span>
+<span class="sd">            </span>
+<span class="sd">        msg : str, Optional</span>
+<span class="sd">            The message to show. If not provided, a default message is shown. </span>
+<span class="sd">            Default is True.</span>
+<span class="sd">            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Select one or more nodes!&#39;</span>
+        <span class="n">deletecurrent</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">clear</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">StartModalSelection</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">deletecurrent</span><span class="p">,</span> <span class="s1">&#39;seltNode&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected</span><span class="p">(</span><span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IAxisVMNodes.get_selected"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_selected">[docs]</a>    <span class="k">def</span> <span class="nf">get_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a dictionary of nodes mapping node indices to node records,</span>
+<span class="sd">        or None if the selection is invalid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">_wrapped</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">nIDs</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetSelectedItemIds</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetNode</span><span class="p">(</span><span class="n">nID</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">nID</span> <span class="ow">in</span> <span class="n">nIDs</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">interactive</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">clear</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="IAxisVMNodes.get_indices"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of integers, depending on the arguments. </span>
+<span class="sd">        It can be used to turn an arbitrary specification of nodes into a list </span>
+<span class="sd">        of indices. Individual items can be specified, but the result is always a list. </span>
+<span class="sd">        If there are no valid specifiers, the function either gets the selected nodes</span>
+<span class="sd">        from AxisVM, or if there is none, a selection dialog shows up in</span>
+<span class="sd">        AxisVM and the function is called again with valid specifiers</span>
+<span class="sd">        emerging from any of these scenarios.</span>
+<span class="sd">        </span>
+<span class="sd">        Possible keys and values</span>
+<span class="sd">        </span>
+<span class="sd">            node : a single node record</span>
+<span class="sd">        </span>
+<span class="sd">            nodes : a list of node records</span>
+<span class="sd">        </span>
+<span class="sd">            ID : int, a single node index</span>
+<span class="sd">        </span>
+<span class="sd">            IDs : [int], a sequence of node indices</span>
+<span class="sd">        </span>
+<span class="sd">            UID : int, a single unique node index</span>
+<span class="sd">        </span>
+<span class="sd">            UIDs : [int], a sequence of unique node indices</span>
+<span class="sd">        </span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        The call accepts the trivial keys &#39;ID&#39; and &#39;IDs&#39; to support automatization,</span>
+<span class="sd">        where demand for trivial inputs is possible. </span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        List[int]</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        To get indices of nodes from a selection in AxisVM.</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; axvm = start_AxisVM(visible=True, daemon=True)</span>
+<span class="sd">        &gt;&gt;&gt; axvm.model = examples.download_bernoulli_grid()</span>
+<span class="sd">        &gt;&gt;&gt; axvm.model.Nodes.get_indices()</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nodeIDs</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">Model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;node&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]</span>
+                <span class="n">nodeIDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="s1">&#39;nodes&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]</span>
+                <span class="n">nodeIDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">IndexOf</span><span class="p">(</span>
+                    <span class="n">n</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">&#39;ID&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">nodeIDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]]</span>
+            <span class="k">elif</span> <span class="s1">&#39;nodeIDs&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">nodeIDs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;IDs&#39;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s1">&#39;UID&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">nodeIDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">IndexOfUID</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;UID&#39;</span><span class="p">])]</span>
+            <span class="k">elif</span> <span class="s1">&#39;UIDs&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">nodeIDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">IndexOfUID</span><span class="p">(</span>
+                    <span class="n">UID</span><span class="p">)</span> <span class="k">for</span> <span class="n">UID</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;UIDs&#39;</span><span class="p">]]</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="s2">&quot;Ivalid specification of nodeIDs!&quot;</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nodeIDs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">nodeIDs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected_indices</span><span class="p">(</span><span class="n">interactive</span><span class="o">=</span><span class="n">interactive</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">nodeIDs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s1">&#39;all&#39;</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                    <span class="n">nNode</span> <span class="o">=</span> <span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Count</span>
+                    <span class="n">nodeIDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nNode</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="n">nodeIDs</span></div>
+
+<div class="viewcode-block" id="IAxisVMNodes.select_indices"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.select_indices">[docs]</a>    <span class="k">def</span> <span class="nf">select_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shows up a selectiondialog for nodes in AxisVM and returns the selected</span>
+<span class="sd">        nodeIDs if succesful.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        clear : boolean, Optional</span>
+<span class="sd">            Clears selection if True. Default is True.</span>
+<span class="sd">            </span>
+<span class="sd">        msg : str, Optional</span>
+<span class="sd">            The message to show. If not provided, a default message is shown. </span>
+<span class="sd">            Default is True.</span>
+<span class="sd">            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Select one or more nodes!&#39;</span>
+        <span class="n">Model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="n">deletecurrent</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">clear</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">Model</span><span class="o">.</span><span class="n">StartModalSelection</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">deletecurrent</span><span class="p">,</span> <span class="s1">&#39;seltNode&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected_indices</span><span class="p">(</span><span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IAxisVMNodes.get_selected_indices"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_selected_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_selected_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of nodeIDs. The result is always iterable,</span>
+<span class="sd">        even if it contains only one item.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetSelectedItemIds</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">interactive</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_indices</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Select one or more nodes!&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="IAxisVMNodes.connected_surfaces"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.connected_surfaces">[docs]</a>    <span class="k">def</span> <span class="nf">connected_surfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flatten</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">as_dict</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns surfaces connected by the specified nodes. For the details of</span>
+<span class="sd">        specification of nodes see the documentation of :func:`get_indices`.</span>
+<span class="sd">        If ``as_dict == True``, the result is a dictionary that maps node indices </span>
+<span class="sd">        to lists of surfaces.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="n">nodeIDs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indices</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">nodeIDs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Invalid specification of nodes!&quot;</span>
+        <span class="k">if</span> <span class="n">as_dict</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">OrderedDict</span><span class="p">({</span><span class="n">nID</span><span class="p">:</span> <span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetConnectedSurfaces</span><span class="p">(</span><span class="n">nID</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                                <span class="k">for</span> <span class="n">nID</span> <span class="ow">in</span> <span class="n">nodeIDs</span><span class="p">})</span>
+        <span class="k">if</span> <span class="n">flatten</span><span class="p">:</span>
+            <span class="n">surfaces</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">nID</span> <span class="ow">in</span> <span class="n">nodeIDs</span><span class="p">:</span>
+                <span class="n">surfaces</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetConnectedSurfaces</span><span class="p">(</span><span class="n">nID</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">surfaces</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">GetConnectedSurfaces</span><span class="p">(</span><span class="n">nID</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">nID</span> <span class="ow">in</span> <span class="n">nodeIDs</span><span class="p">]</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2022, Bence Balogh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

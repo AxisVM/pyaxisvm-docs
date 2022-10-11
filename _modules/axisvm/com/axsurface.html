@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="EN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>axisvm.com.axsurface &mdash; PyAxisVM v1.0.5-git documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme_override.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> PyAxisVM
+          </a>
+              <div class="version">
+                v1.0.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks.html">Notebooks</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../downloads.html">Downloadable Examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyAxisVM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>axisvm.com.axsurface</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for axisvm.com.axsurface</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">awkward</span> <span class="k">as</span> <span class="nn">ak</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span> <span class="k">as</span> <span class="n">Array</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">import</span> <span class="nn">awkward</span> <span class="k">as</span> <span class="nn">ak</span>
+
+<span class="kn">from</span> <span class="nn">dewloosh.core</span> <span class="kn">import</span> <span class="n">issequence</span>
+<span class="kn">from</span> <span class="nn">polymesh.topo</span> <span class="kn">import</span> <span class="n">TopologyArray</span><span class="p">,</span> <span class="n">unique_topo_data</span>
+<span class="kn">from</span> <span class="nn">polymesh.topo.topodata</span> <span class="kn">import</span> <span class="n">edges_Q4</span>
+<span class="kn">from</span> <span class="nn">polymesh.tri.triutils</span> <span class="kn">import</span> <span class="n">edges_tri</span>
+<span class="kn">from</span> <span class="nn">dewloosh.plotly</span> <span class="kn">import</span> <span class="n">plot_triangles_3d</span>
+<span class="kn">from</span> <span class="nn">polymesh.topo</span> <span class="kn">import</span> <span class="n">detach</span> <span class="k">as</span> <span class="n">detach_mesh</span>
+
+<span class="kn">import</span> <span class="nn">axisvm</span>
+<span class="kn">from</span> <span class="nn">.core.wrap</span> <span class="kn">import</span> <span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">AxisVMModelItems</span>
+<span class="kn">from</span> <span class="nn">.core.utils</span> <span class="kn">import</span> <span class="p">(</span><span class="n">RMatrix3x3toNumPy</span><span class="p">,</span> <span class="n">triangulate</span><span class="p">,</span> <span class="n">RSurfaceForces2list</span><span class="p">,</span>
+                         <span class="n">RSurfaceStresses2list</span><span class="p">,</span> <span class="n">get_xsev</span><span class="p">,</span> <span class="n">RXLAMSurfaceStresses2list</span><span class="p">,</span>
+                         <span class="n">get_xlam_strs_case</span><span class="p">,</span> <span class="n">get_xlam_strs_comb</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.attr</span> <span class="kn">import</span> <span class="n">AxisVMAttributes</span>
+
+<span class="n">surfacetype_to_str</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Hole&#39;</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;MembraneStress&#39;</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;MembraneStrain&#39;</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;Plate&#39;</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;Shell&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">surface_attr_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Thickness&#39;</span><span class="p">,</span> <span class="s1">&#39;SurfaceType&#39;</span><span class="p">,</span> <span class="s1">&#39;RefZId&#39;</span><span class="p">,</span> <span class="s1">&#39;RefXId&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;MaterialId&#39;</span><span class="p">,</span> <span class="s1">&#39;Characteristics&#39;</span><span class="p">,</span> <span class="s1">&#39;ElasticFoundation&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;NonLinearity&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance&#39;</span><span class="p">]</span>
+
+<span class="n">surface_data_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;Attr&#39;</span><span class="p">,</span> <span class="s1">&#39;DomainIndex&#39;</span><span class="p">,</span> <span class="s1">&#39;LineIndex1&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;LineIndex2&#39;</span><span class="p">,</span> <span class="s1">&#39;LineIndex3&#39;</span><span class="p">,</span> <span class="s1">&#39;LineIndex4&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">xyz</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">z</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">get_surface_attributes</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="n">rec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">fields</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">surface_attr_fields</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">fields</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">surface_attr_fields</span><span class="p">,</span> <span class="n">fields</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">attr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">_get_attributes_raw</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rec</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">attr</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">Attr</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="s1">&#39;Thickness&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Thickness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">Thickness</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;SurfaceType&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;SurfaceType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">surfacetype_to_str</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">SurfaceType</span><span class="p">],</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;RefXId&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;RefXId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">RefXId</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;RefZId&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;RefZId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">RefZId</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;MaterialId&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;MaterialId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">MaterialId</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;Characteristics&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Characteristics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">Charactersitics</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;ElasticFoundation&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ElasticFoundation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">xyz</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">ElasticFoundation</span><span class="p">),</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;NonLinearity&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;NonLinearity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">xyz</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">NonLinearity</span><span class="p">),</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s1">&#39;Resistance&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Resistance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">xyz</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">Resistance</span><span class="p">),</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">AxisVMAttributes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SurfaceMixin</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">surface_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topology</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the edges of the surface.&quot;&quot;&quot;</span>
+        <span class="n">topo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span> <span class="k">if</span> <span class="n">topology</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">topology</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">topo</span><span class="o">.</span><span class="n">widths</span><span class="p">()</span>
+        <span class="n">i6</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">w</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">i8</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">w</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">eT</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">unique_topo_data</span><span class="p">(</span><span class="n">edges_tri</span><span class="p">(</span><span class="n">topo</span><span class="p">[</span><span class="n">i6</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()))</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">eT</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">unique_topo_data</span><span class="p">(</span><span class="n">edges_tri</span><span class="p">(</span><span class="n">topo</span><span class="p">[</span><span class="n">i6</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">eQ</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">unique_topo_data</span><span class="p">(</span><span class="n">edges_Q4</span><span class="p">(</span><span class="n">topo</span><span class="p">[</span><span class="n">i8</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()))</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">eQ</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">unique_topo_data</span><span class="p">(</span><span class="n">edges_Q4</span><span class="p">(</span><span class="n">topo</span><span class="p">[</span><span class="n">i8</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">eT</span><span class="p">,</span> <span class="n">eQ</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">triangles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topology</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the topology as a collection of triangles.&quot;&quot;&quot;</span>
+        <span class="n">topo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span> <span class="k">if</span> <span class="n">topology</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">topology</span>
+        <span class="k">return</span> <span class="n">triangulate</span><span class="p">(</span><span class="n">topo</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">detach</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;mpl&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plots the mesh using `matplotlib`.&quot;&quot;&quot;</span>
+        <span class="n">topo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span>
+        <span class="n">triangles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">triangles</span><span class="p">(</span><span class="n">topo</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">plot_edges</span><span class="p">:</span>
+            <span class="n">edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">surface_edges</span><span class="p">(</span><span class="n">topo</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">detach</span><span class="p">:</span>
+            <span class="c1">#ids = np.unique(triangles) + 1</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
+            <span class="n">coords</span><span class="p">,</span> <span class="n">triangles</span> <span class="o">=</span> <span class="n">detach_mesh</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">triangles</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s1">&#39;mpl&#39;</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">return</span> <span class="n">plot_triangles_3d</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">triangles</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">scalars</span><span class="p">,</span>
+                                 <span class="n">plot_edges</span><span class="o">=</span><span class="n">plot_edges</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="IAxisVMSurface"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMSurface</span><span class="p">(</span><span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMSurface` COM interface.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="IAxisVMSurface.topology"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.topology">[docs]</a>    <span class="k">def</span> <span class="nf">topology</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopologyArray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the node indices of the surface.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">topology</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IAxisVMSurface.record"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.record">[docs]</a>    <span class="k">def</span> <span class="nf">record</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the record of the surface.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">records</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IAxisVMSurface.normal"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.normal">[docs]</a>    <span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the normal vector of the surface.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">normals</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IAxisVMSurface.transformation_matrix"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.transformation_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">transformation_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the transformation matrix of the surface.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">transformation_matrices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the transformation matrix of the surface.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrix</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the attributes of the surface as a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">surface_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the surface attributes of the surface as a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_surface_attributes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IAxisVMSurface.xlam_stresses"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.xlam_stresses">[docs]</a>    <span class="k">def</span> <span class="nf">xlam_stresses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">case</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">combination</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">LoadCaseId</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">LoadCombinationId</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">DisplacementSystem</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                      <span class="n">AnalysisType</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">frmt</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span><span class="n">Iterable</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> \
+                          <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns XLAM stresses either as a :class:`numpy.ndarray` or as a dictionary.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        DisplacementSystem : int, Optional</span>
+<span class="sd">            0 for local, 1 for global. Default is 1.</span>
+<span class="sd">        </span>
+<span class="sd">        LoadCaseId : int, Optional</span>
+<span class="sd">            Default is None.</span>
+<span class="sd">            </span>
+<span class="sd">        LoadLevelOrModeShapeOrTimeStep : int, Optional</span>
+<span class="sd">            Default is None.</span>
+<span class="sd">            </span>
+<span class="sd">        LoadCombinationId : int, Optional</span>
+<span class="sd">            Default is None.</span>
+<span class="sd">            </span>
+<span class="sd">        case : Union[str, Iterable], Optional</span>
+<span class="sd">            The name of a loadcase or an iterable of indices. </span>
+<span class="sd">            Default is None.</span>
+<span class="sd">        </span>
+<span class="sd">        combination : str, Optional</span>
+<span class="sd">            The name of a load combination. Default is None.</span>
+<span class="sd">            </span>
+<span class="sd">        AnalysisType : int, Optional</span>
+<span class="sd">            Default is 0.</span>
+<span class="sd">            </span>
+<span class="sd">        frmt : str, Optional</span>
+<span class="sd">            Controls the type of the result. With &#39;array&#39; it is a</span>
+<span class="sd">            3d NumPy array, otherwise a dictionary. Default is &#39;array&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">        factor : Iterable, Optional</span>
+<span class="sd">            Linear coefficients for the different load cases specified with &#39;case&#39;.</span>
+<span class="sd">            If &#39;case&#39; is an Iterable, &#39;factor&#39; must be an Iterable of the same shape.</span>
+<span class="sd">            Default is None.</span>
+<span class="sd">            </span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        1) It is the user who has to make sure that this call is only called on surfaces,</span>
+<span class="sd">        that belong to an XLAM domain.</span>
+<span class="sd">        2) The returned stresses do not belong to the same position.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`numpy.ndarray` or dict</span>
+<span class="sd">            If frmt is &#39;array&#39;, the result is a 2d float NumPy array of shape (nN, nX),</span>
+<span class="sd">            where nN is the number of nodes of the surface and nX is the number of stress</span>
+<span class="sd">            components, which are:</span>
+<span class="sd">            </span>
+<span class="sd">                0 : :math:`\\sigma_{x}` stress at the top, from bending</span>
+<span class="sd">                </span>
+<span class="sd">                1 : :math:`\\sigma_{y}` stress at the top, from bending</span>
+<span class="sd">                </span>
+<span class="sd">                2 : :math:`\\tau_{xy}` stress at the top, from bending</span>
+<span class="sd">                </span>
+<span class="sd">                3 : :math:`\\sigma_{x}` stress at the bottom, from bending</span>
+<span class="sd">                </span>
+<span class="sd">                4 : :math:`\\sigma_{y}` stress at the bottom, from bending</span>
+<span class="sd">                </span>
+<span class="sd">                5 : :math:`\\tau_{xy}` stress at the bottom, from bending</span>
+<span class="sd">                </span>
+<span class="sd">                6 : :math:`\\sigma_{x, max}` stress from stretching</span>
+<span class="sd">                </span>
+<span class="sd">                7 : :math:`\\sigma_{y, max}` stress from stretching</span>
+<span class="sd">                </span>
+<span class="sd">                8 : :math:`\\tau_{xy, max}` stress from stretching</span>
+<span class="sd">                </span>
+<span class="sd">                9 : :math:`\\tau_{xz, max}` shear stress </span>
+<span class="sd">                </span>
+<span class="sd">                10 : :math:`\\tau_{yz, max}` shear stress</span>
+<span class="sd">                </span>
+<span class="sd">                11 : :math:`\\tau_{xz, r, max}` rolling shear stress </span>
+<span class="sd">                </span>
+<span class="sd">                12 : :math:`\\tau_{yz, r, max}` rolling shear stress </span>
+<span class="sd">            </span>
+<span class="sd">            If frmt is &#39;dict&#39;, the stresses are returned as a dictionary of 1d NumPy arrays,</span>
+<span class="sd">            where indices from 0 to 12 are the keys of the values at the corders.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#assert self.IsXLAM, &quot;This is not an XLAM domain!&quot;</span>
+
+        <span class="k">def</span> <span class="nf">ad2d</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span> <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">arr</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">)}</span>
+
+        <span class="k">if</span> <span class="n">issequence</span><span class="p">(</span><span class="n">case</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">issequence</span><span class="p">(</span><span class="n">factor</span><span class="p">),</span> \
+                    <span class="s2">&quot;If &#39;case&#39; is an Iterable, &#39;factor&#39; must be an Iterable of the same shape.&quot;</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">case</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">factor</span><span class="p">),</span> \
+                    <span class="s2">&quot;Lists &#39;case&#39; and &#39;factor&#39; must have equal lengths.&quot;</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">xlam_stresses</span><span class="p">(</span>
+                    <span class="n">case</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                    <span class="n">frmt</span><span class="o">=</span><span class="s1">&#39;array&#39;</span><span class="p">,</span>
+                    <span class="n">factor</span><span class="o">=</span><span class="n">f</span><span class="p">,</span>
+                    <span class="n">AnalysisType</span><span class="o">=</span><span class="n">AnalysisType</span><span class="p">,</span>
+                    <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
+                    <span class="n">DisplacementSystem</span><span class="o">=</span><span class="n">DisplacementSystem</span>
+                <span class="p">)</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">factor</span><span class="p">)])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">xlam_stresses</span><span class="p">(</span>
+                    <span class="n">case</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                    <span class="n">frmt</span><span class="o">=</span><span class="n">frmt</span><span class="p">,</span>
+                    <span class="n">factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                    <span class="n">AnalysisType</span><span class="o">=</span><span class="n">AnalysisType</span><span class="p">,</span>
+                    <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
+                    <span class="n">DisplacementSystem</span><span class="o">=</span><span class="n">DisplacementSystem</span>
+                <span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">case</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">frmt</span> <span class="o">==</span> <span class="s1">&#39;dict&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">ad2d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+        <span class="n">axm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="n">stresses</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Stresses</span>
+        
+        <span class="n">LoadCaseId</span><span class="p">,</span> <span class="n">LoadCombinationId</span> <span class="o">=</span> \
+            <span class="n">stresses</span><span class="o">.</span><span class="n">_get_case_or_component</span><span class="p">(</span><span class="n">case</span><span class="o">=</span><span class="n">case</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="n">combination</span><span class="p">,</span>
+                                            <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">LoadCaseId</span><span class="p">,</span>
+                                            <span class="n">LoadCombinationId</span><span class="o">=</span><span class="n">LoadCombinationId</span><span class="p">)</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">LoadCaseId</span><span class="p">,</span>
+            <span class="n">LoadCombinationId</span><span class="o">=</span><span class="n">LoadCombinationId</span><span class="p">,</span>
+            <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
+            <span class="n">DisplacementSystem</span><span class="o">=</span><span class="n">DisplacementSystem</span>
+        <span class="p">)</span>
+        <span class="n">stresses</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">LoadCaseId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">getter</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get_xlam_strs_case</span><span class="p">,</span> <span class="n">stresses</span><span class="p">,</span> <span class="n">LoadCaseId</span><span class="p">,</span>
+                             <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span> <span class="n">AnalysisType</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">LoadCombinationId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">getter</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get_xlam_strs_comb</span><span class="p">,</span> <span class="n">stresses</span><span class="p">,</span> <span class="n">LoadCombinationId</span><span class="p">,</span>
+                             <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span> <span class="n">AnalysisType</span><span class="p">)</span>            
+        <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="k">if</span> <span class="n">factor</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RXLAMSurfaceStresses2list</span><span class="p">(</span><span class="n">getter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)))</span>
+    
+        <span class="k">if</span> <span class="n">frmt</span> <span class="o">==</span> <span class="s1">&#39;dict&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ad2d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="IAxisVMSurface.critical_xlam_efficiency"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.critical_xlam_efficiency">[docs]</a>    <span class="k">def</span> <span class="nf">critical_xlam_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">CombinationType</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                                 <span class="n">AnalysisType</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">Component</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                 <span class="n">MinMaxType</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the critical efficiency of a component, and also data on </span>
+<span class="sd">        the combination that yields it.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        MinMaxType : EMinMaxType, Optional</span>
+<span class="sd">            0 for min, 1 for max, 2 for minmax. Default is 1.</span>
+<span class="sd">            </span>
+<span class="sd">        Component : EXLAMSurfaceEfficiency, Optional </span>
+<span class="sd">            Default is 4, which refers to the maximum overall efficiency.</span>
+<span class="sd">        </span>
+<span class="sd">        CombinationType : ECombinationType, Optional</span>
+<span class="sd">            Default is 7 wich refers to the worst case of ULS combinations.</span>
+<span class="sd">            </span>
+<span class="sd">        AnalysisType : EAnalysisType, Optional</span>
+<span class="sd">            Default is 0 which refers to linear statics.</span>
+<span class="sd">            </span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        It is the user who has to make sure that this call is only called on surfaces,</span>
+<span class="sd">        that belong to an XLAM domain.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`numpy.ndarray`</span>
+<span class="sd">            A 2d float NumPy array of shape (nN, nX), where nN is the number of nodes </span>
+<span class="sd">            of the surface and nX is the number of efficiency components, which are:</span>
+<span class="sd">            </span>
+<span class="sd">                0 : M - N - 0</span>
+<span class="sd">                </span>
+<span class="sd">                1 : M - N - 90</span>
+<span class="sd">                </span>
+<span class="sd">                2 : V - T</span>
+<span class="sd">                </span>
+<span class="sd">                3 : Vr - N</span>
+<span class="sd">                </span>
+<span class="sd">                4 : max     </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">axm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="n">stresses</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Stresses</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">SurfaceId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">,</span>
+            <span class="n">MinMaxType</span><span class="o">=</span><span class="n">MinMaxType</span><span class="p">,</span>
+            <span class="n">CombinationType</span><span class="o">=</span><span class="n">CombinationType</span><span class="p">,</span>
+            <span class="n">AnalysisType</span><span class="o">=</span><span class="n">AnalysisType</span><span class="p">,</span> 
+            <span class="n">Component</span><span class="o">=</span><span class="n">Component</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">rec</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">loadcases</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> \
+            <span class="n">stresses</span><span class="o">.</span><span class="n">GetCriticalXLAMSurfaceEfficiency</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">get_xsev</span><span class="p">(</span><span class="n">rec</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">loadcases</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the representation methods (internal helper).&quot;&quot;&quot;</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;UID&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">UID</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Area&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Area</span><span class="p">,</span> <span class="n">axisvm</span><span class="o">.</span><span class="n">FLOAT_FORMAT</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Volume&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Volume</span><span class="p">,</span> <span class="n">axisvm</span><span class="o">.</span><span class="n">FLOAT_FORMAT</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Weight&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">axisvm</span><span class="o">.</span><span class="n">FLOAT_FORMAT</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">attrs</span></div>
+
+
+<div class="viewcode-block" id="IAxisVMSurfaces"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMSurfaces</span><span class="p">(</span><span class="n">AxisVMModelItems</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMSurfaces` COM interface.&quot;&quot;&quot;</span>
+
+    <span class="n">__itemcls__</span> <span class="o">=</span> <span class="n">IAxisVMSurface</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the transformation matrices for all surfaces.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrices</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">t</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the thicknessws of all surfaces.&quot;&quot;&quot;</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="s1">&#39;Thickness&#39;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_surface_attributes</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="n">k</span><span class="p">])[</span><span class="n">k</span><span class="p">])</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">n</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the normal vectors of all surfaces.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">normals</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">frames</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the transformation matrices for all surfaces.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrices</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the attributes of all surfaces as a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">surface_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the surface attributes of all surfaces as a dictionary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_surface_attributes</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">topology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span>  <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopologyArray</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_wrapped</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">GetContourPoints</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">GetMidPoints</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Count</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">ids</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span>
+            <span class="k">def</span> <span class="nf">fnc_corner</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">GetContourPoints</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">def</span> <span class="nf">fnc_mid</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">GetMidPoints</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">def</span> <span class="nf">fnc</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="n">fnc_corner</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">fnc_mid</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">TopologyArray</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">fnc</span><span class="p">,</span> <span class="n">ids</span><span class="p">))))</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">records</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_attributes_raw</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dfields</span><span class="p">,</span> <span class="n">afields</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">fields</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">afields</span> <span class="o">=</span> <span class="n">surface_attr_fields</span>
+            <span class="n">dfields</span> <span class="o">=</span> <span class="n">surface_data_fields</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">fields</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">afields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                    <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">surface_attr_fields</span><span class="p">,</span> <span class="n">fields</span><span class="p">))</span>
+                <span class="n">dfields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                    <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">surface_data_fields</span><span class="p">,</span> <span class="n">fields</span><span class="p">))</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">dfields</span> <span class="o">+</span> <span class="n">afields</span>
+        <span class="n">rec_raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_attributes_raw</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rec_raw</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="n">rec_raw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="s1">&#39;Attr&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_surface_attributes</span><span class="p">(</span><span class="n">_rec</span><span class="o">=</span><span class="n">rec_raw</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">afields</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_surface_attributes</span><span class="p">(</span>
+                    <span class="n">_rec</span><span class="o">=</span><span class="n">rec_raw</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">afields</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">afields</span><span class="p">:</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;N&#39;</span> <span class="ow">in</span> <span class="n">dfields</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;DomainIndex&#39;</span> <span class="ow">in</span> <span class="n">dfields</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;DomainIndex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">DomainIndex</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;LineIndex1&#39;</span> <span class="ow">in</span> <span class="n">dfields</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;LineIndex1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">LineIndex1</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;LineIndex2&#39;</span> <span class="ow">in</span> <span class="n">dfields</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;LineIndex2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">LineIndex2</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;LineIndex3&#39;</span> <span class="ow">in</span> <span class="n">dfields</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;LineIndex3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">LineIndex3</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s1">&#39;LineIndex4&#39;</span> <span class="ow">in</span> <span class="n">dfields</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;LineIndex4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">LineIndex4</span><span class="p">,</span> <span class="n">rec</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">AxisVMAttributes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_attributes_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Count</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">BulkGetSurfaces</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_surface_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxisVMAttributes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">get_surface_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">normals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_wrapped</span>
+            <span class="k">def</span> <span class="nf">xyz</span><span class="p">(</span><span class="n">p</span><span class="p">):</span> <span class="k">return</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">z</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xyz</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">GetNormalVector</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">inds</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Count</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">GetNormalVector</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inds</span><span class="p">)</span>
+        <span class="n">xyz</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">z</span><span class="p">],</span> <span class="n">m</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">xyz</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">transformation_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">_wrapped</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMatrix3x3toNumPy</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">GetTrMatrix</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">inds</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+                <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Count</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">GetTrMatrix</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inds</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">RMatrix3x3toNumPy</span><span class="p">,</span> <span class="n">rec</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">generalized_surface_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">DisplacementSystem</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">LoadCaseId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">LoadCombinationId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">axm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="k">if</span> <span class="n">case</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LoadCombinationId</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">LoadCases</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LoadCases</span>
+                <span class="n">imap</span> <span class="o">=</span> <span class="p">{</span><span class="n">LoadCases</span><span class="o">.</span><span class="n">Name</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                    <span class="mi">1</span><span class="p">,</span> <span class="n">LoadCases</span><span class="o">.</span><span class="n">Count</span><span class="o">+</span><span class="mi">1</span><span class="p">)}</span>
+                <span class="k">if</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">imap</span><span class="p">:</span>
+                    <span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">imap</span><span class="p">[</span><span class="n">case</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Unknown case with name &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">case</span>
+        <span class="k">elif</span> <span class="n">combination</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LoadCaseId</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">combination</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">LoadCombinations</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LoadCombinations</span>
+                <span class="n">imap</span> <span class="o">=</span> <span class="p">{</span><span class="n">LoadCombinations</span><span class="o">.</span><span class="n">Name</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                    <span class="mi">1</span><span class="p">,</span> <span class="n">LoadCombinations</span><span class="o">.</span><span class="n">Count</span><span class="o">+</span><span class="mi">1</span><span class="p">)}</span>
+                <span class="k">if</span> <span class="n">combination</span> <span class="ow">in</span> <span class="n">imap</span><span class="p">:</span>
+                    <span class="n">LoadCombinationId</span> <span class="o">=</span> <span class="n">imap</span><span class="p">[</span><span class="n">combination</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                        <span class="s2">&quot;Unknown combination with name &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">combination</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">combination</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">LoadCombinationId</span> <span class="o">=</span> <span class="n">combination</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Forces</span>
+        <span class="k">if</span> <span class="n">DisplacementSystem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">DisplacementSystem</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># global</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">DisplacementSystem</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">forces</span><span class="o">.</span><span class="n">DisplacementSystem</span> <span class="o">=</span> <span class="n">DisplacementSystem</span>
+        <span class="k">if</span> <span class="n">LoadCaseId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">forces</span><span class="o">.</span><span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">LoadCaseId</span>
+        <span class="k">if</span> <span class="n">LoadCombinationId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">forces</span><span class="o">.</span><span class="n">LoadCombinationId</span> <span class="o">=</span> <span class="n">LoadCombinationId</span>
+        <span class="k">if</span> <span class="n">LoadLevelOrModeShapeOrTimeStep</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LoadLevelOrModeShapeOrTimeStep</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">forces</span><span class="o">.</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span> <span class="o">=</span> <span class="n">LoadLevelOrModeShapeOrTimeStep</span>
+        <span class="k">if</span> <span class="n">LoadCaseId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">recs</span> <span class="o">=</span> <span class="n">forces</span><span class="o">.</span><span class="n">AllSurfaceForcesByLoadCaseId</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">LoadCombinationId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">recs</span> <span class="o">=</span> <span class="n">forces</span><span class="o">.</span><span class="n">AllSurfaceForcesByLoadCombinationId</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">RSurfaceForces2list</span><span class="p">,</span> <span class="n">recs</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">surface_stresses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">DisplacementSystem</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">LoadCaseId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">LoadCombinationId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">axm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="k">if</span> <span class="n">case</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LoadCombinationId</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">LoadCases</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LoadCases</span>
+                <span class="n">imap</span> <span class="o">=</span> <span class="p">{</span><span class="n">LoadCases</span><span class="o">.</span><span class="n">Name</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                    <span class="mi">1</span><span class="p">,</span> <span class="n">LoadCases</span><span class="o">.</span><span class="n">Count</span><span class="o">+</span><span class="mi">1</span><span class="p">)}</span>
+                <span class="k">if</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">imap</span><span class="p">:</span>
+                    <span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">imap</span><span class="p">[</span><span class="n">case</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Unknown case with name &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">case</span>
+        <span class="k">elif</span> <span class="n">combination</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LoadCaseId</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">combination</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">LoadCombinations</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LoadCombinations</span>
+                <span class="n">imap</span> <span class="o">=</span> <span class="p">{</span><span class="n">LoadCombinations</span><span class="o">.</span><span class="n">Name</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                    <span class="mi">1</span><span class="p">,</span> <span class="n">LoadCombinations</span><span class="o">.</span><span class="n">Count</span><span class="o">+</span><span class="mi">1</span><span class="p">)}</span>
+                <span class="k">if</span> <span class="n">combination</span> <span class="ow">in</span> <span class="n">imap</span><span class="p">:</span>
+                    <span class="n">LoadCombinationId</span> <span class="o">=</span> <span class="n">imap</span><span class="p">[</span><span class="n">combination</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                        <span class="s2">&quot;Unknown combination with name &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">combination</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">combination</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">LoadCombinationId</span> <span class="o">=</span> <span class="n">combination</span>
+        <span class="n">resobj</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Stresses</span>
+        <span class="k">if</span> <span class="n">DisplacementSystem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">DisplacementSystem</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># global</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">DisplacementSystem</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">resobj</span><span class="o">.</span><span class="n">DisplacementSystem</span> <span class="o">=</span> <span class="n">DisplacementSystem</span>
+        <span class="k">if</span> <span class="n">LoadCaseId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">resobj</span><span class="o">.</span><span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">LoadCaseId</span>
+        <span class="k">if</span> <span class="n">LoadCombinationId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">resobj</span><span class="o">.</span><span class="n">LoadCombinationId</span> <span class="o">=</span> <span class="n">LoadCombinationId</span>
+        <span class="k">if</span> <span class="n">LoadLevelOrModeShapeOrTimeStep</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LoadLevelOrModeShapeOrTimeStep</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">resobj</span><span class="o">.</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span> <span class="o">=</span> <span class="n">LoadLevelOrModeShapeOrTimeStep</span>
+        <span class="k">if</span> <span class="n">LoadCaseId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">recs</span> <span class="o">=</span> <span class="n">resobj</span><span class="o">.</span><span class="n">AllSurfaceStressesByLoadCaseId</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">LoadCombinationId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">recs</span> <span class="o">=</span> <span class="n">resobj</span><span class="o">.</span><span class="n">AllSurfaceStressesByLoadCombinationId</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">foo</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">RSurfaceStresses2list</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="n">recs</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">_get_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the representation methods (internal helper).&quot;&quot;&quot;</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;UID&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">UID</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Area&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Area</span><span class="p">,</span> <span class="n">axisvm</span><span class="o">.</span><span class="n">FLOAT_FORMAT</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Volume&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Volume</span><span class="p">,</span> <span class="n">axisvm</span><span class="o">.</span><span class="n">FLOAT_FORMAT</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Weight&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Weight</span><span class="p">,</span> <span class="n">axisvm</span><span class="o">.</span><span class="n">FLOAT_FORMAT</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">attrs</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2022, Bence Balogh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

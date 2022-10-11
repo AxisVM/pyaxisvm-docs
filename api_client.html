@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="EN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client-Side Operations &mdash; PyAxisVM v1.0.5-git documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme_override.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python COM Interface" href="api_axisvm.html" />
+    <link rel="prev" title="Python API Reference" href="api_python.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> PyAxisVM
+          </a>
+              <div class="version">
+                v1.0.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="api_python.html">Python API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Client-Side Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_axisvm.html">Python COM Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloadable Examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples Gallery</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyAxisVM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="api.html">API Reference</a> &raquo;</li>
+          <li><a href="api_python.html">Python API Reference</a> &raquo;</li>
+      <li>Client-Side Operations</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-axisvm.com.client">
+<span id="client-side-operations"></span><h1>Client-Side Operations<a class="headerlink" href="#module-axisvm.com.client" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="axisvm.com.client.start_AxisVM">
+<span class="sig-prename descclassname"><span class="pre">axisvm.com.client.</span></span><span class="sig-name descname"><span class="pre">start_AxisVM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">join</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">daemon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication" title="axisvm.com.axapp.IAxisVMApplication"><span class="pre">IAxisVMApplication</span></a></span></span><a class="reference internal" href="_modules/axisvm/com/client.html#start_AxisVM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#axisvm.com.client.start_AxisVM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an interface to a new, or an existing AxisVM application.</p>
+<p>If the argument <cite>join</cite> is True, an attempt is made to connect to an
+already running instance. If there is a running instance but <cite>join</cite>
+is False, that instance gets destroyed and a new one will be created.</p>
+<p>If the first argument is a valid path to an AxisVM model file, it gets
+opened.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>join</strong> (<em>boolean</em><em>, </em><em>Optional</em>) – <p>Controls what to do if there is an already running instance
+to connect to. Default is False.</p>
+<p>This is only available from X6r2. For versions prior to this,
+<cite>join=True</cite> has no effect and a new instance is created every time.</p>
+</p></li>
+<li><p><strong>visible</strong> (<em>boolean</em><em> or </em><em>None</em><em>, </em><em>Optional</em>) – <p>Sets the visibility of the AxisVM application, while a None</p>
+<p>value takes no effect. Default is None.</p>
+</p></li>
+<li><p><strong>daemon</strong> (<em>boolean</em><em>, </em><em>Optional</em>) – <p>Controls the behaviour of the COM interface. Default is False.</p>
+<p>Assuming that <cite>axapp</cite> is a COM interface to an AxisVM application,
+<cite>daemon=True</cite> is equivalent to</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">axisvm.com.tlb</span> <span class="kn">import</span> <span class="n">acEnableNoWarning</span><span class="p">,</span> <span class="n">lbFalse</span><span class="p">,</span> <span class="n">lbTrue</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axapp</span><span class="o">.</span><span class="n">CloseOnLastReleased</span> <span class="o">=</span> <span class="n">lbTrue</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axapp</span><span class="o">.</span><span class="n">AskCloseOnLastReleased</span> <span class="o">=</span> <span class="n">lbFalse</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axapp</span><span class="o">.</span><span class="n">AskSaveOnLastReleased</span> <span class="o">=</span> <span class="n">lbFalse</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axapp</span><span class="o">.</span><span class="n">ApplicationClose</span> <span class="o">=</span> <span class="n">acEnableNoWarning</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>wrap</strong> (<em>boolean</em><em>, </em><em>Optional</em>) – Wraps the returning object if True, returns the raw object otherwise.
+Default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A python wrapper around an IAxisVMApplication instance.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">axisvm.com.axapp.AxApp</span></code></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axvm</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#axisvm.com.tlb.wrap_axisvm_tlb" title="axisvm.com.tlb.wrap_axisvm_tlb"><code class="xref py py-func docutils literal notranslate"><span class="pre">axisvm.com.tlb.wrap_axisvm_tlb()</span></code></a>, <a class="reference internal" href="#axisvm.com.tlb.find_axisvm_tlb" title="axisvm.com.tlb.find_axisvm_tlb"><code class="xref py py-func docutils literal notranslate"><span class="pre">axisvm.com.tlb.find_axisvm_tlb()</span></code></a></p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-axisvm.com.tlb"></span><dl class="py function">
+<dt class="sig sig-object py" id="axisvm.com.tlb.find_axisvm_tlb">
+<span class="sig-prename descclassname"><span class="pre">axisvm.com.tlb.</span></span><span class="sig-name descname"><span class="pre">find_axisvm_tlb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#axisvm.com.tlb.find_axisvm_tlb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds all registered AxisVM Type Libraries and
+returns a list of dictionaries including all important
+specs. If the function returns more than one item,
+consider unregistering the ones you don’t use.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">axisvm.com.tlb</span> <span class="kn">import</span> <span class="n">find_axisvm_tlb</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axtlb</span> <span class="o">=</span> <span class="n">find_axisvm_tlb</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="axisvm.com.tlb.wrap_axisvm_tlb">
+<span class="sig-prename descclassname"><span class="pre">axisvm.com.tlb.</span></span><span class="sig-name descname"><span class="pre">wrap_axisvm_tlb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tlbid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">major</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#axisvm.com.tlb.wrap_axisvm_tlb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the wrapped AxisVM type library as a python module.
+The library to wrap can be specified by Id, minor and major
+version numbers, but all three must be provided to have a
+complete specification. Otherwise, the function returns a python
+module for the first AxisVM type library found by the function
+<a class="reference internal" href="#axisvm.com.tlb.find_axisvm_tlb" title="axisvm.com.tlb.find_axisvm_tlb"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_axisvm_tlb()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tlbid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>Optional</em>) – Id of the type library to wrap.
+Defaut is None.</p></li>
+<li><p><strong>major</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>Optional</em>) – Major version number of the type library to wrap.
+Defaut is None.</p></li>
+<li><p><strong>minor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>Optional</em>) – Minor version number of the type library to wrap.
+Defaut is None.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">axisvm.com.tlb</span> <span class="kn">import</span> <span class="n">wrap_axisvm_tlb</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axtlb</span> <span class="o">=</span> <span class="n">wrap_axisvm_tlb</span><span class="p">(</span><span class="s2">&quot;{0AA46C32-04EF-46E3-B0E4-D2DA28D0AB08}&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All three specifiers must be provided, otherwise the function
+inherits the specifications from</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The wrapped AxisVM type library as a python module.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>module</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_python.html" class="btn btn-neutral float-left" title="Python API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api_axisvm.html" class="btn btn-neutral float-right" title="Python COM Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014-2022, Bence Balogh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
