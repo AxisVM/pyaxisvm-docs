@@ -7,6 +7,11 @@ PyAxisVM - The official python package for **AxisVM**
 
 .. image:: gt40.png
 
+.. warning::
+    The documentation is under heavy development. Expect changes more often than usual,
+    and enjoy what is alraeady out. Browse the examples and the notebooks to get
+    a glimpse of what the library can provide!
+
 The **PyAxisVM** project offers a high-level interface to **AxisVM**, 
 making its operations available directly from Python. It builds on top of 
 Microsoft's COM technology and supports all the features of the original 
@@ -33,24 +38,18 @@ and readable code.
     :parser: myst_parser.sphinx_
 
 .. toctree::
+    :caption: Contents
     :maxdepth: 3
 
     notebooks
+    downloads
+    auto_examples/index.rst
 
 .. toctree::
-    :maxdepth: 5
+    :caption: API
+    :maxdepth: 6
 
     api
-
-.. toctree::
-    :maxdepth: 1
-
-    downloads
-
-.. toctree::
-    :maxdepth: 3
-
-    auto_examples/index.rst
 
 Indices and tables
 ------------------
