@@ -48,6 +48,7 @@ and readable code.
 .. toctree::
     :caption: API
     :maxdepth: 6
+    :hidden:
 
     api
 

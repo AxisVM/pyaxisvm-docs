@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Downloadable Examples &mdash; PyAxisVM v1.0.6b-git documentation</title>
+  <title>Downloadable Examples &mdash; PyAxisVM 1.0.7-git documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
@@ -23,6 +23,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -41,7 +42,7 @@
             <a href="index.html" class="icon icon-home"> PyAxisVM
           </a>
               <div class="version">
-                v1.0.6b
+                1.0.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -54,7 +55,17 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Downloadable Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Downloadable Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#axisvm.examples.downloads.delete_downloads"><code class="docutils literal notranslate"><span class="pre">delete_downloads()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#axisvm.examples.downloads.download_tetrahedra"><code class="docutils literal notranslate"><span class="pre">download_tetrahedra()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#axisvm.examples.downloads.download_bernoulli_grid"><code class="docutils literal notranslate"><span class="pre">download_bernoulli_grid()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#axisvm.examples.downloads.download_stem_stl"><code class="docutils literal notranslate"><span class="pre">download_stem_stl()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#axisvm.examples.downloads.download_stand_vtk"><code class="docutils literal notranslate"><span class="pre">download_stand_vtk()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#axisvm.examples.downloads.download_stand_stl"><code class="docutils literal notranslate"><span class="pre">download_stand_stl()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#axisvm.examples.downloads.download_sample_001"><code class="docutils literal notranslate"><span class="pre">download_sample_001()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#axisvm.examples.downloads.download_plate_ss"><code class="docutils literal notranslate"><span class="pre">download_plate_ss()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples Gallery</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
@@ -75,8 +86,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Downloadable Examples</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Downloadable Examples</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -130,7 +141,7 @@ rapid reuse of these datasets.</p>
 <dd class="field-odd"><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -151,7 +162,7 @@ rapid reuse of these datasets.</p>
 <dd class="field-odd"><p>A path to an AxisVM model file on your filesystem.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -172,7 +183,7 @@ rapid reuse of these datasets.</p>
 <dd class="field-odd"><p>A path to an AxisVM model file on your filesystem.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -193,7 +204,7 @@ rapid reuse of these datasets.</p>
 <dd class="field-odd"><p>A path to an stl file on your filesystem.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -212,7 +223,7 @@ rapid reuse of these datasets.</p>
 <dd class="field-odd"><p>A path to a vtk file on your filesystem.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -231,7 +242,7 @@ rapid reuse of these datasets.</p>
 <dd class="field-odd"><p>A path to an stl file on your filesystem.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -251,7 +262,7 @@ domains.</p>
 <dd class="field-odd"><p>A path to an AxisVM model file on your filesystem.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -273,7 +284,7 @@ domains.</p>
 <dd class="field-odd"><p>A path to an AxisVM model file on your filesystem.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
