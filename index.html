@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PyAxisVM - The official python package for AxisVM &mdash; PyAxisVM 1.0.7-git documentation</title>
+  <title>PyAxisVM - The official Python package for AxisVM &mdash; PyAxisVM 1.0.7-git documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
@@ -76,7 +76,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">PyAxisVM - The official python package for <strong>AxisVM</strong></li>
+      <li class="breadcrumb-item active">PyAxisVM - The official Python package for <strong>AxisVM</strong></li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -111,14 +111,15 @@
 </style>
 <img alt="_images/AxisVM_logo.bmp" src="_images/AxisVM_logo.bmp" />
 <section id="pyaxisvm-the-official-python-package-for-axisvm">
-<h1>PyAxisVM - The official python package for <strong>AxisVM</strong><a class="headerlink" href="#pyaxisvm-the-official-python-package-for-axisvm" title="Permalink to this heading">¶</a></h1>
+<h1>PyAxisVM - The official Python package for <strong>AxisVM</strong><a class="headerlink" href="#pyaxisvm-the-official-python-package-for-axisvm" title="Permalink to this heading">¶</a></h1>
 <hr class="docutils" />
 <img alt="_images/gt40.png" src="_images/gt40.png" />
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The documentation is under heavy development. Expect changes more often than usual,
-and enjoy what is alraeady out. Browse the examples and the notebooks to get
-a glimpse of what the library can provide!</p>
+and enjoy what is alraeady out. This only affects the documentation, not the code base.
+Until we het to the end of it, browse the examples and the notebooks to get a glimpse
+of what the library can provide!</p>
 </div>
 <p>The <strong>PyAxisVM</strong> project offers a high-level interface to <strong>AxisVM</strong>,
 making its operations available directly from Python. It builds on top of
@@ -139,7 +140,9 @@ and readable code.</p>
 <h3>Installation and testing<a class="headerlink" href="#installation-and-testing" title="Permalink to this heading">¶</a></h3>
 <section id="register-axisvm-s-type-library">
 <h4>Register AxisVM’s Type Library<a class="headerlink" href="#register-axisvm-s-type-library" title="Permalink to this heading">¶</a></h4>
-<p>If this is not your first time using <strong>AxisVM</strong> through a COM interface on your machine, you should already have a registered type library and you can skip this step. Otherwise, follow the instructions at the beginning of the <em><strong>AxisVM API Reference Guide</strong></em>.</p>
+<p>If this is not your first time using <strong>AxisVM</strong> through a COM interface on your machine, you should already have a registered type library and you can skip this step. Otherwise, you have to register the type library of your AxisVM application. Different versions come with different type libraries, so you might redo this step when you update to a new version. At all times, <strong>older versions must be unregistered from the Windows registry before new registrations!</strong></p>
+<p>To have your AxisVM registered, locate the folder on your filesystem AxisVM is installed into. In that folder you should see a file called <em>!REGISTER_AXISVM_X64</em> and <em>!REGISTER_AXISVM</em>. Double click on the first for a 64-bit, or the second one for a 32-bit installation. <strong>It is important to register only the version that is required and matches with the version of installed AxisVM</strong>.</p>
+<p>To unregister a type library, the step is similar, but now you use the files <em>!UNREGISTER_AXISVM_X64</em> and <em>!UNREGISTER_AXISVM</em>.</p>
 </section>
 <section id="install-pyaxisvm">
 <h4>Install PyAxisVM<a class="headerlink" href="#install-pyaxisvm" title="Permalink to this heading">¶</a></h4>
@@ -301,7 +304,7 @@ and readable code.</p>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorials.html">Tutorials</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_notebooks/console.html">Linear Static and Vibration Analysis of Bernoulli Frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_notebooks/membrane.html">Simply supported beam as a membrane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_notebooks/membrane.html">Simply Supported Beam as a Membrane</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_notebooks/plate1.html">Basic Example with Plates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_notebooks/plate2.html">Navier Plate</a></li>
 </ul>

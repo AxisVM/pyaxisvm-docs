@@ -114,7 +114,9 @@
 <h2>Installation and testing<a class="headerlink" href="#installation-and-testing" title="Permalink to this heading">¶</a></h2>
 <section id="register-axisvm-s-type-library">
 <h3>Register AxisVM’s Type Library<a class="headerlink" href="#register-axisvm-s-type-library" title="Permalink to this heading">¶</a></h3>
-<p>If this is not your first time using <strong>AxisVM</strong> through a COM interface on your machine, you should already have a registered type library and you can skip this step. Otherwise, follow the instructions at the beginning of the <em><strong>AxisVM API Reference Guide</strong></em>.</p>
+<p>If this is not your first time using <strong>AxisVM</strong> through a COM interface on your machine, you should already have a registered type library and you can skip this step. Otherwise, you have to register the type library of your AxisVM application. Different versions come with different type libraries, so you might redo this step when you update to a new version. At all times, <strong>older versions must be unregistered from the Windows registry before new registrations!</strong></p>
+<p>To have your AxisVM registered, locate the folder on your filesystem AxisVM is installed into. In that folder you should see a file called <em>!REGISTER_AXISVM_X64</em> and <em>!REGISTER_AXISVM</em>. Double click on the first for a 64-bit, or the second one for a 32-bit installation. <strong>It is important to register only the version that is required and matches with the version of installed AxisVM</strong>.</p>
+<p>To unregister a type library, the step is similar, but now you use the files <em>!UNREGISTER_AXISVM_X64</em> and <em>!UNREGISTER_AXISVM</em>.</p>
 </section>
 <section id="install-pyaxisvm">
 <h3>Install PyAxisVM<a class="headerlink" href="#install-pyaxisvm" title="Permalink to this heading">¶</a></h3>

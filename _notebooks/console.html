@@ -32,7 +32,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Simply supported beam as a membrane" href="membrane.html" />
+    <link rel="next" title="Simply Supported Beam as a Membrane" href="membrane.html" />
     <link rel="prev" title="Tutorials" href="../tutorials.html" /> 
 </head>
 
@@ -65,7 +65,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#Vibration-Analysis">Vibration Analysis</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="membrane.html">Simply supported beam as a membrane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="membrane.html">Simply Supported Beam as a Membrane</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plate1.html">Basic Example with Plates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plate2.html">Navier Plate</a></li>
 </ul>
@@ -390,7 +390,7 @@ div.rendered_html tbody tr:hover {
 <h2>Input Data<a class="headerlink" href="#Input-Data" title="Permalink to this heading">¶</a></h2>
 <p>Python has a waste number of third party packages, that might save you dozens of time. Now we are going to use the <code class="docutils literal notranslate"><span class="pre">PolyMesh</span></code> library to create a grid of lines. The following lines contain all input parameters of the calculations. After modifying these, the rest should work.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the size of the grid</span>
@@ -415,7 +415,7 @@ div.rendered_html tbody tr:hover {
 <h3>Mesh Creation<a class="headerlink" href="#Mesh-Creation" title="Permalink to this heading">¶</a></h3>
 <p>We can create a 3d grid of bernoulli beams using the <code class="docutils literal notranslate"><span class="pre">PolyMesh</span></code> library. After it, we are going to have our mesh as two <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> arrays, <code class="docutils literal notranslate"><span class="pre">coords</span></code> for the coordinates and <code class="docutils literal notranslate"><span class="pre">topo</span></code> for nodal connectivity. We will use these to build our AxisVM model.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">polymesh.space</span> <span class="kn">import</span> <span class="n">StandardFrame</span><span class="p">,</span> <span class="n">PointCloud</span>
@@ -457,7 +457,7 @@ div.rendered_html tbody tr:hover {
 <h2>AxisVM<a class="headerlink" href="#AxisVM" title="Permalink to this heading">¶</a></h2>
 <p>Starting an AxisVM instance is easy. If in a Jupyter Notebook, drop the interface and watch a html represantation of it, which summarizes the version of the application and the type library as well.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
@@ -467,7 +467,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -479,7 +479,7 @@ div.rendered_html tbody tr:hover {
 </table></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">axisvm.com.tlb</span> <span class="k">as</span> <span class="nn">axtlb</span>
@@ -560,7 +560,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -578,7 +578,7 @@ div.rendered_html tbody tr:hover {
 <h2>Linear Static Analysis<a class="headerlink" href="#Linear-Static-Analysis" title="Permalink to this heading">¶</a></h2>
 <p>We can perform a linear elastic static analysis with the following command:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axm</span><span class="o">.</span><span class="n">Calculation</span><span class="o">.</span><span class="n">LinearAnalysis</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">cuiNoUserInteractionWithAutoCorrectNoShow</span><span class="p">)</span>
@@ -586,7 +586,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -596,7 +596,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>You can make a screenshot anytime!</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axvm</span><span class="o">.</span><span class="n">BringToFront</span><span class="p">()</span>
@@ -608,40 +608,38 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <img alt="../_images/_notebooks_console_16_0.png" src="../_images/_notebooks_console_16_0.png" />
 </div>
 </div>
-<p>The following block fetches degree of freedom solutions for all nodes in the model and stores it in a <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> array. You can use this block as a template in any of your future workflows.</p>
+<p>The following block fetches displacements for all nodes and load cases in the model and stores it in a <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> array. You can use this block as a template in any of your future workflows.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nIDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Count</span><span class="p">)]</span>
-<span class="n">disps</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Displacements</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">disps</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Displacements</span>
 <span class="n">disps</span><span class="o">.</span><span class="n">DisplacementSystem</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">dsGlobal</span>
 <span class="n">disps</span><span class="o">.</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">dofsol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">axm</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Count</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">nCase</span><span class="p">))</span>
-<span class="k">def</span> <span class="nf">f_ex</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="n">disps</span><span class="o">.</span><span class="n">NodalDisplacementByLoadCaseId</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ex</span>
-<span class="k">def</span> <span class="nf">f_ey</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="n">disps</span><span class="o">.</span><span class="n">NodalDisplacementByLoadCaseId</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ey</span>
-<span class="k">def</span> <span class="nf">f_ez</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="n">disps</span><span class="o">.</span><span class="n">NodalDisplacementByLoadCaseId</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ez</span>
 <span class="k">for</span> <span class="n">lcid</span><span class="p">,</span> <span class="n">lcdata</span> <span class="ow">in</span> <span class="n">load_cases</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">lcname</span> <span class="o">=</span> <span class="n">lcdata</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="n">lcname</span> <span class="o">=</span> <span class="n">lcdata</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>  <span class="c1"># retrieve the name of the load case</span>
     <span class="n">disps</span><span class="o">.</span><span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">lcid</span>
-    <span class="n">dataid</span> <span class="o">=</span> <span class="n">lcdata</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-    <span class="n">dofsol</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dataid</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">f_ex</span><span class="p">,</span> <span class="n">nIDs</span><span class="p">)))</span>
-    <span class="n">dofsol</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dataid</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">f_ey</span><span class="p">,</span> <span class="n">nIDs</span><span class="p">)))</span>
-    <span class="n">dofsol</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dataid</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">f_ez</span><span class="p">,</span> <span class="n">nIDs</span><span class="p">)))</span>
-<span class="n">dofsol</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dofsol</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.00001</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">load_case_id</span> <span class="o">=</span> <span class="n">lcdata</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">nodeId</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Count</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">disps</span><span class="o">.</span><span class="n">NodalDisplacementByLoadCaseId</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dofsol</span><span class="p">[</span><span class="n">nodeId</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">load_case_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">ex</span>
+        <span class="n">dofsol</span><span class="p">[</span><span class="n">nodeId</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">load_case_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">ey</span>
+        <span class="n">dofsol</span><span class="p">[</span><span class="n">nodeId</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">load_case_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">ez</span>
+<span class="n">dofsol</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dofsol</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.00001</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># trim very small values</span>
 </pre></div>
 </div>
 </div>
 <p>The array has values for all 45 nodes, 3 spatial dimensions and 5 load cases</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dofsol</span><span class="o">.</span><span class="n">shape</span>
@@ -649,7 +647,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -662,7 +660,7 @@ div.rendered_html tbody tr:hover {
 <h2>Vibration Analysis<a class="headerlink" href="#Vibration-Analysis" title="Permalink to this heading">¶</a></h2>
 <p>The following block performs a vibration analysis for the first load case.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RVibration</span><span class="p">(</span>
@@ -690,18 +688,18 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&lt;comtypes.gen._0AA46C32_04EF_46E3_B0E4_D2DA28D0AB08_0_16_100.RVibration at 0x1e757debec0&gt;,
+[&lt;comtypes.gen._0AA46C32_04EF_46E3_B0E4_D2DA28D0AB08_0_16_100.RVibration at 0x23f05125840&gt;,
  1]
 </pre></div></div>
 </div>
 <p>Execute this line to get the natural circular frequencies:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freks</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">GetAllFrequencies</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">atLinearVibration</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -710,7 +708,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -734,7 +732,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>You can also get modal mass factors. It is easy to read out from the results, that the first two modes correspond to bending shapes.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">records</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">GetAllModalMassfactors</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">atLinearVibration</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -746,7 +744,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -770,7 +768,7 @@ array([[ 0.        , 74.60765839,  0.        ],
 </div>
 <p>Finally, close AxisVM if you are done.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axvm</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
@@ -785,7 +783,7 @@ array([[ 0.        , 74.60765839,  0.        ],
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="membrane.html" class="btn btn-neutral float-right" title="Simply supported beam as a membrane" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="membrane.html" class="btn btn-neutral float-right" title="Simply Supported Beam as a Membrane" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

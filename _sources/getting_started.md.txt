@@ -4,10 +4,14 @@
 
 ### Register AxisVM's Type Library
 
-If this is not your first time using **AxisVM** through a COM interface on your machine, you should already have a registered type library and you can skip this step. Otherwise, follow the instructions at the beginning of the ***AxisVM API Reference Guide***.
+If this is not your first time using **AxisVM** through a COM interface on your machine, you should already have a registered type library and you can skip this step. Otherwise, you have to register the type library of your AxisVM application. Different versions come with different type libraries, so you might redo this step when you update to a new version. At all times, **older versions must be unregistered from the Windows registry before new registrations!**
 
+To have your AxisVM registered, locate the folder on your filesystem AxisVM is installed into. In that folder you should see a file called *!REGISTER_AXISVM_X64* and *!REGISTER_AXISVM*. Double click on the first for a 64-bit, or the second one for a 32-bit installation. **It is important to register only the version that is required and matches with the version of installed AxisVM**.
+
+To unregister a type library, the step is similar, but now you use the files *!UNREGISTER_AXISVM_X64* and *!UNREGISTER_AXISVM*.
 
 ### Install PyAxisVM
+
 This is optional, but we suggest you to create a dedicated virtual enviroment at all times to avoid conflicts with your other projects. Create a folder, open a command shell in that folder and use the following command
 
 ```console
@@ -30,7 +34,6 @@ The **AxisVM** python package can be installed (either in a virtual enviroment o
 
 The `axisvm.com.client` submodule implements various tools to handle the client side operations of creating a COM connection. Import the module and start a new application instance with the `start_AxisVM` method:
 
-
 ```python
 from axisvm.com.client import start_AxisVM
 axapp = start_AxisVM(visible=True)
@@ -45,7 +48,6 @@ To test the connection, you can query the path of the executable being run by ty
 ### Basic API usage
 
 Firts of all, we need a runnning AxisVM either in the background, or with the graphical interface.
-
 
 ```python
 from axisvm.com.client import start_AxisVM
@@ -64,7 +66,6 @@ After all the functions, the documentation of the interface is finished by listi
 
 ![Properties](IAxisVMNodes_Properties.png)
 
-
 ```python
 from axisvm.com.client import start_AxisVM
 axvm = start_AxisVM(visible=True, daemon=True)
@@ -79,7 +80,6 @@ Right below the `Add` function, there is the `AddWithDOF`, with the following do
 
 It tells, that the function needs to be called with specifying three scalar values and a fourth one specifying a DOF component. The enumeration `EDegreeOfFreedom` was listed at the beginning of the documentation of the interface.
 
-
 ```python
 from axisvm.com.tlb import dofFree
 id1 = model.Nodes.AddWithDOF(-1, -1, 0, dofFree)
@@ -87,9 +87,8 @@ id2 = model.Nodes.AddWithDOF(1, -1, 0, dofFree)
 id3 = model.Nodes.AddWithDOF(1, 1, 0, dofFree)
 id4 = model.Nodes.AddWithDOF(-1, 1, 0, dofFree)
 ```
-    
-After the session has ended, close the application by
 
+After the session has ended, close the application by
 
 ```python
 axvm.Quit()
