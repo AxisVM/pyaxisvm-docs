@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>axisvm.com.axmodel &mdash; PyAxisVM 1.0.7-git documentation</title>
+  <title>axisvm.com.axmodel &mdash; PyAxisVM 1.0.9-git documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
@@ -18,9 +18,6 @@
   <![endif]-->
   
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
@@ -36,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> PyAxisVM
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PyAxisVM
           </a>
               <div class="version">
-                1.0.7
+                1.0.9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -73,7 +74,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">axisvm.com.axmodel</li>
       <li class="wy-breadcrumbs-aside">
@@ -90,7 +91,7 @@
 <span class="kn">import</span> <span class="nn">awkward</span> <span class="k">as</span> <span class="nn">ak</span>
 
 <span class="kn">from</span> <span class="nn">polymesh</span> <span class="kn">import</span> <span class="n">PointCloud</span><span class="p">,</span> <span class="n">CartesianFrame</span>
-<span class="kn">from</span> <span class="nn">polymesh.topo</span> <span class="kn">import</span> <span class="n">TopologyArray</span>
+<span class="kn">from</span> <span class="nn">polymesh</span> <span class="kn">import</span> <span class="n">TopologyArray</span>
 <span class="kn">from</span> <span class="nn">neumann.linalg.sparse.utils</span> <span class="kn">import</span> <span class="n">count_cols</span>
 
 <span class="kn">from</span> <span class="nn">.core.wrap</span> <span class="kn">import</span> <span class="n">AxWrapper</span><span class="p">,</span> <span class="n">AxisVMModelItems</span>
@@ -111,7 +112,7 @@
 
 
 <div class="viewcode-block" id="IAxisVMModel"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axmodel.IAxisVMModel">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMModel</span><span class="p">(</span><span class="n">AxWrapper</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMModel` COM interface.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMModel` COM interface.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -119,17 +120,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMNodes</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMNodes` COM interface.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMNodes` COM interface.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">IAxisVMNodes</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Nodes</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Members</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMMembers</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMMembers` COM interface.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMMembers` COM interface.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">IAxisVMMembers</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Members</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Domains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMDomains</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMDomains` COM interface.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMDomains` COM interface.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">IAxisVMDomains</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Domains</span><span class="p">)</span>
 
     <span class="nd">@property</span>
@@ -138,37 +139,37 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Lines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMLines</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMLines` COM interface.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMLines` COM interface.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">IAxisVMLines</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Lines</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Surfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMSurfaces</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMSurfaces` COM interface.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMSurfaces` COM interface.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">IAxisVMSurfaces</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Surfaces</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Windows</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMWindows</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMWindows` COM interface.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMWindows` COM interface.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">IAxisVMWindows</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Windows</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMResults</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMResults` COM interface.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMResults` COM interface.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">IAxisVMResults</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Results</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Calculation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMCalculation</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMCalculation` COM interface.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMCalculation` COM interface.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">IAxisVMCalculation</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Calculation</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Materials</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IAxisVMMaterials</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMMaterials` COM interface.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a pointer object to the `IAxisVMMaterials` COM interface.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">IAxisVMMaterials</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">Materials</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">MeshSurfaceIds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns the indices of the surfaces of all domains in the model</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the indices of the surfaces of all domains in the model</span>
 <span class="sd">        as a :class:`numpy.ndarray`.&quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Domains</span>
         <span class="n">dc</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">Count</span>
@@ -203,7 +204,7 @@
         <span class="k">return</span> <span class="n">PointCloud</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">inds</span><span class="o">=</span><span class="n">ids</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="n">frame</span><span class="p">)</span>
 
 <div class="viewcode-block" id="IAxisVMModel.coordinates"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the coordinates of the points in the model as a :class:`numpy.ndarray`. </span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -225,7 +226,7 @@
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">topology</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">Count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">topology</span><span class="p">())</span>
-            <span class="sd">&quot;&quot;&quot;s = self.Surfaces</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;s = self.Surfaces</span>
 <span class="sd">            sIDs = self.MeshSurfaceIds</span>
 <span class="sd">            def fnc_corner(i): return list(s[i].GetContourPoints()[0])</span>
 <span class="sd">            def fnc_mid(i): return list(s[i].GetMidPoints()[0])</span>
@@ -238,7 +239,7 @@
 <div class="viewcode-block" id="IAxisVMModel.dof_solution"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.dof_solution">[docs]</a>    <span class="k">def</span> <span class="nf">dof_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">DisplacementSystem</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">LoadCaseId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">LoadCombinationId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">case</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns degree of freedom solution for the whole model as a :class:`numpy.ndarray`.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -310,15 +311,15 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">RDisplacementValues2list</span><span class="p">,</span> <span class="n">recs</span><span class="p">)))</span></div>
 
 <div class="viewcode-block" id="IAxisVMModel.generalized_surface_forces"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.generalized_surface_forces">[docs]</a>    <span class="k">def</span> <span class="nf">generalized_surface_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns internal forces and moments for all surfaces in the model.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns internal forces and moments for all surfaces in the model.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">generalized_surface_forces</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IAxisVMModel.surface_stresses"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.surface_stresses">[docs]</a>    <span class="k">def</span> <span class="nf">surface_stresses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns stresses for all surfaces in the model.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns stresses for all surfaces in the model.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">surface_stresses</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IAxisVMModel.critical_xlam_data"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.critical_xlam_data">[docs]</a>    <span class="k">def</span> <span class="nf">critical_xlam_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">CombinationType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="n">AnalysisType</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns critical XLAM data.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -388,14 +389,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">EndUpdate</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_get_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the representation methods (internal helper).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the representation methods (internal helper).&quot;&quot;&quot;</span>
         <span class="n">attrs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;N Nodes&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Count</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;N Lines&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Lines</span><span class="o">.</span><span class="n">Count</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;N Members&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">Count</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;N Surfaces&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">Count</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;N Domains&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Domains</span><span class="o">.</span><span class="n">Count</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
-        <span class="sd">&quot;&quot;&quot;bds = self.bounds</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;bds = self.bounds</span>
 <span class="sd">        fmt = f&quot;{axisvm.FLOAT_FORMAT}, {axisvm.FLOAT_FORMAT}&quot;</span>
 <span class="sd">        attrs.append((&quot;X Bounds&quot;, (bds[0], bds[1]), fmt))</span>
 <span class="sd">        attrs.append((&quot;Y Bounds&quot;, (bds[2], bds[3]), fmt))</span>
@@ -404,7 +405,7 @@
 
 
 <span class="k">class</span> <span class="nc">IAxisVMModels</span><span class="p">(</span><span class="n">AxWrapper</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMModels` COM interface.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMModels` COM interface.&quot;&quot;&quot;</span>
 
     <span class="n">__itemcls__</span> <span class="o">=</span> <span class="n">IAxisVMModel</span>
 
@@ -420,7 +421,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2014-2022, Bence Balogh.</p>
+    <p>&#169; Copyright 2014-2023, Bence Balogh.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>axisvm.com.axdomain &mdash; PyAxisVM 1.0.7-git documentation</title>
+  <title>axisvm.com.axdomain &mdash; PyAxisVM 1.0.9-git documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
@@ -18,9 +18,6 @@
   <![endif]-->
   
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
         <script src="../../../_static/clipboard.min.js"></script>
@@ -36,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> PyAxisVM
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PyAxisVM
           </a>
               <div class="version">
-                1.0.7
+                1.0.9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -73,7 +74,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">axisvm.com.axdomain</li>
       <li class="wy-breadcrumbs-aside">
@@ -100,8 +101,9 @@
 <span class="kn">from</span> <span class="nn">neumann.linalg</span> <span class="kn">import</span> <span class="n">Vector</span>
 <span class="kn">from</span> <span class="nn">polymesh</span> <span class="kn">import</span> <span class="n">PointCloud</span><span class="p">,</span> <span class="n">CartesianFrame</span>
 <span class="kn">from</span> <span class="nn">dewloosh.mpl</span> <span class="kn">import</span> <span class="n">triplot</span>
-<span class="kn">from</span> <span class="nn">polymesh.topo</span> <span class="kn">import</span> <span class="n">TopologyArray</span><span class="p">,</span> <span class="n">rewire</span>
+<span class="kn">from</span> <span class="nn">polymesh</span> <span class="kn">import</span> <span class="n">TopologyArray</span>
 <span class="kn">from</span> <span class="nn">polymesh.utils</span> <span class="kn">import</span> <span class="n">decompose</span>
+<span class="kn">from</span> <span class="nn">polymesh.utils.topology</span> <span class="kn">import</span> <span class="n">rewire</span>
 <span class="kn">from</span> <span class="nn">neumann.linalg.sparse.utils</span> <span class="kn">import</span> <span class="n">count_cols</span>
 
 <span class="kn">import</span> <span class="nn">axisvm</span>
@@ -138,7 +140,7 @@
 
 
 <div class="viewcode-block" id="IAxisVMDomain"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMDomain</span><span class="p">(</span><span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMDomain` COM interface.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMDomain` COM interface.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -154,24 +156,24 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns the transformation matrix of the domain.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the transformation matrix of the domain.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrix</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">IsXLAM</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if the domain is an XLAM domain, False otherwise.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the domain is an XLAM domain, False otherwise.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">IsXLAM</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">]</span>
 
 <div class="viewcode-block" id="IAxisVMDomain.transformation_matrix"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.transformation_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">transformation_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns the transformation matrix of the domain.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the transformation matrix of the domain.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMatrix3x3toNumPy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetTrMatrix</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IAxisVMDomain.record"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.record">[docs]</a>    <span class="k">def</span> <span class="nf">record</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns the record of the domain.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the record of the domain.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">records</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IAxisVMDomain.ABDS"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.ABDS">[docs]</a>    <span class="k">def</span> <span class="nf">ABDS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">compose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the ABDS matrix of the domain.</span>
 
 <span class="sd">        Parameters</span>
@@ -207,7 +209,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">GetCustomStiffnessMatrix</span><span class="p">()</span>
 
 <div class="viewcode-block" id="IAxisVMDomain.coordinates"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the coordinates of the points related to the domain.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
@@ -223,7 +225,7 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="IAxisVMDomain.topology"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.topology">[docs]</a>    <span class="k">def</span> <span class="nf">topology</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopologyArray</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the topology of the domain as a :class:`polymesh.topo.TopologyArray`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">axms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">_wrapped</span>
@@ -234,7 +236,7 @@
         <span class="k">return</span> <span class="n">TopologyArray</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">fnc</span><span class="p">,</span> <span class="n">sIDs</span><span class="p">))))</span></div>
 
 <div class="viewcode-block" id="IAxisVMDomain.surface_coordinates"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.surface_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">surface_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the coordinates for each surface of the domain as an </span>
 <span class="sd">        :class:`awkward.Array` instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -243,7 +245,7 @@
 
 <div class="viewcode-block" id="IAxisVMDomain.detach_mesh"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.detach_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">detach_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triangulate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_indices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> \
             <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PointCloud</span><span class="p">,</span> <span class="n">TopologyArray</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the coordinate and topology arrays of the domain,</span>
 <span class="sd">        detached from the structure.</span>
 
@@ -270,7 +272,7 @@
         <span class="k">return</span> <span class="n">coords</span><span class="p">,</span> <span class="n">topo</span></div>
 
 <div class="viewcode-block" id="IAxisVMDomain.plot"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots the surface using `matplotlib`.</span>
 
 <span class="sd">        Parameters</span>
@@ -288,7 +290,7 @@
 
 <div class="viewcode-block" id="IAxisVMDomain.plot_dof_solution"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_dof_solution">[docs]</a>    <span class="k">def</span> <span class="nf">plot_dof_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span> <span class="n">mpl_kw</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                           <span class="n">DisplacementSystem</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots the degree of freedom solution of a domain using `matplotlib`.</span>
 
 <span class="sd">        Parameters</span>
@@ -379,7 +381,7 @@
 
 <div class="viewcode-block" id="IAxisVMDomain.plot_forces"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_forces">[docs]</a>    <span class="k">def</span> <span class="nf">plot_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="s1">&#39;nx&#39;</span><span class="p">,</span> <span class="n">mpl_kw</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">smoothen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots internal forces of a domain using `matplotlib`.</span>
 
 <span class="sd">        Parameters</span>
@@ -433,7 +435,7 @@
 
 <div class="viewcode-block" id="IAxisVMDomain.plot_stresses"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_stresses">[docs]</a>    <span class="k">def</span> <span class="nf">plot_stresses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">mpl_kw</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                       <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots internal forces of a domain using `matplotlib`.</span>
 
 <span class="sd">        Parameters</span>
@@ -570,7 +572,7 @@
                               <span class="n">LoadCaseId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">LoadCombinationId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">DisplacementSystem</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                               <span class="n">AnalysisType</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">frmt</span><span class="o">=</span><span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns XLAM stresses either as a :class:`numpy.ndarray` or as a dictionary.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -768,7 +770,7 @@
         <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">lc</span><span class="p">,</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">nid</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the representation methods (internal helper).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the representation methods (internal helper).&quot;&quot;&quot;</span>
         <span class="n">attrs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
         <span class="n">attrs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">))</span>
@@ -781,7 +783,7 @@
 
 
 <div class="viewcode-block" id="IAxisVMDomains"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomains">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMDomains</span><span class="p">(</span><span class="n">AxisVMModelItems</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMDomains` COM interface.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMDomains` COM interface.&quot;&quot;&quot;</span>
 
     <span class="n">__itemcls__</span> <span class="o">=</span> <span class="n">IAxisVMDomain</span>
     <span class="n">__collectioncls__</span> <span class="o">=</span> <span class="n">AxDomainCollection</span>
@@ -879,7 +881,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2014-2022, Bence Balogh.</p>
+    <p>&#169; Copyright 2014-2023, Bence Balogh.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

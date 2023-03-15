@@ -16,7 +16,7 @@ Examples Gallery
 .. only:: html
 
   .. image:: /auto_examples/images/thumb/sphx_glr_plot_0_grid1_thumb.png
-    :alt: Screenshot
+    :alt:
 
   :ref:`sphx_glr_auto_examples_plot_0_grid1.py`
 
@@ -33,13 +33,13 @@ Examples Gallery
 .. only:: html
 
   .. image:: /auto_examples/images/thumb/sphx_glr_plot_1_domain_results_thumb.png
-    :alt: Plot Domain Results with `Matplotlib`
+    :alt:
 
   :ref:`sphx_glr_auto_examples_plot_1_domain_results.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Plot Domain Results with `Matplotlib`</div>
+      <div class="sphx-glr-thumbnail-title">Plot Domain Results with Matplotlib</div>
     </div>
 
 
@@ -50,13 +50,13 @@ Examples Gallery
 .. only:: html
 
   .. image:: /auto_examples/images/thumb/sphx_glr_plot_2_domain_stresses_thumb.png
-    :alt: Plot Domain Stresses with `Matplotlib`
+    :alt:
 
   :ref:`sphx_glr_auto_examples_plot_2_domain_stresses.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Plot Domain Stresses with `Matplotlib`</div>
+      <div class="sphx-glr-thumbnail-title">Plot Domain Stresses with Matplotlib</div>
     </div>
 
 
