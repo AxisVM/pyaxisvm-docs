@@ -8,3 +8,4 @@ Tutorials
     _notebooks/membrane
     _notebooks/plate1
     _notebooks/plate2
+    _notebooks/tetra
