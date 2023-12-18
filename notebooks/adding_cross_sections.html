@@ -1,0 +1,931 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="EN" data-content_root="" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Adding predefined and custom cross sections to the model and assigning them to beams. &#8212; PyAxisVM v1.2.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/adding_cross_sections';</script>
+    <script src="../_static/require.min.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Design example of a concrete beam. Define geometry, loads, material, calculate, get results." href="concrete_beam_design.html" />
+    <link rel="prev" title="User Guide" href="../user_guide.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="EN"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyAxisVM</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Adding predefined and custom cross sections to the model and assigning them to beams.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concrete_beam_design.html">Design example of a concrete beam. Define geometry, loads, material, calculate, get results.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Linear Static and Vibration Analysis of Bernoulli Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="membrane_example.html">Simply Supported Beam as a Membrane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="moving_loads_on_a_beam.html">Adding concentrated and distributed moving loads to a beam.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plate_example_1.html">Basic Example with Plates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plate_example_2.html">Navier Plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tips_and_tricks.html">Tips and Tricks</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Adding...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="nbsphinx-download">
+    <a href="https://github.com/AxisVM/pyaxisvm/blob/v1.2.1/docs\source\notebooks\adding_cross_sections.ipynb" download>
+        <button class="nbsphinx-download-button">Download Notebook</button>
+    </a>
+</div><div class="admonition note">
+  This page was generated from <{download}>
+  <a class="reference external" href="https://github.com/AxisVM/pyaxisvm/blob/v1.2.1/docs\source\notebooks\adding_cross_sections.ipynb">docs\source\notebooks\adding_cross_sections.ipynb</a>.
+</div><section id="Adding-predefined-and-custom-cross-sections-to-the-model-and-assigning-them-to-beams.">
+<h1>Adding predefined and custom cross sections to the model and assigning them to beams.<a class="headerlink" href="#Adding-predefined-and-custom-cross-sections-to-the-model-and-assigning-them-to-beams." title="Permalink to this heading">#</a></h1>
+<p>In this example, we show how to - add cross sections from the catalog - add parametric cross sections - define custom cross sections and add them to the model - assign a cross section to a beam</p>
+<section id="Launch-AxisVM-and-create-a-new-model">
+<h2>Launch AxisVM and create a new model<a class="headerlink" href="#Launch-AxisVM-and-create-a-new-model" title="Permalink to this heading">#</a></h2>
+<p>We launch an instance of AxisVM.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+
+<span class="n">axisvm_application</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We import the type library. This is done on a separate line to ensure that the notebook runs correctly for first timers too, since in that case the type library is dynamicall generated with the first launch of an AxisVM instance, which could be the previus block. If this is not the first time you use the library, you can do all the import statements right below each other.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">axisvm.com.tlb</span> <span class="k">as</span> <span class="nn">axtlb</span>
+</pre></div>
+</div>
+</div>
+<p>Create a new model</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axisvm_model_id</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
+<span class="n">axisvm_model</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">axisvm_model_id</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Add-a-cross-section-from-the-catalog">
+<h2>Add a cross section from the catalog<a class="headerlink" href="#Add-a-cross-section-from-the-catalog" title="Permalink to this heading">#</a></h2>
+<p>We can use the cross sections found in the AxisVM cross section library. A cross section can be identified by a parameter describing the shape and the name of the section. For instance, adding an I section to the model looks like this:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">section_index_1</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">CrossSections</span><span class="o">.</span><span class="n">AddFromCatalog</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">cssI</span><span class="p">,</span> <span class="s2">&quot;I 200&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">section_index_1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">section_index_1</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Add-a-parametric-cross-section">
+<h2>Add a parametric cross section<a class="headerlink" href="#Add-a-parametric-cross-section" title="Permalink to this heading">#</a></h2>
+<p>Most of the section types can be added with custom values. For instance, adding a parametric asymmetric I section goes like this:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">section_index_2</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">CrossSections</span><span class="o">.</span><span class="n">AddAsymmetricI</span><span class="p">(</span>
+    <span class="s2">&quot;asymmetric I 200&quot;</span><span class="p">,</span>
+    <span class="mf">0.2</span><span class="p">,</span>      <span class="c1"># cross-section height</span>
+    <span class="mf">0.09</span><span class="p">,</span>     <span class="c1"># cross-section upper flange width</span>
+    <span class="mf">0.0075</span><span class="p">,</span>   <span class="c1"># cross-section web thickness</span>
+    <span class="mf">0.0113</span><span class="p">,</span>   <span class="c1"># cross-section upper flange thickness</span>
+    <span class="mf">0.04</span><span class="p">,</span>     <span class="c1"># cross-section lower flange width</span>
+    <span class="mf">0.0113</span><span class="p">,</span>   <span class="c1"># cross-section lower flange thickness</span>
+<span class="p">)</span>
+<span class="k">assert</span> <span class="n">section_index_2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">section_index_2</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Adding a parametric box section:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">section_index_3</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">CrossSections</span><span class="o">.</span><span class="n">AddBox</span><span class="p">(</span>
+    <span class="s2">&quot;box 20x10&quot;</span><span class="p">,</span>
+    <span class="mf">0.2</span><span class="p">,</span>             <span class="c1"># cross-section height</span>
+    <span class="mf">0.1</span><span class="p">,</span>             <span class="c1"># cross-section width</span>
+    <span class="mf">0.0075</span><span class="p">,</span>          <span class="c1"># cross-section wall thickness at the web</span>
+    <span class="mf">0.0113</span><span class="p">,</span>          <span class="c1"># cross-section wall thickness at the flange</span>
+    <span class="mf">0.0</span><span class="p">,</span>             <span class="c1"># fillet radius</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">cspWelded</span>  <span class="c1"># manufacturing process</span>
+<span class="p">)</span>
+<span class="k">assert</span> <span class="n">section_index_3</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">section_index_3</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-a-custom-polygonal-cross-section">
+<h2>Create a custom polygonal cross section<a class="headerlink" href="#Create-a-custom-polygonal-cross-section" title="Permalink to this heading">#</a></h2>
+<p>We define a rectangular 10cm x 10cm section as a polygon. To define general cross sections, one has to create a list of polygons. If the section is defined by one polygon, the polygon list should be a list of length 1. The polygon list consists of polygons, which consists of lines. Each of these geometrical entities can be created using the <code class="docutils literal notranslate"><span class="pre">IAxisVMObjectCreator</span></code> interface. We use this interface to create interfaces for creating lines, polygons and polygon lists.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a polygon list creator object</span>
+<span class="n">polygon_list_creator</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewPolygon2dList</span><span class="p">()</span>
+
+<span class="c1"># create a polygon creator object</span>
+<span class="n">polygon_creator</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewPolygon2d</span><span class="p">()</span>
+
+<span class="c1"># create a line creator object and add a line to it</span>
+<span class="c1"># this creates the line between the bottom-left and the bottom-right</span>
+<span class="c1"># corners of the rectangle</span>
+<span class="n">line_creator</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewLine2d</span><span class="p">()</span>
+<span class="n">line_creator</span><span class="o">.</span><span class="n">LineType</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ltStraightLine</span>
+<span class="n">line_creator</span><span class="o">.</span><span class="n">SetLinePoints</span><span class="p">(</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span>
+        <span class="n">Coord1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+        <span class="n">Coord2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+    <span class="p">),</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span>
+        <span class="n">Coord1</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+        <span class="n">Coord2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">polygon_creator</span><span class="o">.</span><span class="n">AddLine</span><span class="p">(</span><span class="n">line_creator</span><span class="p">)</span>
+
+<span class="c1"># create a line creator object and add a line to it</span>
+<span class="c1"># this creates the line between the bottom-right and the top-right</span>
+<span class="c1"># corners of the rectangle</span>
+<span class="n">line_creator</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewLine2d</span><span class="p">()</span>
+<span class="n">line_creator</span><span class="o">.</span><span class="n">LineType</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ltStraightLine</span>
+<span class="n">line_creator</span><span class="o">.</span><span class="n">SetLinePoints</span><span class="p">(</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span>
+        <span class="n">Coord1</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+        <span class="n">Coord2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+    <span class="p">),</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span>
+        <span class="n">Coord1</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+        <span class="n">Coord2</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">polygon_creator</span><span class="o">.</span><span class="n">AddLine</span><span class="p">(</span><span class="n">line_creator</span><span class="p">)</span>
+
+<span class="c1"># create a line creator object and add a line to it</span>
+<span class="c1"># this creates the line between the top-right and the top-left</span>
+<span class="c1"># corners of the rectangle</span>
+<span class="n">line_creator</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewLine2d</span><span class="p">()</span>
+<span class="n">line_creator</span><span class="o">.</span><span class="n">LineType</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ltStraightLine</span>
+<span class="n">line_creator</span><span class="o">.</span><span class="n">SetLinePoints</span><span class="p">(</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span>
+        <span class="n">Coord1</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+        <span class="n">Coord2</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+    <span class="p">),</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span>
+        <span class="n">Coord1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+        <span class="n">Coord2</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">polygon_creator</span><span class="o">.</span><span class="n">AddLine</span><span class="p">(</span><span class="n">line_creator</span><span class="p">)</span>
+
+<span class="c1"># create a line creator object and add a line to it</span>
+<span class="c1"># this creates the line between the top-left and the bottom-left</span>
+<span class="c1"># corners of the rectangle</span>
+<span class="n">line_creator</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewLine2d</span><span class="p">()</span>
+<span class="n">line_creator</span><span class="o">.</span><span class="n">LineType</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ltStraightLine</span>
+<span class="n">line_creator</span><span class="o">.</span><span class="n">SetLinePoints</span><span class="p">(</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span>
+        <span class="n">Coord1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+        <span class="n">Coord2</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+    <span class="p">),</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span>
+        <span class="n">Coord1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+        <span class="n">Coord2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># in metres</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">polygon_creator</span><span class="o">.</span><span class="n">AddLine</span><span class="p">(</span><span class="n">line_creator</span><span class="p">)</span>
+
+<span class="c1"># add the polygon to the polygon list</span>
+<span class="n">polygon_list_creator</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">polygon_creator</span><span class="p">)</span>
+
+<span class="c1"># add the cross section to the model using the polygon list</span>
+<span class="n">custom_section_index_1</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">CrossSections</span><span class="o">.</span><span class="n">AddCustomWithUserParams</span><span class="p">(</span>
+    <span class="s2">&quot;custom section 1&quot;</span><span class="p">,</span>
+    <span class="n">polygon_list_creator</span><span class="p">,</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">cspOther</span><span class="p">,</span>
+<span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">custom_section_index_1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">custom_section_index_1</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-a-custom-polygonal-cross-section-with-a-circular-hole">
+<h2>Create a custom polygonal cross section with a circular hole<a class="headerlink" href="#Create-a-custom-polygonal-cross-section-with-a-circular-hole" title="Permalink to this heading">#</a></h2>
+<p>We reproduce the previously created cross section, but this time with a circular hole in it. Also, we are going to use some advanced Python features to avoid the repeating steps in the previous section.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a polygon list creator object</span>
+<span class="n">polygon_list_creator</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewPolygon2dList</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>We create a helper function that adds a list of points as a polygon. The function accepts an argument that controls if the polygon represents a hole or not. It is important here, that this attribute must be set after all lines are added to the polygon!</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_polygon_to_polygon_list</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">polygon_creator</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewPolygon2d</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">point_1</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">point_2</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">line_creator</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewLine2d</span><span class="p">()</span>
+        <span class="n">line_creator</span><span class="o">.</span><span class="n">LineType</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ltStraightLine</span>
+        <span class="n">line_creator</span><span class="o">.</span><span class="n">SetLinePoints</span><span class="p">(</span>
+            <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span><span class="n">Coord1</span> <span class="o">=</span> <span class="n">point_1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Coord2</span> <span class="o">=</span> <span class="n">point_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+            <span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint2d</span><span class="p">(</span><span class="n">Coord1</span> <span class="o">=</span> <span class="n">point_2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Coord2</span> <span class="o">=</span> <span class="n">point_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="p">)</span>
+        <span class="n">polygon_creator</span><span class="o">.</span><span class="n">AddLine</span><span class="p">(</span><span class="n">line_creator</span><span class="p">)</span>
+
+    <span class="c1"># set the polygon as solid or hole</span>
+    <span class="c1"># this must be set after all lines are added</span>
+    <span class="n">polygon_creator</span><span class="o">.</span><span class="n">Hole</span> <span class="o">=</span> <span class="n">hole</span>
+
+    <span class="c1"># add the polygon to the polygon list</span>
+    <span class="n">polygon_list_creator</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">polygon_creator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We define the same 10cm x 10cm rectangle as before, but now using the helper function we created in the previous block:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the coordinates of the corner nodes of the rectangle in metres</span>
+<span class="n">polygon_coordinates</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">],</span>  <span class="c1"># bottom-left</span>
+    <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">],</span>   <span class="c1"># bottom-right</span>
+    <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span>    <span class="c1"># top-right</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>    <span class="c1"># top-left</span>
+<span class="p">]</span>
+<span class="c1"># add the first point again</span>
+<span class="n">polygon_coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">polygon_coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">add_polygon_to_polygon_list</span><span class="p">(</span><span class="n">polygon_coordinates</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The hole is a circle with a diameter of 8 cm. We add the circle as a polygon by discretizing the perimeter.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">radius_of_circle</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># in metres</span>
+<span class="n">n_segments</span> <span class="o">=</span> <span class="mi">60</span>  <span class="c1"># the number of segments</span>
+
+<span class="c1"># the coordinates of the perimeter of the circle</span>
+<span class="n">polygon_coordinates</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_segments</span><span class="p">):</span>
+    <span class="n">angle_rad</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">n_segments</span>
+    <span class="n">coord_x</span> <span class="o">=</span> <span class="n">radius_of_circle</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)</span>
+    <span class="n">coord_y</span> <span class="o">=</span> <span class="n">radius_of_circle</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle_rad</span><span class="p">)</span>
+    <span class="n">polygon_coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">coord_x</span><span class="p">,</span> <span class="n">coord_y</span><span class="p">])</span>
+
+<span class="c1"># add the first point again</span>
+<span class="n">polygon_coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">polygon_coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">add_polygon_to_polygon_list</span><span class="p">(</span><span class="n">polygon_coordinates</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Add the section to the model:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add the cross section to the model using the polygon list</span>
+<span class="n">custom_section_index_2</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">CrossSections</span><span class="o">.</span><span class="n">AddCustomWithUserParams</span><span class="p">(</span>
+    <span class="s2">&quot;custom section 2&quot;</span><span class="p">,</span>
+    <span class="n">polygon_list_creator</span><span class="p">,</span>
+    <span class="n">axtlb</span><span class="o">.</span><span class="n">cspOther</span><span class="p">,</span>
+<span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">custom_section_index_2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">custom_section_index_1</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Define-a-material">
+<h2>Define a material<a class="headerlink" href="#Define-a-material" title="Permalink to this heading">#</a></h2>
+<p>We set the national design code and define a material for later use.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># setting the national design code</span>
+<span class="n">axisvm_model</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">NationalDesignCode</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ndcEuroCode</span>
+
+<span class="c1"># setting the material</span>
+<span class="n">material_index</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Materials</span><span class="o">.</span><span class="n">AddFromCatalog</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ndcEuroCode</span><span class="p">,</span> <span class="s2">&quot;S 235&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">material_index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">material_index</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-the-geometry-of-the-beam">
+<h2>Create the geometry of the beam<a class="headerlink" href="#Create-the-geometry-of-the-beam" title="Permalink to this heading">#</a></h2>
+<p>We create a line for our beam:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the left node</span>
+<span class="n">node_index_1</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">dofFrameXZ</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">node_index_1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">node_index_1</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># define the right node</span>
+<span class="n">node_imdex_2</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">dofFrameXZ</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">node_imdex_2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">node_imdex_2</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># define a line</span>
+<span class="n">line_index</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Lines</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">node_index_1</span><span class="p">,</span> <span class="n">node_imdex_2</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lgtStraightLine</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">line_index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">line_index</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-the-beam-member">
+<h2>Create the beam member<a class="headerlink" href="#Create-the-beam-member" title="Permalink to this heading">#</a></h2>
+<p>We define our beam using the material and cross section defined before. Assigning a cross section to a beam involves exactly the same steps, regardless of the way it was defined. You can use any of the previously defined cross sections by referring to it using the appropriate index.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add the member defined by a single line</span>
+<span class="n">member_index</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">Add</span><span class="p">([</span><span class="n">line_index</span><span class="p">])</span>
+<span class="k">assert</span> <span class="n">member_index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">member_index</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># access the newly created member</span>
+<span class="n">member</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">member_index</span><span class="p">]</span>
+
+<span class="c1"># define the beam</span>
+<span class="n">beam_index</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">DefineAsBeam</span><span class="p">(</span>
+    <span class="n">material_index</span><span class="p">,</span>          <span class="c1"># the index of the material</span>
+    <span class="n">custom_section_index_2</span><span class="p">,</span>  <span class="c1"># start cross section index</span>
+    <span class="n">custom_section_index_2</span><span class="p">,</span>  <span class="c1"># end cross section index</span>
+<span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">beam_index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">beam_index</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>At the end of our workflow, we close AxisVM.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axisvm_application</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../user_guide.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">User Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="concrete_beam_design.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Design example of a concrete beam. Define geometry, loads, material, calculate, get results.</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Launch-AxisVM-and-create-a-new-model">Launch AxisVM and create a new model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Add-a-cross-section-from-the-catalog">Add a cross section from the catalog</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Add-a-parametric-cross-section">Add a parametric cross section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-a-custom-polygonal-cross-section">Create a custom polygonal cross section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-a-custom-polygonal-cross-section-with-a-circular-hole">Create a custom polygonal cross section with a circular hole</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-a-material">Define a material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-the-geometry-of-the-beam">Create the geometry of the beam</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-the-beam-member">Create the beam member</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/notebooks/adding_cross_sections.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2014-2023, Bence Balogh.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

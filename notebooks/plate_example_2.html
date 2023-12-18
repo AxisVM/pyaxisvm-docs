@@ -1,0 +1,1009 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="EN" data-content_root="" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Navier Plate &#8212; PyAxisVM v1.2.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/plate_example_2';</script>
+    <script src="../_static/require.min.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tips and Tricks" href="../tips_and_tricks.html" />
+    <link rel="prev" title="Basic Example with Plates" href="plate_example_1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="EN"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyAxisVM</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="adding_cross_sections.html">Adding predefined and custom cross sections to the model and assigning them to beams.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concrete_beam_design.html">Design example of a concrete beam. Define geometry, loads, material, calculate, get results.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Linear Static and Vibration Analysis of Bernoulli Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="membrane_example.html">Simply Supported Beam as a Membrane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="moving_loads_on_a_beam.html">Adding concentrated and distributed moving loads to a beam.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plate_example_1.html">Basic Example with Plates</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Navier Plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tips_and_tricks.html">Tips and Tricks</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Navier Plate</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="nbsphinx-download">
+    <a href="https://github.com/AxisVM/pyaxisvm/blob/v1.2.1/docs\source\notebooks\plate_example_2.ipynb" download>
+        <button class="nbsphinx-download-button">Download Notebook</button>
+    </a>
+</div><div class="admonition note">
+  This page was generated from <{download}>
+  <a class="reference external" href="https://github.com/AxisVM/pyaxisvm/blob/v1.2.1/docs\source\notebooks\plate_example_2.ipynb">docs\source\notebooks\plate_example_2.ipynb</a>.
+</div><section id="Navier-Plate">
+<h1>Navier Plate<a class="headerlink" href="#Navier-Plate" title="Permalink to this heading">#</a></h1>
+<p>In this example we model a so called Navier plate, simply supported on all edges, under the effect varius loads. We run run a linear analysis and do some plotting.</p>
+<hr class="docutils" />
+<section id="Create-a-COM-interface-to-a-new-instance-of-AxisVM">
+<h2>Create a COM interface to a new instance of AxisVM<a class="headerlink" href="#Create-a-COM-interface-to-a-new-instance-of-AxisVM" title="Permalink to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="kn">import</span> <span class="nn">axisvm.com.tlb</span> <span class="k">as</span> <span class="nn">axtlb</span>
+<span class="n">axvm</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axvm</span><span class="o">.</span><span class="vm">__class__</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+axisvm.com.axapp.IAxisVMApplication
+</pre></div></div>
+</div>
+<p>Create a new model and set the working directory. An empty string means the directory where AxisVM.exe is located:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelId</span> <span class="o">=</span> <span class="n">axvm</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
+<span class="n">axm</span> <span class="o">=</span> <span class="n">axvm</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">modelId</span><span class="p">]</span>
+<span class="n">wdir</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<br/></pre></div>
+</div>
+</div>
+</section>
+<section id="Material">
+<h2>Material<a class="headerlink" href="#Material" title="Permalink to this heading">#</a></h2>
+<p>Set Eurocode as the standard and “C16/20” concrete form the material library.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axm</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">NationalDesignCode</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ndcEuroCode</span>
+<span class="n">matId</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Materials</span><span class="o">.</span><span class="n">AddFromCatalog</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ndcEuroCode</span><span class="p">,</span> <span class="s2">&quot;C16/20&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+</section>
+<section id="Geometry">
+<h2>Geometry<a class="headerlink" href="#Geometry" title="Permalink to this heading">#</a></h2>
+<p>The definition of a geometry of a model follows a hierarchical workflow. This means, that we cannot directly define the domains. Instead, we first define the nodes that make up the lines, with which finally we define the domains.</p>
+<p>We create the beam as two touching domains, which makes up for a total of 6 nodes. We also store the indices of the defined nodes as a reference for creating the lines.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">axisvm.com.tlb</span> <span class="kn">import</span> <span class="n">dofPlateXY</span>
+
+<span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span> <span class="o">=</span> <span class="mf">8.</span><span class="p">,</span> <span class="mf">6.</span>  <span class="c1"># side lengths</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># thickness</span>
+
+<span class="c1"># the plate is in the x-y plane</span>
+<span class="c1"># the origo is located at the left bottom corner</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># we have four points in 3d space</span>
+<span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span>
+<span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">Lx</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span>
+<span class="n">coords</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="mf">0.</span>
+<span class="n">coords</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="mf">0.</span>
+
+<span class="n">fnc</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span>
+<span class="n">nodeIDs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">fnc</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="n">dofPlateXY</span><span class="p">),</span> <span class="n">coords</span><span class="p">))</span>
+<br/></pre></div>
+</div>
+</div>
+<p>We define the lines that make up the domains and store their indices in a <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes_of_lines</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="n">LineGeomType</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lgtStraightLine</span>
+<span class="n">lineIDs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">nodes_of_lines</span><span class="p">:</span>
+    <span class="n">lineIDs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Lines</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">nodeIDs</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">nodeIDs</span><span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                   <span class="n">LineGeomType</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RLineGeomData</span><span class="p">())[</span><span class="mi">1</span><span class="p">])</span>
+<br/></pre></div>
+</div>
+</div>
+<p>Now we are in a position to create the domains by providing lineIDs.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.tlb</span> <span class="kn">import</span> <span class="n">RSurfaceAttr</span><span class="p">,</span> <span class="n">lnlTensionAndCompression</span><span class="p">,</span> \
+    <span class="n">RResistancesXYZ</span><span class="p">,</span> <span class="n">schLinear</span><span class="p">,</span> <span class="n">stPlate</span><span class="p">,</span> <span class="n">RElasticFoundationXYZ</span><span class="p">,</span> \
+    <span class="n">RNonLinearityXYZ</span>
+
+<span class="n">sattr</span> <span class="o">=</span> <span class="n">RSurfaceAttr</span><span class="p">(</span>
+    <span class="n">Thickness</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+    <span class="n">SurfaceType</span><span class="o">=</span><span class="n">stPlate</span><span class="p">,</span>
+    <span class="n">RefZId</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">RefXId</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">MaterialId</span><span class="o">=</span><span class="n">matId</span><span class="p">,</span>
+    <span class="n">ElasticFoundation</span><span class="o">=</span><span class="n">RElasticFoundationXYZ</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">NonLinearity</span><span class="o">=</span><span class="n">RNonLinearityXYZ</span><span class="p">(</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+                                  <span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+                                  <span class="n">lnlTensionAndCompression</span><span class="p">),</span>
+    <span class="n">Resistance</span><span class="o">=</span><span class="n">RResistancesXYZ</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">Charactersitics</span><span class="o">=</span><span class="n">schLinear</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Domains</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">LineIds</span><span class="o">=</span><span class="n">lineIDs</span><span class="p">,</span> <span class="n">SurfaceAttr</span><span class="o">=</span><span class="n">sattr</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+</section>
+<section id="Loads">
+<h2>Loads<a class="headerlink" href="#Loads" title="Permalink to this heading">#</a></h2>
+<p>Load Case 1 - Constant distributed vertical load on the whole domain</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lcid1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">LoadCases</span><span class="o">.</span><span class="n">Name</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;LC1&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qz</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>  <span class="c1"># load intensity</span>
+
+<span class="n">LoadDomainConstant</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RLoadDomainConstant</span><span class="p">(</span>
+    <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">lcid1</span><span class="p">,</span>
+    <span class="n">DomainId</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">qx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">qy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">qz</span><span class="o">=</span><span class="n">qz</span><span class="p">,</span>
+    <span class="n">DistributionType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">sddtSurface</span><span class="p">,</span>
+    <span class="n">SystemGLR</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">sysGlobal</span>
+<span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Loads</span><span class="o">.</span><span class="n">AddDomainConstant</span><span class="p">(</span><span class="n">LoadDomainConstant</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<p>Load Case 2 - Constant distributed vertical load over a rectangular patch</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lcid2</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LoadCases</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s1">&#39;LC2&#39;</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lctStandard</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.tlb</span> <span class="kn">import</span> <span class="n">RLoadDomainPolyArea</span><span class="p">,</span> <span class="n">dtGlobal</span><span class="p">,</span> \
+    <span class="n">ldtConst</span>
+
+<span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">Lx</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">3</span>
+<span class="n">qz</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span>  <span class="c1"># load intensity</span>
+
+<span class="c1"># origo is located at the left bottom corner</span>
+<span class="n">patchlines</span> <span class="o">=</span> <span class="n">axvm</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewLines3d</span><span class="p">()</span>
+<span class="n">patchline1</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RLine3d</span><span class="p">(</span>
+    <span class="n">LineType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ltStraightLine3d</span><span class="p">,</span>
+    <span class="n">P1</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint3d</span><span class="p">(</span><span class="n">xc</span><span class="o">-</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">yc</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">P2</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint3d</span><span class="p">(</span><span class="n">xc</span><span class="o">+</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">yc</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">patchline2</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RLine3d</span><span class="p">(</span>
+    <span class="n">LineType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ltStraightLine3d</span><span class="p">,</span>
+    <span class="n">P1</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint3d</span><span class="p">(</span><span class="n">xc</span><span class="o">+</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">yc</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">P2</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint3d</span><span class="p">(</span><span class="n">xc</span><span class="o">+</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">yc</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">patchline3</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RLine3d</span><span class="p">(</span>
+    <span class="n">LineType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ltStraightLine3d</span><span class="p">,</span>
+    <span class="n">P1</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint3d</span><span class="p">(</span><span class="n">xc</span><span class="o">+</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">yc</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">P2</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint3d</span><span class="p">(</span><span class="n">xc</span><span class="o">-</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">yc</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">patchline4</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RLine3d</span><span class="p">(</span>
+    <span class="n">LineType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ltStraightLine3d</span><span class="p">,</span>
+    <span class="n">P1</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint3d</span><span class="p">(</span><span class="n">xc</span><span class="o">-</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">yc</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">P2</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RPoint3d</span><span class="p">(</span><span class="n">xc</span><span class="o">-</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">yc</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">patchlines</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">patchline1</span><span class="p">)</span>
+<span class="n">patchlines</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">patchline2</span><span class="p">)</span>
+<span class="n">patchlines</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">patchline3</span><span class="p">)</span>
+<span class="n">patchlines</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">patchline4</span><span class="p">)</span>
+
+<span class="n">RectPatch</span> <span class="o">=</span> <span class="n">RLoadDomainPolyArea</span><span class="p">(</span>
+    <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">lcid2</span><span class="p">,</span>
+    <span class="n">DistributionType</span><span class="o">=</span><span class="n">dtGlobal</span><span class="p">,</span>
+    <span class="n">LoadDistributionType</span><span class="o">=</span><span class="n">ldtConst</span><span class="p">,</span>
+    <span class="n">Component</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># z direction</span>
+    <span class="n">P1</span><span class="o">=</span><span class="n">qz</span><span class="p">,</span>
+    <span class="n">WindowLoad</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Loads</span><span class="o">.</span><span class="n">AddDomainPolyArea</span><span class="p">(</span><span class="n">patchlines</span><span class="p">,</span> <span class="n">RectPatch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Load Case 3 - Vertical concentrated load</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lcid3</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LoadCases</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s1">&#39;LC3&#39;</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lctStandard</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.tlb</span> <span class="kn">import</span> <span class="n">RLoadDomainConcentrated</span>
+
+<span class="n">Fz</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
+<span class="n">xF</span><span class="p">,</span> <span class="n">yF</span> <span class="o">=</span> <span class="n">Lx</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">Ly</span><span class="o">/</span><span class="mi">3</span>
+
+<span class="n">concload</span> <span class="o">=</span> <span class="n">RLoadDomainConcentrated</span><span class="p">(</span>
+    <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">lcid3</span><span class="p">,</span>
+    <span class="n">DomainId</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">Fz</span><span class="o">=</span><span class="n">Fz</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">xF</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">yF</span><span class="p">,</span>
+    <span class="n">ReferenceId</span><span class="o">=</span><span class="mi">0</span>  <span class="c1"># global</span>
+<span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Loads</span><span class="o">.</span><span class="n">AddDomainConcentrated</span><span class="p">(</span><span class="n">concload</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Load-Combinations">
+<h2>Load Combinations<a class="headerlink" href="#Load-Combinations" title="Permalink to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lcomb1</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LoadCombinations</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s1">&#39;ULS1&#39;</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ctULS1</span><span class="p">,</span>
+                                  <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span> <span class="p">[</span><span class="n">lcid1</span><span class="p">,</span> <span class="n">lcid2</span><span class="p">,</span> <span class="n">lcid3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Supports">
+<h2>Supports<a class="headerlink" href="#Supports" title="Permalink to this heading">#</a></h2>
+<p>We add two hinged supports at the ends.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Stiffnesses</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RStiffnesses</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span>
+    <span class="n">z</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span>
+    <span class="n">xx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">yy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">zz</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">NonLinearity</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RNonLinearity</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">z</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">xx</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">yy</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">zz</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span>
+<span class="p">)</span>
+<span class="n">Resistances</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RResistances</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">xx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">yy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">zz</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LineSupports</span><span class="o">.</span><span class="n">AddEdgeRelative</span><span class="p">(</span><span class="n">Stiffnesses</span><span class="p">,</span> <span class="n">NonLinearity</span><span class="p">,</span>
+                                     <span class="n">Resistances</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LineSupports</span><span class="o">.</span><span class="n">AddEdgeRelative</span><span class="p">(</span><span class="n">Stiffnesses</span><span class="p">,</span> <span class="n">NonLinearity</span><span class="p">,</span>
+                                     <span class="n">Resistances</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LineSupports</span><span class="o">.</span><span class="n">AddEdgeRelative</span><span class="p">(</span><span class="n">Stiffnesses</span><span class="p">,</span> <span class="n">NonLinearity</span><span class="p">,</span>
+                                     <span class="n">Resistances</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LineSupports</span><span class="o">.</span><span class="n">AddEdgeRelative</span><span class="p">(</span><span class="n">Stiffnesses</span><span class="p">,</span> <span class="n">NonLinearity</span><span class="p">,</span>
+                                     <span class="n">Resistances</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+</section>
+<section id="Meshing">
+<h2>Meshing<a class="headerlink" href="#Meshing" title="Permalink to this heading">#</a></h2>
+<p>We define a triangle mesh, fitted to both concentrated and distributed areaa loads.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MeshParams</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RDomainMeshParameters</span><span class="p">(</span>
+    <span class="n">MeshSize</span><span class="o">=</span><span class="nb">min</span><span class="p">([</span><span class="n">Lx</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="n">Ly</span><span class="o">/</span><span class="mi">10</span><span class="p">]),</span>
+    <span class="n">MeshType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">mtUniform</span><span class="p">,</span>
+    <span class="n">MeshGeometryType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">mgtTriangle</span><span class="p">,</span>
+    <span class="n">IsFitToPointLoad</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">FitToPointLoad</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>  <span class="c1"># fit to all loads</span>
+    <span class="n">IsFitToSurfaceLoad</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">FitToSurfaceLoad</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>  <span class="c1"># fit to all loads</span>
+<span class="p">)</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Domains</span><span class="p">[:]</span><span class="o">.</span><span class="n">GenerateMesh</span><span class="p">(</span><span class="n">MeshParams</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>Notice the use of the semicolon here. This simplifies carrying out the same operation over a range of domains. (the colon at the end simply suppresses the output).</p>
+</section>
+<section id="Processing">
+<h2>Processing<a class="headerlink" href="#Processing" title="Permalink to this heading">#</a></h2>
+<p>We save the file and run a linear analysis, with all warnings suppressed.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="n">wdir</span> <span class="o">+</span> <span class="s1">&#39;Navier.axs&#39;</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">SaveToFile</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Calculation</span><span class="o">.</span><span class="n">LinearAnalysis</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">cuiNoUserInteractionWithAutoCorrectNoShow</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1
+</pre></div></div>
+</div>
+</section>
+<section id="Plotting-with-AxisVM">
+<h2>Plotting with AxisVM<a class="headerlink" href="#Plotting-with-AxisVM" title="Permalink to this heading">#</a></h2>
+<p>We plot vertical displacements of the previously defined load combination. At the end we save the plot to a file in the working directory.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we want the domain to fill up the screen entirely</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">View</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">vTop</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">FitInView</span><span class="p">()</span>
+
+<span class="c1"># turn off the grid</span>
+<span class="n">GridOptions</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RGridOptions</span><span class="p">(</span><span class="n">DisplayGrid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">SetGridOptions</span><span class="p">(</span><span class="n">GridOptions</span><span class="p">)</span>
+
+<span class="n">WriteValuesTo</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RWriteValuesTo</span><span class="p">(</span>
+    <span class="n">Nodes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">Lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">Surfaces</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">MinMaxOnly</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">BasicDispParams</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RBasicDisplayParameters_V153</span><span class="p">(</span>
+    <span class="n">ResultComponent</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">rc_d_eZ</span><span class="p">,</span>
+    <span class="n">Scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">DisplayMode</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">dmIsosurfaces2D</span><span class="p">,</span>
+    <span class="n">DisplayShape</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">dsDeformed</span><span class="p">,</span>
+    <span class="n">WriteValuesTo</span><span class="o">=</span><span class="n">WriteValuesTo</span>
+<span class="p">)</span>
+
+<span class="n">ExtDispParams</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RExtendedDisplayParameters_V153</span><span class="p">(</span>
+    <span class="n">BasicDispParams</span><span class="o">=</span><span class="n">BasicDispParams</span><span class="p">,</span>
+    <span class="n">DisplayAnalysisType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">datLinear</span><span class="p">,</span>
+    <span class="n">ResultType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">rtLoadCombination</span>
+<span class="p">)</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">SetStaticDisplayParameters_V153</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ExtDispParams</span><span class="p">,</span> <span class="n">lcomb1</span><span class="p">,</span> <span class="p">[])</span>
+
+<span class="n">axm</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">ReDraw</span><span class="p">()</span>
+<span class="n">imgpath</span> <span class="o">=</span> <span class="n">wdir</span> <span class="o">+</span> <span class="s1">&#39;Navier_ez.bmp&#39;</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Windows</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">SaveWindowToBitmap</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">wcmColour</span><span class="p">,</span> <span class="n">imgpath</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axvm</span><span class="o">.</span><span class="n">BringToFront</span><span class="p">()</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">View</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">vTop</span>
+<span class="n">axvm</span><span class="o">.</span><span class="n">MainFormTab</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">mftStatic</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">FitInView</span><span class="p">()</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Windows</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">screenshot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_plate_example_2_44_0.png" src="../_images/notebooks_plate_example_2_44_0.png" />
+</div>
+</div>
+</section>
+<section id="Close-AxisVM">
+<h2>Close AxisVM<a class="headerlink" href="#Close-AxisVM" title="Permalink to this heading">#</a></h2>
+<p>Because we created the interface with <code class="docutils literal notranslate"><span class="pre">daemon=True</span></code>, the application closes without any warning.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axvm</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="plate_example_1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Basic Example with Plates</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../tips_and_tricks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tips and Tricks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-a-COM-interface-to-a-new-instance-of-AxisVM">Create a COM interface to a new instance of AxisVM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Material">Material</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Geometry">Geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Loads">Loads</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Load-Combinations">Load Combinations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Supports">Supports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Meshing">Meshing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Processing">Processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Plotting-with-AxisVM">Plotting with AxisVM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Close-AxisVM">Close AxisVM</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/notebooks/plate_example_2.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2014-2023, Bence Balogh.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
