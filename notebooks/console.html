@@ -1,0 +1,967 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="EN" data-content_root="" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Linear Static and Vibration Analysis of Bernoulli Frames &#8212; PyAxisVM v1.2.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/console';</script>
+    <script src="../_static/require.min.js"></script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Simply Supported Beam as a Membrane" href="membrane_example.html" />
+    <link rel="prev" title="Design example of a concrete beam. Define geometry, loads, material, calculate, get results." href="concrete_beam_design.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="EN"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyAxisVM</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="adding_cross_sections.html">Adding predefined and custom cross sections to the model and assigning them to beams.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concrete_beam_design.html">Design example of a concrete beam. Define geometry, loads, material, calculate, get results.</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Static and Vibration Analysis of Bernoulli Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="membrane_example.html">Simply Supported Beam as a Membrane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="moving_loads_on_a_beam.html">Adding concentrated and distributed moving loads to a beam.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plate_example_1.html">Basic Example with Plates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plate_example_2.html">Navier Plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tips_and_tricks.html">Tips and Tricks</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Linear...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="nbsphinx-download">
+    <a href="https://github.com/AxisVM/pyaxisvm/blob/v1.2.1/docs\source\notebooks\console.ipynb" download>
+        <button class="nbsphinx-download-button">Download Notebook</button>
+    </a>
+</div><div class="admonition note">
+  This page was generated from <{download}>
+  <a class="reference external" href="https://github.com/AxisVM/pyaxisvm/blob/v1.2.1/docs\source\notebooks\console.ipynb">docs\source\notebooks\console.ipynb</a>.
+</div><section id="Linear-Static-and-Vibration-Analysis-of-Bernoulli-Frames">
+<h1>Linear Static and Vibration Analysis of Bernoulli Frames<a class="headerlink" href="#Linear-Static-and-Vibration-Analysis-of-Bernoulli-Frames" title="Permalink to this heading">#</a></h1>
+<p>This notebook demonstrates how to use <strong>pyaxisvm</strong> to build and analyze 3d frames. We will build a scalable model, consisting of a grid of Bernoulli beams, and perform a linear static analysis and a linear vibration analysis. We will use <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> to store and handle numerical data and <code class="docutils literal notranslate"><span class="pre">sigmaepsilon.mesh</span></code> for grid generation.</p>
+<section id="Input-Data">
+<h2>Input Data<a class="headerlink" href="#Input-Data" title="Permalink to this heading">#</a></h2>
+<p>Python has a waste number of third party packages, that might save you dozens of time. Now we are going to use the <code class="docutils literal notranslate"><span class="pre">sigmaepsilon.mesh</span></code> library to create a grid of lines. The following lines contain all input parameters of the calculations. After modifying these, the rest should work.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the size of the grid</span>
+<span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">Lz</span> <span class="o">=</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span>
+
+<span class="c1"># these control subdivision</span>
+<span class="c1"># set these higher if you want more lines in the same space</span>
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+
+<span class="c1"># data of a CHS section</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># outer diameter of the tube in m</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># thickness of the tube in m</span>
+
+<span class="c1"># value of the concentrated force at the free end in kN</span>
+<span class="c1"># and the number of load cases to generate</span>
+<span class="n">F</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">nCase</span> <span class="o">=</span> <span class="mi">5</span>
+<br/></pre></div>
+</div>
+</div>
+<section id="Mesh-Creation">
+<h3>Mesh Creation<a class="headerlink" href="#Mesh-Creation" title="Permalink to this heading">#</a></h3>
+<p>We can create a 3d grid of bernoulli beams using the <code class="docutils literal notranslate"><span class="pre">sigmaepsilon.mesh</span></code> library. After it, we are going to have our mesh as two <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> arrays, <code class="docutils literal notranslate"><span class="pre">coords</span></code> for the coordinates and <code class="docutils literal notranslate"><span class="pre">topo</span></code> for nodal connectivity. We will use these to build our AxisVM model.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sigmaepsilon.mesh.space</span> <span class="kn">import</span> <span class="n">StandardFrame</span><span class="p">,</span> <span class="n">PointCloud</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.mesh.grid</span> <span class="kn">import</span> <span class="n">gridH8</span> <span class="k">as</span> <span class="n">grid</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.mesh.utils.topology.tr</span> <span class="kn">import</span> <span class="n">H8_to_L2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># mesh</span>
+<span class="n">gridparams</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">Lz</span><span class="p">),</span>
+    <span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">),</span>
+    <span class="s1">&#39;origo&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="c1"># create a grid of hexagonals</span>
+<span class="n">coords</span><span class="p">,</span> <span class="n">topo</span> <span class="o">=</span> <span class="n">grid</span><span class="p">(</span><span class="o">**</span><span class="n">gridparams</span><span class="p">)</span>
+
+<span class="c1"># turn the hexagonal mesh into lines</span>
+<span class="n">coords</span><span class="p">,</span> <span class="n">topo</span> <span class="o">=</span> <span class="n">H8_to_L2</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">topo</span><span class="p">)</span>
+
+<span class="n">GlobalFrame</span> <span class="o">=</span> <span class="n">StandardFrame</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># define a pointcloud</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">PointCloud</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="n">GlobalFrame</span><span class="p">)</span><span class="o">.</span><span class="n">centralize</span><span class="p">()</span>
+
+<span class="c1"># set the origo to the center of the fixed end</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+<span class="n">points</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span>
+
+<span class="c1"># get the coordinates of the vectors</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<br/></pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="AxisVM">
+<h2>AxisVM<a class="headerlink" href="#AxisVM" title="Permalink to this heading">#</a></h2>
+<p>Starting an AxisVM instance is easy. If in a Jupyter Notebook, drop the interface and watch a html represantation of it, which summarizes the version of the application and the type library as well.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+<span class="n">axvm</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axvm</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table>
+<tr><th>IAxisVMApplication</th><th>Information</th></tr>
+<tr><td>AxisVM Platform</td><td>64 bit</td></tr>
+<tr><td>AxisVM Version</td><td>16 r2j-hf1 En 0</td></tr>
+<tr><td>Type Library Version</td><td>16 100</td></tr>
+</table></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">axisvm.com.tlb</span> <span class="k">as</span> <span class="nn">axtlb</span>
+
+<span class="c1"># create new model</span>
+<span class="n">modelId</span> <span class="o">=</span> <span class="n">axvm</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
+<span class="n">axm</span> <span class="o">=</span> <span class="n">axvm</span><span class="o">.</span><span class="n">Models</span><span class="p">[</span><span class="n">modelId</span><span class="p">]</span>
+
+<span class="c1"># material</span>
+<span class="n">ndc</span><span class="p">,</span> <span class="n">material</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ndcEuroCode</span><span class="p">,</span> <span class="s2">&quot;S 235&quot;</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">NationalDesignCode</span> <span class="o">=</span> <span class="n">ndc</span>
+
+<span class="c1"># cross section</span>
+<span class="n">MaterialIndex</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Materials</span><span class="o">.</span><span class="n">AddFromCatalog</span><span class="p">(</span><span class="n">ndc</span><span class="p">,</span> <span class="n">material</span><span class="p">)</span>
+<span class="n">CrossSectionIndex</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">CrossSections</span><span class="o">.</span><span class="n">AddCircleHollow</span><span class="p">(</span><span class="s1">&#39;S1&#39;</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># crate nodes</span>
+<span class="n">fnc</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Add</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">fnc</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">),</span> <span class="n">coords</span><span class="p">))</span>
+
+<span class="c1"># create lines</span>
+<span class="n">fnc</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Lines</span><span class="o">.</span><span class="n">Add</span>
+<span class="n">GeomType</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lgtStraightLine</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">fnc</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">GeomType</span><span class="p">),</span> <span class="n">topo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># set material and cross section</span>
+<span class="n">LineAttr</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RLineAttr</span><span class="p">(</span>
+    <span class="n">LineType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ltBeam</span><span class="p">,</span>
+    <span class="n">MaterialIndex</span><span class="o">=</span><span class="n">MaterialIndex</span><span class="p">,</span>
+    <span class="n">StartCrossSectionIndex</span><span class="o">=</span><span class="n">CrossSectionIndex</span><span class="p">,</span>
+    <span class="n">EndCrossSectionIndex</span><span class="o">=</span><span class="n">CrossSectionIndex</span>
+<span class="p">)</span>
+<span class="n">lineIDs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Lines</span><span class="o">.</span><span class="n">Count</span><span class="p">)]</span>
+<span class="n">attributes</span> <span class="o">=</span> <span class="p">[</span><span class="n">LineAttr</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Lines</span><span class="o">.</span><span class="n">Count</span><span class="p">)]</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Lines</span><span class="o">.</span><span class="n">BulkSetAttr</span><span class="p">(</span><span class="n">lineIDs</span><span class="p">,</span> <span class="n">attributes</span><span class="p">)</span>
+
+<span class="c1"># nodal supports</span>
+<span class="n">spring</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RStiffnesses</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">xx</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">yy</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">zz</span><span class="o">=</span><span class="mf">1e12</span><span class="p">)</span>
+<span class="n">RNonLinearity</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RNonLinearity</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">z</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">xx</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">yy</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">zz</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span>
+<span class="p">)</span>
+<span class="n">RResistances</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RResistances</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">yy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">zz</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ebcinds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">coords</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ebcinds</span><span class="p">:</span>
+    <span class="n">axm</span><span class="o">.</span><span class="n">NodalSupports</span><span class="o">.</span><span class="n">AddNodalGlobal</span><span class="p">(</span><span class="n">spring</span><span class="p">,</span> <span class="n">RNonLinearity</span><span class="p">,</span> <span class="n">RResistances</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># nodal loads</span>
+<span class="n">load_cases</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">LoadCaseType</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lctStandard</span>
+<span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">coords</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Lx</span> <span class="o">-</span> <span class="mf">1e-12</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">BeginUpdate</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nCase</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;LC</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">lcid</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">LoadCases</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">LoadCaseType</span><span class="p">)</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">inds</span><span class="p">)</span>
+    <span class="n">Fx</span><span class="p">,</span> <span class="n">Fy</span><span class="p">,</span> <span class="n">Fz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">F</span>
+    <span class="n">force</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RLoadNodalForce</span><span class="p">(</span>
+        <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">lcid</span><span class="p">,</span>
+        <span class="n">NodeId</span><span class="o">=</span><span class="n">pid</span><span class="p">,</span>
+        <span class="n">Fx</span><span class="o">=</span><span class="n">Fx</span><span class="p">,</span> <span class="n">Fy</span><span class="o">=</span><span class="n">Fy</span><span class="p">,</span> <span class="n">Fz</span><span class="o">=</span><span class="n">Fz</span><span class="p">,</span>
+        <span class="n">Mx</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">My</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">Mz</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+        <span class="n">ReferenceId</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">axm</span><span class="o">.</span><span class="n">Loads</span><span class="o">.</span><span class="n">AddNodalForce</span><span class="p">(</span><span class="n">force</span><span class="p">)</span>
+    <span class="n">load_cases</span><span class="p">[</span><span class="n">lcid</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">case</span><span class="p">)</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">EndUpdate</span><span class="p">()</span>
+
+<span class="c1"># save the model before calculation</span>
+<span class="n">fpath</span> <span class="o">=</span> <span class="s1">&#39;the_name_of_your_file.axs&#39;</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">SaveToFile</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axm</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table>
+<tr><th>IAxisVMModel</th><th>Information</th></tr>
+<tr><td>N Nodes</td><td>45</td></tr>
+<tr><td>N Lines</td><td>96</td></tr>
+<tr><td>N Members</td><td>96</td></tr>
+<tr><td>N Surfaces</td><td>0</td></tr>
+<tr><td>N Domains</td><td>0</td></tr>
+</table></div>
+</div>
+</section>
+<section id="Linear-Static-Analysis">
+<h2>Linear Static Analysis<a class="headerlink" href="#Linear-Static-Analysis" title="Permalink to this heading">#</a></h2>
+<p>We can perform a linear elastic static analysis with the following command:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axm</span><span class="o">.</span><span class="n">Calculation</span><span class="o">.</span><span class="n">LinearAnalysis</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">cuiNoUserInteractionWithAutoCorrectNoShow</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1
+</pre></div></div>
+</div>
+<p>You can make a screenshot anytime!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axvm</span><span class="o">.</span><span class="n">BringToFront</span><span class="p">()</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">View</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">vPerspective</span>
+<span class="n">axvm</span><span class="o">.</span><span class="n">MainFormTab</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">mftStatic</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">FitInView</span><span class="p">()</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Windows</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">screenshot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_console_16_0.png" src="../_images/notebooks_console_16_0.png" />
+</div>
+</div>
+<p>The following block fetches displacements for all nodes and load cases in the model and stores it in a <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> array. You can use this block as a template in any of your future workflows.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">disps</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Displacements</span>
+<span class="n">disps</span><span class="o">.</span><span class="n">DisplacementSystem</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">dsGlobal</span>
+<span class="n">disps</span><span class="o">.</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">dofsol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">axm</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Count</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">nCase</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">lcid</span><span class="p">,</span> <span class="n">lcdata</span> <span class="ow">in</span> <span class="n">load_cases</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">lcname</span> <span class="o">=</span> <span class="n">lcdata</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>  <span class="c1"># retrieve the name of the load case</span>
+    <span class="n">disps</span><span class="o">.</span><span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">lcid</span>
+    <span class="n">load_case_id</span> <span class="o">=</span> <span class="n">lcdata</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">nodeId</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">axm</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">Count</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">disps</span><span class="o">.</span><span class="n">NodalDisplacementByLoadCaseId</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">dofsol</span><span class="p">[</span><span class="n">nodeId</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">load_case_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">ex</span>
+        <span class="n">dofsol</span><span class="p">[</span><span class="n">nodeId</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">load_case_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">ey</span>
+        <span class="n">dofsol</span><span class="p">[</span><span class="n">nodeId</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">load_case_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">ez</span>
+<span class="n">dofsol</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dofsol</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.00001</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># trim very small values</span>
+</pre></div>
+</div>
+</div>
+<p>The array has values for all 45 nodes, 3 spatial dimensions and 5 load cases</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dofsol</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(45, 3, 5)
+</pre></div></div>
+</div>
+</section>
+<section id="Vibration-Analysis">
+<h2>Vibration Analysis<a class="headerlink" href="#Vibration-Analysis" title="Permalink to this heading">#</a></h2>
+<p>The following block performs a vibration analysis for the first load case.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RVibration</span><span class="p">(</span>
+    <span class="n">LoadCase</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">Iterations</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">ModeShapes</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="n">EigenValueConvergence</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+    <span class="n">EigenVectorConvergence</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+    <span class="n">MassControl</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">mcMassesOnly</span><span class="p">,</span>
+    <span class="n">ConvertLoadsToMasses</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">ConcentratedMasses</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">ConvertConcentratedMassesToLoads</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">ElementMasses</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">MassComponentX</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">MassComponentY</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">MassComponentZ</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">ConvertSlabsToDiaphragms</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">MassMatrixType</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">mtConsistent</span><span class="p">,</span>
+    <span class="n">IncreasedSupportStiffness</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">MassesTakenIntoAccount</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">mtiaAll</span>
+<span class="p">)</span>
+<span class="n">interaction</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">cuiNoUserInteractionWithAutoCorrectNoShow</span>
+<span class="n">axm</span><span class="o">.</span><span class="n">Calculation</span><span class="o">.</span><span class="n">Vibration</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">interaction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;comtypes.gen._0AA46C32_04EF_46E3_B0E4_D2DA28D0AB08_0_16_100.RVibration at 0x21da4856040&gt;,
+ 1]
+</pre></div></div>
+</div>
+<p>Execute this line to get the natural circular frequencies:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freks</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">GetAllFrequencies</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">atLinearVibration</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">freks</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(2.959385451831059,
+ 3.0874871771922074,
+ 4.2843169427821906,
+ 9.185151639376052,
+ 9.515214328710275,
+ 12.974291945228083,
+ 15.96847008498523,
+ 16.552764989633506,
+ 21.82392993055216,
+ 21.869449619700013,
+ 22.11765361461048,
+ 28.831941430030103,
+ 61.843802681433814,
+ 63.1993862629429,
+ 67.8132972985758)
+</pre></div></div>
+</div>
+<p>You can also get modal mass factors. It is easy to read out from the results, that the first two modes correspond to bending shapes.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">records</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">GetAllModalMassfactors</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">atLinearVibration</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">records</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">r</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">z</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">records</span><span class="p">])</span>
+<span class="n">records</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">records</span> <span class="o">&lt;</span> <span class="mf">0.001</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># rule out small values</span>
+<span class="n">records</span> <span class="o">*=</span> <span class="mi">100</span>  <span class="c1"># to get percentage values</span>
+<span class="n">records</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[ 0.        , 74.60765839,  0.        ],
+       [ 0.        ,  0.        , 74.40606356],
+       [ 0.        ,  0.        ,  0.        ],
+       [ 0.        ,  8.9579545 ,  0.        ],
+       [ 0.        ,  0.        ,  9.68592092],
+       [ 0.        ,  0.        ,  0.        ],
+       [ 0.        ,  2.84366924,  0.        ],
+       [ 0.        ,  0.        ,  2.56371368],
+       [ 0.        ,  0.        ,  0.        ],
+       [ 0.        ,  0.7027301 ,  0.        ],
+       [ 0.        ,  0.        ,  0.55825803],
+       [ 0.        ,  0.        ,  0.        ],
+       [ 0.        ,  0.        ,  0.        ],
+       [ 0.        ,  0.        ,  0.        ],
+       [ 0.        ,  0.        ,  0.        ]])
+</pre></div></div>
+</div>
+<p>Finally, close AxisVM if you are done.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axvm</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="concrete_beam_design.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Design example of a concrete beam. Define geometry, loads, material, calculate, get results.</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="membrane_example.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Simply Supported Beam as a Membrane</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Input-Data">Input Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Mesh-Creation">Mesh Creation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AxisVM">AxisVM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Linear-Static-Analysis">Linear Static Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Vibration-Analysis">Vibration Analysis</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/notebooks/console.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2014-2023, Bence Balogh.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

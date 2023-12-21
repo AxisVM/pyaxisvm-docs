@@ -1,3 +1,4 @@
+(tips-and-tricks)=
 # Tips and Tricks
 
 This page sums up the changes in syntax, compared to the 'raw' usage of the COM type library. Everything the API provides out of the box is still available and is working as ever, but the syntax of Python provides a few shortcuts to make coding easier.
@@ -12,6 +13,7 @@ for i in range(axm.Surfaces.Count):
     weights.append(axm.Surfaces.Item[i+1].Weight)
 weight = sum(weights)
 ```
+
 or using a list comprehension
 
 ```python
@@ -44,7 +46,7 @@ or maybe
 weight = sum(map(lambda s : s.Weight, axm.Surfaces))
 ```
 
-Notice how the loops here are carried out over the collection object itself. This is because collection types implement the so-called iterator protocol. 
+Notice how the loops here are carried out over the collection object itself. This is because collection types implement the so-called iterator protocol.
 
 It is also possible to provide negative indices:
 
@@ -93,7 +95,7 @@ from axisvm.com.client import start_AxisVM
 axvm = start_AxisVM(visible=True, daemon=True)
 ```
 
-The keyword argument `daemon=True` is a simple shortcut, equivalent to 
+The keyword argument `daemon=True` is a simple shortcut, equivalent to
 
 ```python
 from axisvm.com.client import start_AxisVM
