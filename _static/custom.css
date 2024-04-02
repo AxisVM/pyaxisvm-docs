@@ -117,23 +117,3 @@ html[data-theme=dark] h1 {
 html[data-theme=dark] h3 {
   color: #0a6774;
 }
-
-.nbsphinx-download-button {
-  background-color: #007bff;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-}
-
-.nbsphinx-download-button:hover {
-  background-color: #0056b3;
-  color: white;
-}
