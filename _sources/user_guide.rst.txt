@@ -15,3 +15,4 @@ is to provide you with enough examples to get a hang of the library.
     notebooks/plate_example_1
     notebooks/plate_example_2
     tips_and_tricks
+    safearray

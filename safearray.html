@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>User Guide &#8212; PyAxisVM v1.2.2 documentation</title>
+    <title>SAFEARRAYs &#8212; PyAxisVM v1.2.2 documentation</title>
   
   
   
@@ -48,13 +48,13 @@
     <script src="_static/tabs.js?v=3ee01567"></script>
     <script src="_static/design-tabs.js?v=36754332"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'safearray';</script>
     <script src="_static/require.min.js?v=8a87acde"></script>
     <script src="_static/custom.js?v=9aa989ff"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Adding predefined and custom cross sections to the model and assigning them to beams." href="notebooks/adding_cross_sections.html" />
-    <link rel="prev" title="Getting Started" href="getting_started.html" />
+    <link rel="next" title="Gallery" href="examples_gallery.html" />
+    <link rel="prev" title="Tips and Tricks" href="tips_and_tricks.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="EN"/>
   </head>
@@ -149,7 +149,7 @@
                 
 
                     <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
+                      <a class="nav-link nav-internal" href="user_guide.html">
                         User Guide
                       </a>
                     </li>
@@ -286,7 +286,7 @@ document.write(`
                 
 
                     <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="#">
+                      <a class="nav-link nav-internal" href="user_guide.html">
                         User Guide
                       </a>
                     </li>
@@ -363,7 +363,7 @@ document.write(`
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebooks/adding_cross_sections.html">Adding predefined and custom cross sections to the model and assigning them to beams.</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/console.html">Linear Static and Vibration Analysis of Bernoulli Frames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/membrane_example.html">Simply Supported Beam as a Membrane</a></li>
@@ -371,7 +371,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="notebooks/plate_example_1.html">Basic Example with Plates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/plate_example_2.html">Navier Plate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tips_and_tricks.html">Tips and Tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="safearray.html">SAFEARRAYs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">SAFEARRAYs</a></li>
 </ul>
 </div>
 </nav></div>
@@ -409,7 +409,10 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">User Guide</li>
+    
+    <li class="breadcrumb-item"><a href="user_guide.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">SAFEARRAYs</li>
   </ul>
 </nav>
 </div>
@@ -426,23 +429,31 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="user-guide">
-<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading">#</a></h1>
-<p>The user guide provides in-depth information on the key concepts of the library with
-useful background information and explanation. The goal of this part of the documentation
-is to provide you with enough examples to get a hang of the library.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/adding_cross_sections.html">Adding predefined and custom cross sections to the model and assigning them to beams.</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/console.html">Linear Static and Vibration Analysis of Bernoulli Frames</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/membrane_example.html">Simply Supported Beam as a Membrane</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/moving_loads_on_a_beam.html">Adding concentrated and distributed moving loads to a beam.</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/plate_example_1.html">Basic Example with Plates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/plate_example_2.html">Navier Plate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tips_and_tricks.html">Tips and Tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="safearray.html">SAFEARRAYs</a></li>
+  <section id="safearrays">
+<span id="safe-array"></span><h1>SAFEARRAYs<a class="headerlink" href="#safearrays" title="Link to this heading">#</a></h1>
+<section id="safearrays-in-general">
+<h2>SAFEARRAYs in General<a class="headerlink" href="#safearrays-in-general" title="Link to this heading">#</a></h2>
+<p>SAFEARRAYs are a data structure used in COM (Component Object Model) programming to encapsulate arrays that can be safely passed between different programming languages, including those that run in different execution environments. They provide a means of accessing data in a language-independent way, ensuring that the data is handled correctly, no matter the environment or language used. This capability is crucial for software components that need to interoperate across various programming languages and systems.</p>
+<p>Key features of SAFEARRAYs include:</p>
+<ul class="simple">
+<li><p>Bounds Checking: SAFEARRAYs automatically check the boundaries of the array to prevent buffer overflows, enhancing security and stability.</p></li>
+<li><p>Type Safety: They store the type of the elements in the array, allowing only compatible types to be inserted, which prevents type mismatches.</p></li>
+<li><p>Dimension Flexibility: SAFEARRAYs can support multiple dimensions, not just one-dimensional arrays, making them versatile for different data structures.</p></li>
+<li><p>Language Neutrality: By abstracting the array details, SAFEARRAYs allow for data exchange between different programming languages without needing to know the specifics of how those languages implement arrays.</p></li>
+<li><p>Reference Counting: They use COM’s reference counting mechanism to manage the memory of the array elements efficiently, helping to prevent memory leaks.</p></li>
 </ul>
-</div>
+<p>SAFEARRAYs are commonly used in scenarios where COM components interact with each other, such as in automation or when interfacing with scripting languages like VBScript. They are essential for applications that require high levels of interoperability and security in handling array data across different component boundaries.</p>
+</section>
+<section id="handling-safearrays-with-the-comtypes-library">
+<h2>Handling SAFEARRAYs with the <code class="docutils literal notranslate"><span class="pre">comtypes</span></code> library<a class="headerlink" href="#handling-safearrays-with-the-comtypes-library" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">comtypes</span></code> library in Python is a lightweight COM package that allows Python code to call and implement custom and dispatch-based COM interfaces. When dealing with SAFEARRAYs, <code class="docutils literal notranslate"><span class="pre">comtypes</span></code> provides mechanisms to work with these arrays seamlessly, allowing Python scripts to interact with COM objects that expect or return SAFEARRAYs.</p>
+<p>To work with SAFEARRAYs in <code class="docutils literal notranslate"><span class="pre">comtypes</span></code>, you typically won’t need to deal directly with the low-level details unless your use case requires it. The library’s design to abstract these details allows for straightforward interaction with COM components, focusing on the logic of your application rather than the intricacies of COM interop.</p>
+<p>Overall, the <code class="docutils literal notranslate"><span class="pre">comtypes</span></code> library simplifies the process of working with SAFEARRAYs in Python, providing a bridge between Python and COM components that leverages the strengths of both environments.</p>
+</section>
+<section id="handling-safearrays-in-this-library">
+<h2>Handling SAFEARRAYs in this library<a class="headerlink" href="#handling-safearrays-in-this-library" title="Link to this heading">#</a></h2>
+<p>In the <code class="docutils literal notranslate"><span class="pre">axisvm</span></code> package, you hardly ever have to worry about handling SAFEARRAYs directly. This is because in most cases the <code class="docutils literal notranslate"><span class="pre">comptypes</span></code> library handles it out of the box, and where it doesn’t, we did what had to be done to make it easier for you. <strong>If you run into a situation where you would work with SAFEARRAYs and you don’t now what to do, we suggest to open a new issue yourself, or get in tuch with the AxisVM’s developers</strong>.</p>
+</section>
 </section>
 
 
@@ -456,20 +467,20 @@ is to provide you with enough examples to get a hang of the library.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="getting_started.html"
+       href="tips_and_tricks.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Getting Started</p>
+        <p class="prev-next-title">Tips and Tricks</p>
       </div>
     </a>
     <a class="right-next"
-       href="notebooks/adding_cross_sections.html"
+       href="examples_gallery.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Adding predefined and custom cross sections to the model and assigning them to beams.</p>
+        <p class="prev-next-title">Gallery</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -484,9 +495,23 @@ is to provide you with enough examples to get a hang of the library.</p>
 
 
   <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#safearrays-in-general">SAFEARRAYs in General</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-safearrays-with-the-comtypes-library">Handling SAFEARRAYs with the <code class="docutils literal notranslate"><span class="pre">comtypes</span></code> library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-safearrays-in-this-library">Handling SAFEARRAYs in this library</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="_sources/user_guide.rst.txt">
+    <a href="_sources/safearray.md.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
