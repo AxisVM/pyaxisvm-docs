@@ -1,223 +1,595 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="EN" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; PyAxisVM 1.0.9-git documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/theme_override.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+<!DOCTYPE html>
+
+
+<html lang="EN" data-content_root="./" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API Reference &#8212; PyAxisVM v1.2.2 documentation</title>
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/clipboard.min.js"></script>
-        <script src="_static/copybutton.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=8a337ff1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=d0707414"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api';</script>
+    <script src="_static/require.min.js?v=8a87acde"></script>
+    <script src="_static/custom.js?v=9aa989ff"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Python API Reference" href="api_python.html" />
-    <link rel="prev" title="Plot Domain Stresses with Matplotlib" href="auto_examples/plot_2_domain_stresses.html" /> 
-</head>
+    <link rel="next" title="AxisVM COM Client" href="api/api_client.html" />
+    <link rel="prev" title="Plot Domain Results with Matplotlib" href="examples/plot_domain_results.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="EN"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-          
-          
-          <a href="index.html" class="icon icon-home">
-            PyAxisVM
-          </a>
-              <div class="version">
-                1.0.9
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="downloads.html">Downloadable Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples Gallery</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">API</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api_python.html">Python API Reference</a></li>
-</ul>
-</li>
-</ul>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-        </div>
-      </div>
-    </nav>
+  
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">PyAxisVM</a>
-      </nav>
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyAxisVM</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">API Reference</li>
-      <li class="wy-breadcrumbs-aside">
-      </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        API Reference
+                      </a>
+                    </li>
+                
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/api_client.html">AxisVM COM Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api_axisvm.html">Python COM Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api_downloads.html">Downloadable examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">API Reference</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading">¶</a></h1>
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
+<p>The reference guide contains a detailed description of the functions,
+modules, and objects included in the library. The reference describes how the
+methods work and which parameters can be used. It assumes that you have an
+understanding of the key concepts.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api_python.html">Python API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api_client.html">Client-Side Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_client.html#axisvm.com.client.start_AxisVM"><code class="docutils literal notranslate"><span class="pre">start_AxisVM()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_client.html#axisvm.com.tlb.find_axisvm_tlb"><code class="docutils literal notranslate"><span class="pre">find_axisvm_tlb()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_client.html#axisvm.com.tlb.wrap_axisvm_tlb"><code class="docutils literal notranslate"><span class="pre">wrap_axisvm_tlb()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api_client.html">AxisVM COM Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/api_client.html#axisvm.com.client.start_AxisVM"><code class="docutils literal notranslate"><span class="pre">start_AxisVM()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_client.html#axisvm.com.tlb.find_axisvm_tlb"><code class="docutils literal notranslate"><span class="pre">find_axisvm_tlb()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_client.html#axisvm.com.tlb.wrap_axisvm_tlb"><code class="docutils literal notranslate"><span class="pre">wrap_axisvm_tlb()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api_axisvm.html">Python COM Interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_axisvm.html#application">Application</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.app"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.app</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.Models"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.Models</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.model"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.model</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.new_model"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.new_model()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.UnLoadCOMclients"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.UnLoadCOMclients()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.BringToFront"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.BringToFront()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.ChangeUnitSystem"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.ChangeUnitSystem()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.CustomFunction"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.CustomFunction()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.DisableMainForm"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.DisableMainForm()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.EnableMainForm"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.EnableMainForm()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.HandleMessages"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.HandleMessages()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.MessageDlg"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.MessageDlg()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.Quit"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.Quit()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.ApplicationClose"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.ApplicationClose</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.AskCloseOnLastReleased"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.AskCloseOnLastReleased</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.AskSaveOnLastReleased"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.AskSaveOnLastReleased</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.AxisVMPlatform"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.AxisVMPlatform</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.Catalog"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.Catalog</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="api_axisvm.html#model">Model</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Nodes"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Nodes</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Members"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Members</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Domains"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Domains</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Lines"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Lines</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Surfaces"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Surfaces</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Windows"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Windows</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Results"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Results</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Calculation"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Calculation</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Materials"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Materials</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.MeshSurfaceIds"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.MeshSurfaceIds</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.coordinates"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.coordinates()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.dof_solution"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.dof_solution()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.generalized_surface_forces"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.generalized_surface_forces()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.surface_stresses"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.surface_stresses()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.critical_xlam_data"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.critical_xlam_data()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api_axisvm.html">Python COM Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/api_axisvm.html#application">Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.ApplicationClose"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.ApplicationClose</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.AskCloseOnLastReleased"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.AskCloseOnLastReleased</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.AskSaveOnLastReleased"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.AskSaveOnLastReleased</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.AxisVMPlatform"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.AxisVMPlatform</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.BringToFront"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.BringToFront()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.Catalog"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.Catalog</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.ChangeUnitSystem"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.ChangeUnitSystem()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.CustomFunction"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.CustomFunction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.DisableMainForm"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.DisableMainForm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.EnableMainForm"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.EnableMainForm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.HandleMessages"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.HandleMessages()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.MessageDlg"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.MessageDlg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.Models"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.Models</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.Quit"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.Quit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.UnLoadCOMclients"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.UnLoadCOMclients()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.app"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.app</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.model"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axapp.IAxisVMApplication.new_model"><code class="docutils literal notranslate"><span class="pre">IAxisVMApplication.new_model()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api_axisvm.html#calculation">Calculation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axcalculation.IAxisVMCalculation"><code class="docutils literal notranslate"><span class="pre">IAxisVMCalculation</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axcalculation.IAxisVMCalculation.LinearAnalysis"><code class="docutils literal notranslate"><span class="pre">IAxisVMCalculation.LinearAnalysis()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_axisvm.html#model">Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Calculation"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Calculation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Domains"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Domains</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Lines"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Lines</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.LoadCombinations"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.LoadCombinations</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Materials"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Materials</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Members"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Members</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.MeshSurfaceIds"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.MeshSurfaceIds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.NodalSupports"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.NodalSupports</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Nodes"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Nodes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.RCBeamDesign"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.RCBeamDesign</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Results"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Results</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Surfaces"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Surfaces</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.Windows"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.Windows</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.app"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.app</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.coordinates"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.coordinates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.critical_xlam_data"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.critical_xlam_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.dof_solution"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.dof_solution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.generalized_surface_forces"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.generalized_surface_forces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.points"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.points()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.surface_stresses"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.surface_stresses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmodel.IAxisVMModel.topology"><code class="docutils literal notranslate"><span class="pre">IAxisVMModel.topology()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api_axisvm.html#nodes">Nodes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axnode.IAxisVMNodes"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_record"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.get_record()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.select"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.select()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_selected"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.get_selected()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_indices"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.get_indices()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.select_indices"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.select_indices()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_selected_indices"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.get_selected_indices()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.connected_surfaces"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.connected_surfaces()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_axisvm.html#calculation">Calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axcalculation.IAxisVMCalculation"><code class="docutils literal notranslate"><span class="pre">IAxisVMCalculation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axcalculation.IAxisVMCalculation.LinearAnalysis"><code class="docutils literal notranslate"><span class="pre">IAxisVMCalculation.LinearAnalysis()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api_axisvm.html#lines-and-members">Lines and Members</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axline.IAxisVMLine"><code class="docutils literal notranslate"><span class="pre">IAxisVMLine</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axline.IAxisVMLines"><code class="docutils literal notranslate"><span class="pre">IAxisVMLines</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmember.IAxisVMMember"><code class="docutils literal notranslate"><span class="pre">IAxisVMMember</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axmember.IAxisVMMembers"><code class="docutils literal notranslate"><span class="pre">IAxisVMMembers</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="api_axisvm.html#surfaces-and-domains">Surfaces and Domains</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.topology"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.topology()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.record"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.record()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.normal"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.normal()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.transformation_matrix"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.transformation_matrix()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.tr"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.tr</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.attributes</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.surface_attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.surface_attributes</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.xlam_stresses"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.xlam_stresses()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.critical_xlam_efficiency"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.critical_xlam_efficiency()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.tr"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.tr</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.t"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.t</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.n"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.n</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.frames"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.frames</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.attributes</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.surface_attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.surface_attributes</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.tr"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.tr</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.IsXLAM"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.IsXLAM</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.transformation_matrix"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.transformation_matrix()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.record"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.record()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.ABDS"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.ABDS()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.coordinates"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.coordinates()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.topology"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.topology()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.surface_coordinates"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.surface_coordinates()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.detach_mesh"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.detach_mesh()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.plot()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_dof_solution"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.plot_dof_solution()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_forces"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.plot_forces()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_stresses"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.plot_stresses()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.xlam_surface_stresses"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.xlam_surface_stresses()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="api_axisvm.html#axisvm.com.axdomain.IAxisVMDomains"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomains</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_axisvm.html#nodes">Nodes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axnode.IAxisVMNodes"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.connected_surfaces"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.connected_surfaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_indices"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.get_indices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_record"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.get_record()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_selected"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.get_selected()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.get_selected_indices"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.get_selected_indices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.select"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.select()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axnode.IAxisVMNodes.select_indices"><code class="docutils literal notranslate"><span class="pre">IAxisVMNodes.select_indices()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_axisvm.html#lines-and-members">Lines and Members</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axline.IAxisVMLine"><code class="docutils literal notranslate"><span class="pre">IAxisVMLine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axline.IAxisVMLines"><code class="docutils literal notranslate"><span class="pre">IAxisVMLines</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMember"><code class="docutils literal notranslate"><span class="pre">IAxisVMMember</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMember.attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMMember.attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMember.frame"><code class="docutils literal notranslate"><span class="pre">IAxisVMMember.frame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMember.get_line_id_and_line_section_id"><code class="docutils literal notranslate"><span class="pre">IAxisVMMember.get_line_id_and_line_section_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMember.member_attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMMember.member_attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMember.tr"><code class="docutils literal notranslate"><span class="pre">IAxisVMMember.tr</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMembers"><code class="docutils literal notranslate"><span class="pre">IAxisVMMembers</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMembers.get_connected_member_ids"><code class="docutils literal notranslate"><span class="pre">IAxisVMMembers.get_connected_member_ids()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMembers.get_connected_members"><code class="docutils literal notranslate"><span class="pre">IAxisVMMembers.get_connected_members()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMembers.starting_and_ending_nodes"><code class="docutils literal notranslate"><span class="pre">IAxisVMMembers.starting_and_ending_nodes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axmember.IAxisVMMembers.topology"><code class="docutils literal notranslate"><span class="pre">IAxisVMMembers.topology()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_axisvm.html#surfaces-and-domains">Surfaces and Domains</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.critical_xlam_efficiency"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.critical_xlam_efficiency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.normal"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.normal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.record"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.record()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.surface_attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.surface_attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.topology"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.topology()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.tr"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.tr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.transformation_matrix"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.transformation_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurface.xlam_stresses"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurface.xlam_stresses()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.frames"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.frames</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.get_attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.get_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.get_surface_attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.get_surface_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.n"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.normals"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.normals()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.records"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.records()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.surface_attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.surface_attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.t"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.t</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.topology"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.topology()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.tr"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.tr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axsurface.IAxisVMSurfaces.transformation_matrices"><code class="docutils literal notranslate"><span class="pre">IAxisVMSurfaces.transformation_matrices()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.ABDS"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.ABDS()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.GetCustomStiffnessMatrix"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.GetCustomStiffnessMatrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.IsXLAM"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.IsXLAM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.coordinates"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.coordinates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.detach_mesh"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.detach_mesh()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.domain_attributes"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.domain_attributes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.model"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_dof_solution"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.plot_dof_solution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_forces"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.plot_forces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_stresses"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.plot_stresses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.record"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.record()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.surface_coordinates"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.surface_coordinates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.topology"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.topology()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.tr"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.tr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.transformation_matrix"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.transformation_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.xlam_surface_stresses"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomain.xlam_surface_stresses()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomains"><code class="docutils literal notranslate"><span class="pre">IAxisVMDomains</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/api_downloads.html">Downloadable examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/api_downloads.html#axisvm.examples.downloads.delete_downloads"><code class="docutils literal notranslate"><span class="pre">delete_downloads()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_downloads.html#axisvm.examples.downloads.download_bernoulli_grid"><code class="docutils literal notranslate"><span class="pre">download_bernoulli_grid()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_downloads.html#axisvm.examples.downloads.download_plate_ss"><code class="docutils literal notranslate"><span class="pre">download_plate_ss()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_downloads.html#axisvm.examples.downloads.download_sample_001"><code class="docutils literal notranslate"><span class="pre">download_sample_001()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_downloads.html#axisvm.examples.downloads.download_stand_stl"><code class="docutils literal notranslate"><span class="pre">download_stand_stl()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_downloads.html#axisvm.examples.downloads.download_stand_vtk"><code class="docutils literal notranslate"><span class="pre">download_stand_vtk()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_downloads.html#axisvm.examples.downloads.download_stem_stl"><code class="docutils literal notranslate"><span class="pre">download_stem_stl()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/api_downloads.html#axisvm.examples.downloads.download_tetrahedra"><code class="docutils literal notranslate"><span class="pre">download_tetrahedra()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -225,34 +597,106 @@
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="auto_examples/plot_2_domain_stresses.html" class="btn btn-neutral float-left" title="Plot Domain Stresses with Matplotlib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api_python.html" class="btn btn-neutral float-right" title="Python API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2014-2023, Bence Balogh.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="examples/plot_domain_results.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Plot Domain Results with <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code></p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class="right-next"
+       href="api/api_client.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AxisVM COM Client</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/api.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2014-2024, Bence Balogh.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

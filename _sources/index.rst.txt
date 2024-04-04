@@ -1,64 +1,138 @@
-.. image:: AxisVM_logo.bmp
+.. image:: _static/AxisVM_logo.bmp
 
-PyAxisVM - The official Python package for **AxisVM**
+=====================================================
+**PyAxisVM** - The official Python package for AxisVM
 =====================================================
 
-----
+.. toctree::
+   :maxdepth: 1
+   :hidden:
 
-.. image:: gt40.png
+   getting_started
+   User Guide <user_guide>
+   Gallery <examples_gallery>
+   API Reference <api>
 
-.. note::
-    The documentation is under heavy development. Expect changes more often than usual,
-    and enjoy what is alraeady out. This only affects the documentation, not the code base. 
-    Until we het to the end of it, browse the examples and the notebooks to get a glimpse 
-    of what the library can provide!
+**Version**: |version|
+
+**Useful links**:
+:doc:`getting_started` |
+:doc:`user_guide` |
+:doc:`examples_gallery` |
+:ref:`API Reference` |
+:ref:`tips-and-tricks` |
+`Source Repository <https://github.com/AxisVM/pyaxisvm>`_
 
 The **PyAxisVM** project offers a high-level interface to **AxisVM**, 
 making its operations available directly from Python. It builds on top of 
 Microsoft's COM technology and supports all the features of the original 
-**AxisVM** COM type library, making you able to
+**AxisVM** COM type library.
 
-* build, manipulate and analyse **AxisVM** models
+Highlights
+==========
 
-* find better solutions with iterative methods
-
-* combine the power of **AxisVM** with third-party Python libraries
-
-* build extension modules
+* Build, manipulate and analyse **AxisVM** models.
+* Find better solutions with iterative methods.
+* Combine the power of **AxisVM** with your favourite Python libraries you already love.
+* Build extension modules.
+* And many more neither of us know about yet.
 
 On top of that, **PyAxisVM** enhances the type library with Python's slicing 
-mechanism, context management and more, that enables writing clean, concise, 
+mechanism, context management and more, that helps you to write clean, concise, 
 and readable code.
 
-.. _getting started:
+Installation
+============
 
-.. include:: getting_started.md
-    :parser: myst_parser.sphinx_
+You can install the project from PyPI with `pip`:
 
-.. include:: tips_and_tricks.md
-    :parser: myst_parser.sphinx_
+.. code-block:: shell
 
-.. toctree::
-    :caption: Contents
-    :maxdepth: 3
+   $ pip install axisvm
 
-    notebooks
-    downloads
-    auto_examples/index.rst
+Contents
+========
 
-.. toctree::
-    :caption: API
-    :maxdepth: 6
-    :hidden:
+.. grid:: 2
+    
+    .. grid-item-card::
+        :img-top: ../source/_static/index-images/getting_started.svg
 
-    api
+        Getting Started
+        ^^^^^^^^^^^^^^^
+
+        The getting started guide helps you to make the first steps to get
+        to know the library.
+
+        +++
+
+        .. button-ref:: getting_started
+            :expand:
+            :color: secondary
+            :click-parent:
+
+            Get me started
+
+    .. grid-item-card::
+        :img-top: ../source/_static/index-images/user_guide.svg
+
+        User Guide
+        ^^^^^^^^^^
+
+        The user guide contains a basic introduction to the main concepts 
+        through simple examples.
+
+        +++
+
+        .. button-ref:: user_guide
+            :expand:
+            :color: secondary
+            :click-parent:
+
+            To the user guide
+
+    .. grid-item-card::
+        :img-top: ../source/_static/index-images/api.svg
+
+        API Reference
+        ^^^^^^^^^^^^^
+
+        The reference guide contains a detailed description of the functions,
+        modules, and objects included in the library. The reference describes how the
+        methods work and which parameters can be used. It assumes that you have an
+        understanding of the key concepts.
+
+        +++
+
+        .. button-ref:: api
+            :expand:
+            :color: secondary
+            :click-parent:
+
+            To the reference guide
+
+    .. grid-item-card::
+        :img-top: ../source/_static/index-images/gallery.svg
+
+        Examples Gallery
+        ^^^^^^^^^^^^^^^^
+
+        A gallery of examples that illustrate uses cases that involve some
+        kind of visualization.
+
+        +++
+
+        .. button-ref:: examples_gallery
+            :expand:
+            :color: secondary
+            :click-parent:
+
+            To the examples gallery
+   
 
 Indices and tables
-------------------
+==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-
-

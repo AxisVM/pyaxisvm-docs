@@ -1,0 +1,946 @@
+
+<!DOCTYPE html>
+
+
+<html lang="EN" data-content_root="../" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Adding concentrated and distributed moving loads to a beam. &#8212; PyAxisVM v1.2.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=720011df" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=8a337ff1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=d0707414"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "tags": "ams", "useLabelIds": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/moving_loads_on_a_beam';</script>
+    <script src="../_static/require.min.js?v=8a87acde"></script>
+    <script src="../_static/custom.js?v=9aa989ff"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Example with Plates" href="plate_example_1.html" />
+    <link rel="prev" title="Simply Supported Beam as a Membrane" href="membrane_example.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="EN"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyAxisVM</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="adding_cross_sections.html">Adding predefined and custom cross sections to the model and assigning them to beams.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Linear Static and Vibration Analysis of Bernoulli Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="membrane_example.html">Simply Supported Beam as a Membrane</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Adding concentrated and distributed moving loads to a beam.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plate_example_1.html">Basic Example with Plates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plate_example_2.html">Navier Plate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tips_and_tricks.html">Tips and Tricks</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Adding...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="admonition note">
+  This page was generated from
+  <a class="reference external" href="https://github.com/AxisVM/pyaxisvm/blob/v1.2.2/docs\source\notebooks/moving_loads_on_a_beam.ipynb">docs\source\notebooks/moving_loads_on_a_beam.ipynb</a>.
+</div><section id="Adding-concentrated-and-distributed-moving-loads-to-a-beam.">
+<h1>Adding concentrated and distributed moving loads to a beam.<a class="headerlink" href="#Adding-concentrated-and-distributed-moving-loads-to-a-beam." title="Link to this heading">#</a></h1>
+<p>In this example - we define a simply supported beam - we assign a material and a cross section to the beam - we define concentrated and distributed moving loads - we run a linear analysis - we make a screenshot</p>
+<section id="Launch-AxisVM">
+<h2>Launch AxisVM<a class="headerlink" href="#Launch-AxisVM" title="Link to this heading">#</a></h2>
+<p>We launch an instance of AxisVM.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">axisvm.com.client</span> <span class="kn">import</span> <span class="n">start_AxisVM</span>
+
+<span class="n">axisvm_application</span> <span class="o">=</span> <span class="n">start_AxisVM</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We import the type library. This is done on a separate line to ensure that the notebook runs correctly for first timers too, since in that case the type library is dynamicall generated with the first launch of an AxisVM instance, which could be the previus block. If this is not the first time you use the library, you can do all the import statements right below each other.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">axisvm.com.tlb</span> <span class="k">as</span> <span class="nn">axtlb</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-a-new-model">
+<h2>Create a new model<a class="headerlink" href="#Create-a-new-model" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axisvm_model_id</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">New</span><span class="p">()</span>
+<span class="n">axisvm_model</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">Models</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">axisvm_model_id</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Define-a-material-and-a-cross-section">
+<h2>Define a material and a cross section<a class="headerlink" href="#Define-a-material-and-a-cross-section" title="Link to this heading">#</a></h2>
+<p>Since it is not the goal of this example to show how to define materials and cross sections, we opt for a simple steel I section combination.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># setting the national design code</span>
+<span class="n">axisvm_model</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">NationalDesignCode</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">ndcEuroCode</span>
+
+<span class="c1"># setting the material</span>
+<span class="n">material_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Materials</span><span class="o">.</span><span class="n">AddFromCatalog</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ndcEuroCode</span><span class="p">,</span> <span class="s2">&quot;S 235&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">material_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">material_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># setting the cross section</span>
+<span class="n">section_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">CrossSections</span><span class="o">.</span><span class="n">AddFromCatalog</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">cssI</span><span class="p">,</span> <span class="s2">&quot;I 200&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">section_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">section_id</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-the-geometry">
+<h2>Create the geometry<a class="headerlink" href="#Create-the-geometry" title="Link to this heading">#</a></h2>
+<p>Define the nodes</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node_id_1</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">dofFrameXZ</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">node_id_1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">node_id_1</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="n">node_id_2</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Nodes</span><span class="o">.</span><span class="n">AddWithDOF</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">dofFrameXZ</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">node_id_2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">node_id_2</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Define the line of the beam</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">line_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Lines</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">node_id_1</span><span class="p">,</span> <span class="n">node_id_2</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lgtStraightLine</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">line_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">line_id</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-the-structural-member">
+<h2>Create the structural member<a class="headerlink" href="#Create-the-structural-member" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add the member</span>
+<span class="n">member_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">Add</span><span class="p">([</span><span class="n">line_id</span><span class="p">])</span>
+<span class="k">assert</span> <span class="n">member_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">member_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># access the newly created member</span>
+<span class="n">member</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Members</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">member_id</span><span class="p">]</span>
+
+<span class="c1"># define the beam</span>
+<span class="n">beam_id</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">DefineAsBeam</span><span class="p">(</span><span class="n">material_id</span><span class="p">,</span> <span class="n">section_id</span><span class="p">,</span> <span class="n">section_id</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Define-the-supports">
+<h2>Define the supports<a class="headerlink" href="#Define-the-supports" title="Link to this heading">#</a></h2>
+<p>We define the support conditions of a simply-supported beam.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># spring stiffness values</span>
+<span class="n">springleft</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RStiffnesses</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">xx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">yy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">zz</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">springright</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RStiffnesses</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">1e12</span><span class="p">,</span> <span class="n">xx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">yy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">zz</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># spring behaviour</span>
+<span class="n">RNonLinearity</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RNonLinearity</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">z</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">xx</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">yy</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+    <span class="n">zz</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">lnlTensionAndCompression</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># spring resistances</span>
+<span class="n">RResistances</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RResistances</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">yy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">zz</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># add the left support</span>
+<span class="n">return_value</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">NodalSupports</span><span class="o">.</span><span class="n">AddNodalGlobal</span><span class="p">(</span>
+    <span class="n">springleft</span><span class="p">,</span> <span class="n">RNonLinearity</span><span class="p">,</span> <span class="n">RResistances</span><span class="p">,</span> <span class="n">node_id_1</span>
+<span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">return_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">return_value</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># add the right support</span>
+<span class="n">return_value</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">NodalSupports</span><span class="o">.</span><span class="n">AddNodalGlobal</span><span class="p">(</span>
+    <span class="n">springright</span><span class="p">,</span> <span class="n">RNonLinearity</span><span class="p">,</span> <span class="n">RResistances</span><span class="p">,</span> <span class="n">node_id_2</span>
+<span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">return_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">return_value</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Define-loads">
+<h2>Define loads<a class="headerlink" href="#Define-loads" title="Link to this heading">#</a></h2>
+<section id="Permanent-load-group">
+<h3>Permanent load group<a class="headerlink" href="#Permanent-load-group" title="Link to this heading">#</a></h3>
+<p>We crate a load group for permanent loads first and add the self-weight of the beam to a load case.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a new load gruop</span>
+<span class="n">group_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">LoadGroups</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span>
+    <span class="s2">&quot;Permanent&quot;</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lgtPermanent</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">gctAdditive</span>
+<span class="p">)</span>
+<span class="k">assert</span> <span class="n">group_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">group_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># create a load case for the self-weight</span>
+<span class="n">load_case_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">LoadCases</span><span class="o">.</span><span class="n">AddWithGroup</span><span class="p">(</span><span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lctStandard</span><span class="p">,</span> <span class="n">group_id</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">load_case_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">load_case_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># add the self-weight to the load case</span>
+<span class="n">return_value</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Loads</span><span class="o">.</span><span class="n">AddBeamSelfWeight</span><span class="p">(</span><span class="n">line_id</span><span class="p">,</span> <span class="n">load_case_id</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">return_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">return_value</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Adding-a-concentrated-moving-load">
+<h3>Adding a concentrated moving load<a class="headerlink" href="#Adding-a-concentrated-moving-load" title="Link to this heading">#</a></h3>
+<p>First and foremost we create a dedicated load group for our moving load with a load case in it. We add the initial load case with the name “XXX-001”, where “XXX” is the fantasy name of the load (‘MC’ in this case). The reason for the part “-001” is that when AxisVM generated the discrete positions of the moving load, it is going to use this naming convention anyway.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a dedicated load group</span>
+<span class="n">group_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">LoadGroups</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span>
+    <span class="s2">&quot;moving-conc&quot;</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lgtMoving</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">gctExclusive</span>
+<span class="p">)</span>
+
+<span class="c1"># create a load case</span>
+<span class="n">load_case_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">LoadCases</span><span class="o">.</span><span class="n">AddWithGroup</span><span class="p">(</span><span class="s2">&quot;MC-001&quot;</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lctMoving</span><span class="p">,</span> <span class="n">group_id</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">load_case_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">load_case_id</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Adding moving loads can be done using the <code class="docutils literal notranslate"><span class="pre">ObjectCreator</span></code> interface. First, we need to create an instance to the <code class="docutils literal notranslate"><span class="pre">IAxisVMMovingLoadOnBeam</span></code> interface. We need to do this for every moving load we want to add to the model.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an object that holds onto the data</span>
+<span class="n">MovingLoadOnBeam</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewMovingLoadOnBeam</span><span class="p">()</span>
+
+<span class="c1"># define settings of the moving load</span>
+<span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">load_case_id</span>
+<span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">RunningMode</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">rmOneWay</span>
+<span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">Steps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">StructureMode</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">smBridge</span>
+<span class="n">return_value</span> <span class="o">=</span> <span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">SetPath</span><span class="p">([</span><span class="n">line_id</span><span class="p">],</span> <span class="n">node_id_1</span><span class="p">,</span> <span class="n">node_id_2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">return_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">return_value</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Then we can use the <code class="docutils literal notranslate"><span class="pre">AddItem</span></code> function of our newly created interface to add moving loads. For this, we neeed to prepare a <code class="docutils literal notranslate"><span class="pre">RMovingLoadOnBeamItem</span></code> record and feed it to the <code class="docutils literal notranslate"><span class="pre">AddItem</span></code> function.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the load values</span>
+<span class="n">moving_load_data</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RMovingLoadOnBeamItem</span><span class="p">(</span>
+    <span class="n">ItemType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ltBeamConcentrated</span><span class="p">,</span>
+    <span class="n">Concentrated</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RConcentratedMovingLoadOnBeam</span><span class="p">(</span>
+        <span class="n">SystemGL</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">sysGlobal</span><span class="p">,</span>
+        <span class="n">Position</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">Fz</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># define the load item</span>
+<span class="n">moving_load_beam_index</span> <span class="o">=</span> <span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">AddItem</span><span class="p">(</span><span class="n">moving_load_data</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">moving_load_beam_index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">moving_load_beam_index</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Finally, we add the moving load to the model:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add the moving load to the beam</span>
+<span class="n">return_value</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">MovingLoads</span><span class="o">.</span><span class="n">AddMovingLoadOnBeam</span><span class="p">(</span><span class="n">MovingLoadOnBeam</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">return_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">return_value</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Adding-a-distributed-moving-load">
+<h3>Adding a distributed moving load<a class="headerlink" href="#Adding-a-distributed-moving-load" title="Link to this heading">#</a></h3>
+<p>For defining a distributed moving load, we need to perform the same steps as for the concentrated one, except the definition of the load values. This time, we do all these steps in one block.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a dedicated load group</span>
+<span class="n">group_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">LoadGroups</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span>
+    <span class="s2">&quot;moving-dist&quot;</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lgtMoving</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">gctExclusive</span>
+<span class="p">)</span>
+
+<span class="c1"># create a load case</span>
+<span class="n">load_case_id</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">LoadCases</span><span class="o">.</span><span class="n">AddWithGroup</span><span class="p">(</span><span class="s2">&quot;MD-001&quot;</span><span class="p">,</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">lctMoving</span><span class="p">,</span> <span class="n">group_id</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">load_case_id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">load_case_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># create an object that holds onto the data</span>
+<span class="n">MovingLoadOnBeam</span> <span class="o">=</span> <span class="n">axisvm_application</span><span class="o">.</span><span class="n">ObjectCreator</span><span class="o">.</span><span class="n">NewMovingLoadOnBeam</span><span class="p">()</span>
+
+<span class="c1"># define settings of the moving load</span>
+<span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">LoadCaseId</span> <span class="o">=</span> <span class="n">load_case_id</span>
+<span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">RunningMode</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">rmOneWay</span>
+<span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">Steps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">StructureMode</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">smBridge</span>
+<span class="n">return_value</span> <span class="o">=</span> <span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">SetPath</span><span class="p">([</span><span class="n">line_id</span><span class="p">],</span> <span class="n">node_id_1</span><span class="p">,</span> <span class="n">node_id_2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">return_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">return_value</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># set the load values</span>
+<span class="n">moving_load_data</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RMovingLoadOnBeamItem</span><span class="p">(</span>
+    <span class="n">ItemType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">ltBeamDistributed</span><span class="p">,</span>
+    <span class="n">Distributed</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">RDistributedMovingLoadOnBeam</span><span class="p">(</span>
+        <span class="n">SystemGL</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">sysGlobal</span><span class="p">,</span>
+        <span class="n">Position1</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">Position2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">Fz1</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">Fz2</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">moving_load_beam_index</span> <span class="o">=</span> <span class="n">MovingLoadOnBeam</span><span class="o">.</span><span class="n">AddItem</span><span class="p">(</span><span class="n">moving_load_data</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">moving_load_beam_index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">moving_load_beam_index</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># add the moving load to the beam</span>
+<span class="n">return_value</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">MovingLoads</span><span class="o">.</span><span class="n">AddMovingLoadOnBeam</span><span class="p">(</span><span class="n">MovingLoadOnBeam</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">return_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">return_value</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="Save-the-model">
+<h2>Save the model<a class="headerlink" href="#Save-the-model" title="Link to this heading">#</a></h2>
+<p>It is necessary to save the model before running an analysis.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;model.axs&#39;</span>
+<span class="n">return_value</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">SaveToFile</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">return_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">return_value</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Linear-analysis">
+<h2>Linear analysis<a class="headerlink" href="#Linear-analysis" title="Link to this heading">#</a></h2>
+<p>We perform a simple linear analysis.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">return_value</span> <span class="o">=</span> <span class="n">axisvm_model</span><span class="o">.</span><span class="n">Calculation</span><span class="o">.</span><span class="n">LinearAnalysis</span><span class="p">(</span><span class="n">axtlb</span><span class="o">.</span><span class="n">cuiNoUserInteractionWithAutoCorrectNoShow</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">return_value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;An error occured. Error code: </span><span class="si">{</span><span class="n">return_value</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Take-a-screenshot">
+<h2>Take a screenshot<a class="headerlink" href="#Take-a-screenshot" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axisvm_model</span><span class="o">.</span><span class="n">View</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">vFront</span>
+<span class="n">axisvm_model</span><span class="o">.</span><span class="n">FitInView</span><span class="p">()</span>
+
+<span class="n">GridOptions</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RGridOptions</span><span class="p">(</span><span class="n">DisplayGrid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axisvm_model</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">SetGridOptions</span><span class="p">(</span><span class="n">GridOptions</span><span class="p">)</span>
+
+<span class="n">WriteValuesTo</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RWriteValuesTo</span><span class="p">(</span>
+    <span class="n">Nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">Lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">MinMaxOnly</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">BasicDispParams</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RBasicDisplayParameters_V153</span><span class="p">(</span>
+    <span class="n">ResultComponent</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">rc_d_eZ</span><span class="p">,</span>
+    <span class="n">Scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">DisplayMode</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">dmDiagramFilled</span><span class="p">,</span>
+    <span class="n">DisplayShape</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">dsUndeformed</span><span class="p">,</span>
+    <span class="n">WriteValuesTo</span><span class="o">=</span><span class="n">WriteValuesTo</span>
+<span class="p">)</span>
+
+<span class="n">ExtDispParams</span> <span class="o">=</span> <span class="n">axtlb</span><span class="o">.</span><span class="n">RExtendedDisplayParameters_V153</span><span class="p">(</span>
+    <span class="n">BasicDispParams</span><span class="o">=</span><span class="n">BasicDispParams</span><span class="p">,</span>
+    <span class="n">DisplayAnalysisType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">datLinear</span><span class="p">,</span>
+    <span class="n">ResultType</span><span class="o">=</span><span class="n">axtlb</span><span class="o">.</span><span class="n">rtLoadCase</span>
+<span class="p">)</span>
+
+<span class="n">load_case_id</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">axisvm_model</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">SetStaticDisplayParameters_V153</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ExtDispParams</span><span class="p">,</span> <span class="n">load_case_id</span><span class="p">,</span> <span class="p">[])</span>
+
+<span class="n">axisvm_model</span><span class="o">.</span><span class="n">Windows</span><span class="o">.</span><span class="n">ReDraw</span><span class="p">()</span>
+<span class="n">axisvm_application</span><span class="o">.</span><span class="n">BringToFront</span><span class="p">()</span>
+<span class="n">axisvm_model</span><span class="o">.</span><span class="n">Windows</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">screenshot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_moving_loads_on_a_beam_45_0.png" src="../_images/notebooks_moving_loads_on_a_beam_45_0.png" />
+</div>
+</div>
+</section>
+<section id="Close-the-application">
+<h2>Close the application<a class="headerlink" href="#Close-the-application" title="Link to this heading">#</a></h2>
+<p>At the end of our workflow, we close AxisVM.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axisvm_application</span><span class="o">.</span><span class="n">Quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="membrane_example.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Simply Supported Beam as a Membrane</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="plate_example_1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basic Example with Plates</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Launch-AxisVM">Launch AxisVM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-a-new-model">Create a new model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-a-material-and-a-cross-section">Define a material and a cross section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-the-geometry">Create the geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-the-structural-member">Create the structural member</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-the-supports">Define the supports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-loads">Define loads</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Permanent-load-group">Permanent load group</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Adding-a-concentrated-moving-load">Adding a concentrated moving load</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Adding-a-distributed-moving-load">Adding a distributed moving load</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Save-the-model">Save the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Linear-analysis">Linear analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Take-a-screenshot">Take a screenshot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Close-the-application">Close the application</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/notebooks/moving_loads_on_a_beam.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2014-2024, Bence Balogh.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

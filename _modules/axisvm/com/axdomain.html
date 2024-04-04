@@ -1,137 +1,482 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="EN" >
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>axisvm.com.axdomain &mdash; PyAxisVM 1.0.9-git documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/theme_override.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+
+
+<html lang="EN" data-content_root="" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>axisvm.com.axdomain &#8212; PyAxisVM v1.0.9 documentation</title>
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../../../_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/axisvm/com/axdomain';</script>
+    <script src="../../../_static/require.min.js"></script>
+    <script src="../../../_static/custom.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
-</head>
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="EN"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-          
-          
-          <a href="../../../index.html" class="icon icon-home">
-            PyAxisVM
-          </a>
-              <div class="version">
-                1.0.9
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks.html">Notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../downloads.html">Downloadable Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
-</ul>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-        </div>
-      </div>
-    </nav>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">PyAxisVM</a>
-      </nav>
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">axisvm.com.axdomain</li>
-      <li class="wy-breadcrumbs-aside">
-      </li>
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyAxisVM</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../examples_gallery.html">
+                        Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/AxisVM/pyaxisvm" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://axisvm.eu/" title="AxisVM" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-solid fa-house fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">AxisVM</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">axisvm.com.axdomain</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <h1>Source code for axisvm.com.axdomain</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Iterator</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">awkward</span> <span class="k">as</span> <span class="nn">ak</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span> <span class="k">as</span> <span class="n">Array</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.tri</span> <span class="k">as</span> <span class="nn">tri</span>
 
-<span class="kn">from</span> <span class="nn">dewloosh.core</span> <span class="kn">import</span> <span class="n">issequence</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.core</span> <span class="kn">import</span> <span class="n">issequence</span>
 
-<span class="kn">from</span> <span class="nn">neumann.linalg</span> <span class="kn">import</span> <span class="n">Vector</span>
-<span class="kn">from</span> <span class="nn">polymesh</span> <span class="kn">import</span> <span class="n">PointCloud</span><span class="p">,</span> <span class="n">CartesianFrame</span>
-<span class="kn">from</span> <span class="nn">dewloosh.mpl</span> <span class="kn">import</span> <span class="n">triplot</span>
-<span class="kn">from</span> <span class="nn">polymesh</span> <span class="kn">import</span> <span class="n">TopologyArray</span>
-<span class="kn">from</span> <span class="nn">polymesh.utils</span> <span class="kn">import</span> <span class="n">decompose</span>
-<span class="kn">from</span> <span class="nn">polymesh.utils.topology</span> <span class="kn">import</span> <span class="n">rewire</span>
-<span class="kn">from</span> <span class="nn">neumann.linalg.sparse.utils</span> <span class="kn">import</span> <span class="n">count_cols</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.math.linalg</span> <span class="kn">import</span> <span class="n">Vector</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.math.linalg.sparse.utils</span> <span class="kn">import</span> <span class="n">count_cols</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.mesh</span> <span class="kn">import</span> <span class="n">PointCloud</span><span class="p">,</span> <span class="n">CartesianFrame</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.mesh</span> <span class="kn">import</span> <span class="n">TopologyArray</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.mesh.utils</span> <span class="kn">import</span> <span class="n">decompose</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.mesh.utils.topology</span> <span class="kn">import</span> <span class="n">rewire</span>
+<span class="kn">from</span> <span class="nn">sigmaepsilon.mesh.plotting</span> <span class="kn">import</span> <span class="n">triplot_mpl_data</span><span class="p">,</span> <span class="n">triplot_mpl_mesh</span>
 
 <span class="kn">import</span> <span class="nn">axisvm</span>
-<span class="kn">from</span> <span class="nn">.core.wrap</span> <span class="kn">import</span> <span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">AxisVMModelItems</span><span class="p">,</span> <span class="n">AxItemCollection</span>
-<span class="kn">from</span> <span class="nn">.core.utils</span> <span class="kn">import</span> <span class="p">(</span><span class="n">RMatrix3x3toNumPy</span><span class="p">,</span> <span class="n">RMatrix2x2toNumPy</span><span class="p">,</span>
-                         <span class="n">RSurfaceCoordinates2list</span><span class="p">,</span> <span class="n">triangulate</span> <span class="k">as</span> <span class="n">triang</span><span class="p">,</span>
-                         <span class="n">dcomp2int</span><span class="p">,</span> <span class="n">fcomp2int</span><span class="p">,</span> <span class="n">scomp2int</span><span class="p">,</span> <span class="n">xlmscomp2int</span><span class="p">,</span>
-                         <span class="n">RXLAMSurfaceStresses2list</span><span class="p">,</span> <span class="n">RSurfaceStresses2list</span><span class="p">,</span>
-                         <span class="n">get_xlam_strs_case</span><span class="p">,</span> <span class="n">get_xlam_strs_comb</span><span class="p">,</span>
-                         <span class="n">get_xlam_effs_crit</span><span class="p">,</span> <span class="n">RXLAMSurfaceEfficiencies2list</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.core.wrap</span> <span class="kn">import</span> <span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">AxisVMModelItems</span><span class="p">,</span> <span class="n">AxItemCollection</span><span class="p">,</span> <span class="n">AxWrapper</span>
+<span class="kn">from</span> <span class="nn">.core.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">RMatrix3x3toNumPy</span><span class="p">,</span>
+    <span class="n">RMatrix2x2toNumPy</span><span class="p">,</span>
+    <span class="n">RSurfaceCoordinates2list</span><span class="p">,</span>
+    <span class="n">triangulate</span> <span class="k">as</span> <span class="n">triang</span><span class="p">,</span>
+    <span class="n">dcomp2int</span><span class="p">,</span>
+    <span class="n">fcomp2int</span><span class="p">,</span>
+    <span class="n">scomp2int</span><span class="p">,</span>
+    <span class="n">xlmscomp2int</span><span class="p">,</span>
+    <span class="n">RXLAMSurfaceStresses2list</span><span class="p">,</span>
+    <span class="n">RSurfaceStresses2list</span><span class="p">,</span>
+    <span class="n">get_xlam_strs_case</span><span class="p">,</span>
+    <span class="n">get_xlam_strs_comb</span><span class="p">,</span>
+    <span class="n">get_xlam_effs_crit</span><span class="p">,</span>
+    <span class="n">RXLAMSurfaceEfficiencies2list</span><span class="p">,</span>
+    <span class="n">_DisplacementSystem</span><span class="p">,</span>
+    <span class="n">_LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.attr</span> <span class="kn">import</span> <span class="n">AxisVMAttributes</span><span class="p">,</span> <span class="n">squeeze_attributes</span> <span class="k">as</span> <span class="n">dsqueeze</span>
 <span class="kn">from</span> <span class="nn">.axsurface</span> <span class="kn">import</span> <span class="n">SurfaceMixin</span><span class="p">,</span> <span class="n">get_surface_attributes</span><span class="p">,</span> <span class="n">surface_attr_fields</span>
+<span class="kn">from</span> <span class="nn">.axresult</span> <span class="kn">import</span> <span class="n">AxisVMResultItem</span><span class="p">,</span> <span class="n">IAxisVMStresses</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;IAxisVMDomain&#39;</span><span class="p">,</span> <span class="s1">&#39;IAxisVMDomains&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;IAxisVMDomain&quot;</span><span class="p">,</span> <span class="s2">&quot;IAxisVMDomains&quot;</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">AxDomainCollection</span><span class="p">(</span><span class="n">AxItemCollection</span><span class="p">):</span>
-
     <span class="k">def</span> <span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">attr</span><span class="p">):</span>
             <span class="n">_attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">attr</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_attr</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
-                <span class="k">def</span> <span class="nf">getter</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+
+                <span class="k">def</span> <span class="nf">getter</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+
                 <span class="n">funcs</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">getter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
                 <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
                     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">funcs</span><span class="p">))</span>
+
                 <span class="k">return</span> <span class="n">inner</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">attr</span><span class="p">),</span> <span class="bp">self</span><span class="p">))</span>
@@ -139,23 +484,32 @@
             <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="IAxisVMDomain"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMDomain</span><span class="p">(</span><span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="IAxisVMDomain"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMDomain</span><span class="p">(</span><span class="n">AxisVMModelItem</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMDomain` COM interface.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxWrapper</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the model of the domain.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">model</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the attributes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">dsqueeze</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_attributes</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">domain_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the domain attributes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">dsqueeze</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">get_domain_attributes</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">))</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the transformation matrix of the domain.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrix</span><span class="p">()</span>
 
@@ -164,29 +518,28 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the domain is an XLAM domain, False otherwise.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">IsXLAM</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">]</span>
 
-<div class="viewcode-block" id="IAxisVMDomain.transformation_matrix"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.transformation_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">transformation_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+<div class="viewcode-block" id="IAxisVMDomain.transformation_matrix"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.transformation_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">transformation_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the transformation matrix of the domain.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RMatrix3x3toNumPy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetTrMatrix</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="IAxisVMDomain.record"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.record">[docs]</a>    <span class="k">def</span> <span class="nf">record</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
+<div class="viewcode-block" id="IAxisVMDomain.record"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.record">[docs]</a>    <span class="k">def</span> <span class="nf">record</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the record of the domain.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">records</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="IAxisVMDomain.ABDS"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.ABDS">[docs]</a>    <span class="k">def</span> <span class="nf">ABDS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">compose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]:</span>
+<div class="viewcode-block" id="IAxisVMDomain.ABDS"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.ABDS">[docs]</a>    <span class="k">def</span> <span class="nf">ABDS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">compose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">ndarray</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the ABDS matrix of the domain.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        compose : bool, Optional</span>
+<span class="sd">        compose: bool, Optional</span>
 <span class="sd">            If True, the result is one matrix, otherwise 4 submatrices.</span>
 <span class="sd">            Default is True.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        Union[np.ndarray, List[np.ndarray]]</span>
+<span class="sd">        Union[numpy.ndarray, List[ndarray]]</span>
 <span class="sd">            One or four NumPy arrays.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">GetCustomStiffnessMatrix</span><span class="p">()</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="p">[</span><span class="n">RMatrix3x3toNumPy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">)]</span>
@@ -202,58 +555,91 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">S</span></div>
 
-    <span class="k">def</span> <span class="nf">GetCustomStiffnessMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to_numpy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">compose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IAxisVMDomain.GetCustomStiffnessMatrix"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.GetCustomStiffnessMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">GetCustomStiffnessMatrix</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">to_numpy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">compose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the custom stiffness matrix, optionally as a NumPy array.</span>
+
+<span class="sd">        Paramters</span>
+<span class="sd">        ---------</span>
+<span class="sd">        to_numpy: bool, Optional</span>
+<span class="sd">            If `True`, the result is a NumPy array, otherwise the raw results</span>
+<span class="sd">            are returned. Default is False.</span>
+<span class="sd">        compose: bool, Optional</span>
+<span class="sd">            If True, the result is one matrix, otherwise 4 submatrices. Only if &#39;to_numpy&#39; is `True`.</span>
+<span class="sd">            Default is True.</span>
+
+<span class="sd">        See also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :func:`ABDS`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">to_numpy</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ABDS</span><span class="p">(</span><span class="n">compose</span><span class="o">=</span><span class="n">compose</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">GetCustomStiffnessMatrix</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped</span><span class="o">.</span><span class="n">GetCustomStiffnessMatrix</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="IAxisVMDomain.coordinates"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<div class="viewcode-block" id="IAxisVMDomain.coordinates"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;global&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PointCloud</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the coordinates of the points related to the domain.</span>
+<span class="sd">        Returns the coordinates of the points related to the domain</span>
+<span class="sd">        as an instance of :class:`sigmaepsilon.mesh.space.PointCloud`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
         <span class="n">topo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">topo</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">frame</span> <span class="o">==</span> <span class="s1">&#39;global&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">frame</span> <span class="o">==</span> <span class="s2">&quot;global&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">coords</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">frame</span> <span class="o">==</span> <span class="s1">&#39;local&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">frame</span> <span class="o">==</span> <span class="s2">&quot;local&quot;</span><span class="p">:</span>
             <span class="n">source</span> <span class="o">=</span> <span class="n">CartesianFrame</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
             <span class="n">target</span> <span class="o">=</span> <span class="n">CartesianFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrix</span><span class="p">())</span>
             <span class="k">return</span> <span class="n">PointCloud</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">frame</span><span class="o">=</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;frame&#39; must be &#39;local&#39; or &#39;global&#39;&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="IAxisVMDomain.topology"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.topology">[docs]</a>    <span class="k">def</span> <span class="nf">topology</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopologyArray</span><span class="p">:</span>
+<div class="viewcode-block" id="IAxisVMDomain.topology"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.topology">[docs]</a>    <span class="k">def</span> <span class="nf">topology</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopologyArray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the topology of the domain as a :class:`polymesh.topo.TopologyArray`.</span>
+<span class="sd">        Returns the topology of the domain as a :class:`sigmaepsilon.mesh.TopologyArray`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">axms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Surfaces</span><span class="o">.</span><span class="n">_wrapped</span>
         <span class="n">sIDs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MeshSurfaceIds</span>
-        <span class="k">def</span> <span class="nf">fnc_corner</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">axms</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">GetContourPoints</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">def</span> <span class="nf">fnc_mid</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">axms</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">GetMidPoints</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">def</span> <span class="nf">fnc</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="n">fnc_corner</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">fnc_mid</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">fnc_corner</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">axms</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">GetContourPoints</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">def</span> <span class="nf">fnc_mid</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">axms</span><span class="o">.</span><span class="n">Item</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">GetMidPoints</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">def</span> <span class="nf">fnc</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fnc_corner</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">fnc_mid</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">TopologyArray</span><span class="p">(</span><span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">fnc</span><span class="p">,</span> <span class="n">sIDs</span><span class="p">))))</span></div>
 
-<div class="viewcode-block" id="IAxisVMDomain.surface_coordinates"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.surface_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">surface_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">:</span>
+<div class="viewcode-block" id="IAxisVMDomain.surface_coordinates"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.surface_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">surface_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the coordinates for each surface of the domain as an </span>
+<span class="sd">        Returns the coordinates for each surface of the domain as an</span>
 <span class="sd">        :class:`awkward.Array` instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">recs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMeshSurfacesCoordinates</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">RSurfaceCoordinates2list</span><span class="p">,</span> <span class="n">recs</span><span class="p">)))</span></div>
 
-<div class="viewcode-block" id="IAxisVMDomain.detach_mesh"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.detach_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">detach_mesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triangulate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_indices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> \
-            <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PointCloud</span><span class="p">,</span> <span class="n">TopologyArray</span><span class="p">]:</span>
+<div class="viewcode-block" id="IAxisVMDomain.detach_mesh"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.detach_mesh">[docs]</a>    <span class="k">def</span> <span class="nf">detach_mesh</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">triangulate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">return_indices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PointCloud</span><span class="p">,</span> <span class="n">TopologyArray</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the coordinate and topology arrays of the domain,</span>
 <span class="sd">        detached from the structure.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        triangulate: bool, Optional</span>
+<span class="sd">            If `True` the domain is first triangulated. Default is `False`.</span>
+<span class="sd">        return_indices: bool, Optional</span>
+<span class="sd">            If `True` the original node indices are also returned. Default is `False`.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        Tuple[PointCloud, TopologyArray]</span>
 <span class="sd">            The points and the topology as arrays.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">topo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span>
         <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">topo</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
@@ -271,57 +657,62 @@
             <span class="k">return</span> <span class="n">coords</span><span class="p">,</span> <span class="n">topo</span><span class="p">,</span> <span class="n">inds</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">coords</span><span class="p">,</span> <span class="n">topo</span></div>
 
-<div class="viewcode-block" id="IAxisVMDomain.plot"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">):</span>
+<div class="viewcode-block" id="IAxisVMDomain.plot"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots the surface using `matplotlib`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        **mpl_kw : dict, Optional</span>
-<span class="sd">            Parameters to pass to :func:`dewloosh.mpl.triplot`</span>
-
+<span class="sd">        **mpl_kw: dict, Optional</span>
+<span class="sd">            Parameters to pass to :func:`~sigmaepsilon.mesh.plotting.mpl.triplot_mpl_mesh`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">coords</span><span class="p">,</span> <span class="n">topo</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detach_mesh</span><span class="p">(</span>
-            <span class="n">return_indices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">triangulate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">coords</span><span class="p">,</span> <span class="n">topo</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detach_mesh</span><span class="p">(</span><span class="n">return_indices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">triangulate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">triobj</span> <span class="o">=</span> <span class="n">tri</span><span class="o">.</span><span class="n">Triangulation</span><span class="p">(</span><span class="n">coords</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">triangles</span><span class="o">=</span><span class="n">topo</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mpl_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">mpl_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;on&#39;</span><span class="p">)</span>
-        <span class="n">triplot</span><span class="p">(</span><span class="n">triobj</span><span class="p">,</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">)</span></div>
+            <span class="n">mpl_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+        <span class="n">triplot_mpl_mesh</span><span class="p">(</span><span class="n">triobj</span><span class="p">,</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="IAxisVMDomain.plot_dof_solution"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_dof_solution">[docs]</a>    <span class="k">def</span> <span class="nf">plot_dof_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span> <span class="n">mpl_kw</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                          <span class="n">DisplacementSystem</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="IAxisVMDomain.plot_dof_solution"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_dof_solution">[docs]</a>    <span class="k">def</span> <span class="nf">plot_dof_solution</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="n">component</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ez&quot;</span><span class="p">,</span>
+        <span class="n">mpl_kw</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">displacement_system</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots the degree of freedom solution of a domain using `matplotlib`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        component : str, Optional</span>
+<span class="sd">        component: str, Optional</span>
 <span class="sd">            Possible options are:</span>
 
-<span class="sd">                &#39;ex&#39; or &#39;ux&#39; : displacement in X direction</span>
-
-<span class="sd">                &#39;ey&#39; or &#39;uy&#39; : displacement in Y direction</span>
-
-<span class="sd">                &#39;ez&#39; or &#39;uz&#39; : displacement in Z direction</span>
-
-<span class="sd">                &#39;fx&#39; or &#39;rotx&#39; : rotation around X</span>
-
-<span class="sd">                &#39;fy&#39; or &#39;roty&#39; : rotation around Y</span>
-
-<span class="sd">                &#39;fz&#39; or &#39;rotz&#39; : rotation around Z</span>
+<span class="sd">            * &#39;ex&#39; or &#39;ux&#39; : displacement in X direction</span>
+<span class="sd">            * &#39;ey&#39; or &#39;uy&#39; : displacement in Y direction</span>
+<span class="sd">            * &#39;ez&#39; or &#39;uz&#39; : displacement in Z direction</span>
+<span class="sd">            * &#39;fx&#39; or &#39;rotx&#39; : rotation around X</span>
+<span class="sd">            * &#39;fy&#39; or &#39;roty&#39; : rotation around Y</span>
+<span class="sd">            * &#39;fz&#39; or &#39;rotz&#39; : rotation around Z</span>
 
 <span class="sd">            Default is &#39;ez&#39;.</span>
-
-<span class="sd">        DisplacementSystem : int, Optional</span>
-<span class="sd">            Sets the coordinate system in which results are to be returned.</span>
-<span class="sd">            Default is 1, which means the global system.</span>
-
+<span class="sd">        displacement_system: Union[str, int], Optional</span>
+<span class="sd">            Sets the displacement system in which results are to be returned. Possible values</span>
+<span class="sd">            are 1 (or &#39;global) and 0 (or &#39;local&#39;). Default is 1, which means the global system.</span>
 <span class="sd">        **mpl_kw : dict, Optional</span>
-<span class="sd">            Parameters to pass to :func:`dewloosh.mpl.triplot`</span>
+<span class="sd">            Parameters to pass to :func:`~sigmaepsilon.mesh.plotting.mpl.triplot_mpl_data`</span>
+<span class="sd">        *args</span>
+<span class="sd">            Forwarded to :function:`~axisvm.com.axmodel.IAxisVMModel.dof_solution`.</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Forwarded to :function:`~axisvm.com.axmodel.IAxisVMModel.dof_solution`.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 <span class="sd">        This call does not require AxisVM to be visible.</span>
+
+<span class="sd">        See also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :function:`~axisvm.com.axmodel.IAxisVMModel.dof_solution`</span>
 
 <span class="sd">        Example</span>
 <span class="sd">        -------</span>
@@ -351,68 +742,69 @@
 <span class="sd">        Finally, close the application.</span>
 
 <span class="sd">        &gt;&gt;&gt; axvm.Quit()</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">axm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
-        <span class="n">dofsol</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">dof_solution</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">DisplacementSystem</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">coords</span><span class="p">,</span> <span class="n">topo</span><span class="p">,</span> <span class="n">inds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detach_mesh</span><span class="p">(</span><span class="n">return_indices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                              <span class="n">triangulate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">axm</span><span class="p">:</span> <span class="n">AxWrapper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="n">dofsol</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">dof_solution</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">displacement_system</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">coords</span><span class="p">,</span> <span class="n">topo</span><span class="p">,</span> <span class="n">inds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detach_mesh</span><span class="p">(</span><span class="n">return_indices</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">triangulate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">triobj</span> <span class="o">=</span> <span class="n">tri</span><span class="o">.</span><span class="n">Triangulation</span><span class="p">(</span><span class="n">coords</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">triangles</span><span class="o">=</span><span class="n">topo</span><span class="p">)</span>
-        <span class="n">dofsol</span> <span class="o">=</span> <span class="n">dofsol</span><span class="p">[</span><span class="n">inds</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">mpl_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">mpl_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nlevels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;on&#39;</span><span class="p">,</span>
-                          <span class="n">offset</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">cbpad</span><span class="o">=</span><span class="s1">&#39;10%&#39;</span><span class="p">,</span> <span class="n">cbsize</span><span class="o">=</span><span class="s1">&#39;10%&#39;</span><span class="p">,</span>
-                          <span class="n">cbpos</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">DisplacementSystem</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">DisplacementSystem</span> <span class="o">==</span> <span class="s1">&#39;local&#39;</span><span class="p">:</span>
-                <span class="n">DisplacementSystem</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">DisplacementSystem</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">dofsol</span> <span class="o">=</span> <span class="n">dofsol</span><span class="p">[</span><span class="n">inds</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">displacement_system</span> <span class="o">=</span> <span class="n">_DisplacementSystem</span><span class="p">(</span><span class="n">displacement_system</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">displacement_system</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">source</span> <span class="o">=</span> <span class="n">CartesianFrame</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
             <span class="n">target</span> <span class="o">=</span> <span class="n">CartesianFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrix</span><span class="p">())</span>
             <span class="n">dofsol</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="n">dofsol</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">frame</span><span class="o">=</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
             <span class="n">dofsol</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="n">dofsol</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">frame</span><span class="o">=</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">dcomp2int</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
-        <span class="c1">#min, max = minmax(dofsol[:, i])</span>
+        <span class="n">component_index</span> <span class="o">=</span> <span class="n">dcomp2int</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mpl_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mpl_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">nlevels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;jet&quot;</span><span class="p">,</span>
+                <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
+                <span class="n">offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                <span class="n">cbpad</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">,</span>
+                <span class="n">cbsize</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">,</span>
+                <span class="n">cbpos</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
         <span class="n">compstr</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">,</span> <span class="n">compstr</span><span class="p">]</span>
         <span class="n">tmpl</span> <span class="o">=</span> <span class="s2">&quot;Domain </span><span class="si">{}</span><span class="s2"> - </span><span class="si">{}</span><span class="s2">&quot;</span>
-        <span class="n">mpl_kw</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
-        <span class="n">triplot</span><span class="p">(</span><span class="n">triobj</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dofsol</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">)</span></div>
+        <span class="n">mpl_kw</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
 
-<div class="viewcode-block" id="IAxisVMDomain.plot_forces"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_forces">[docs]</a>    <span class="k">def</span> <span class="nf">plot_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="s1">&#39;nx&#39;</span><span class="p">,</span> <span class="n">mpl_kw</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                    <span class="n">smoothen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">triplot_mpl_data</span><span class="p">(</span><span class="n">triobj</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dofsol</span><span class="p">[:,</span> <span class="n">component_index</span><span class="p">],</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IAxisVMDomain.plot_forces"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_forces">[docs]</a>    <span class="k">def</span> <span class="nf">plot_forces</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="n">component</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;nx&quot;</span><span class="p">,</span>
+        <span class="n">mpl_kw</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">smoothen</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots internal forces of a domain using `matplotlib`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        component : str, Optional</span>
+<span class="sd">        component: str, Optional</span>
 <span class="sd">            Possible options are:</span>
 
-<span class="sd">                &#39;nx&#39; : :math:`n_x` normal force</span>
-
-<span class="sd">                &#39;ny&#39; : :math:`n_y` normal force</span>
-
-<span class="sd">                &#39;nxy&#39; : :math:`n_{xy}` in plane shear force</span>
-
-<span class="sd">                &#39;mx&#39; : :math:`m_x` bending moment</span>
-
-<span class="sd">                &#39;my&#39; : :math:`m_y` bending moment</span>
-
-<span class="sd">                &#39;mxy&#39; : :math:`m_{xy}` twisting moment</span>
-
-<span class="sd">                &#39;vx&#39; or &#39;vxz&#39; : :math:`v_x` shear force</span>
-
-<span class="sd">                &#39;vy&#39; or &#39;vyz&#39; : :math:`v_y` shear force</span>
+<span class="sd">            * &#39;nx&#39; : :math:`n_x` normal force</span>
+<span class="sd">            * &#39;ny&#39; : :math:`n_y` normal force</span>
+<span class="sd">            * &#39;nxy&#39; : :math:`n_{xy}` in plane shear force</span>
+<span class="sd">            * &#39;mx&#39; : :math:`m_x` bending moment</span>
+<span class="sd">            * &#39;my&#39; : :math:`m_y` bending moment</span>
+<span class="sd">            * &#39;mxy&#39; : :math:`m_{xy}` twisting moment</span>
+<span class="sd">            * &#39;vx&#39; or &#39;vxz&#39; : :math:`v_x` shear force</span>
+<span class="sd">            * &#39;vy&#39; or &#39;vyz&#39; : :math:`v_y` shear force</span>
 
 <span class="sd">            Default is &#39;nx&#39;.</span>
-
-<span class="sd">        smoothen : int, Optional</span>
+<span class="sd">        smoothen: int, Optional</span>
 <span class="sd">            If the values should be smoothened or not. Default is False.</span>
-
-<span class="sd">        **mpl_kw : dict, Optional</span>
-<span class="sd">            Parameters to pass to :func:`dewloosh.mpl.triplot`</span>
-
+<span class="sd">        **mpl_kw: dict, Optional</span>
+<span class="sd">            Parameters to pass to :func:`~sigmaepsilon.mesh.plotting.mpl.triplot_mpl_data`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="ow">not</span> <span class="n">smoothen</span><span class="p">,</span> <span class="s2">&quot;Smoothing is not available at the moment.&quot;</span>
         <span class="n">axm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
@@ -421,67 +813,69 @@
         <span class="n">coords</span><span class="p">,</span> <span class="n">topo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detach_mesh</span><span class="p">(</span><span class="n">triangulate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">topo</span><span class="p">,</span> <span class="n">forces</span> <span class="o">=</span> <span class="n">triang</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">forces</span><span class="p">)</span>  <span class="c1"># triangulate with data</span>
         <span class="n">triobj</span> <span class="o">=</span> <span class="n">tri</span><span class="o">.</span><span class="n">Triangulation</span><span class="p">(</span><span class="n">coords</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">triangles</span><span class="o">=</span><span class="n">topo</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">mpl_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">mpl_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nlevels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;on&#39;</span><span class="p">,</span>
-                          <span class="n">offset</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">cbpad</span><span class="o">=</span><span class="s1">&#39;10%&#39;</span><span class="p">,</span> <span class="n">cbsize</span><span class="o">=</span><span class="s1">&#39;10%&#39;</span><span class="p">,</span>
-                          <span class="n">cbpos</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+            <span class="n">mpl_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">nlevels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;jet&quot;</span><span class="p">,</span>
+                <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
+                <span class="n">offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                <span class="n">cbpad</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">,</span>
+                <span class="n">cbsize</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">,</span>
+                <span class="n">cbpos</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">fcomp2int</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
-        <span class="c1">#min, max = minmax(forces[:, :3, i])</span>
         <span class="n">compstr</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">,</span> <span class="n">compstr</span><span class="p">]</span>
         <span class="n">tmpl</span> <span class="o">=</span> <span class="s2">&quot;Domain </span><span class="si">{}</span><span class="s2"> - </span><span class="si">{}</span><span class="s2">&quot;</span>
-        <span class="n">mpl_kw</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
-        <span class="n">triplot</span><span class="p">(</span><span class="n">triobj</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">forces</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">)</span></div>
+        <span class="n">mpl_kw</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
 
-<div class="viewcode-block" id="IAxisVMDomain.plot_stresses"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_stresses">[docs]</a>    <span class="k">def</span> <span class="nf">plot_stresses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">component</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">mpl_kw</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                      <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">triplot_mpl_data</span><span class="p">(</span><span class="n">triobj</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">forces</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IAxisVMDomain.plot_stresses"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.plot_stresses">[docs]</a>    <span class="k">def</span> <span class="nf">plot_stresses</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="n">component</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mpl_kw</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots internal forces of a domain using `matplotlib`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        component : str, Optional</span>
+<span class="sd">        component: str, Optional</span>
 <span class="sd">            Possible options are:</span>
 
-<span class="sd">                &#39;sxx&#39; : :math:`\\sigma_{x}` stress</span>
-
-<span class="sd">                &#39;syy&#39; : :math:`\\sigma_{y}` stress</span>
-
-<span class="sd">                &#39;sxy&#39; : :math:`\\tau_{xy}` stress</span>
-
-<span class="sd">                &#39;sxz&#39; : :math:`\\tau_{xz}` stress</span>
-
-<span class="sd">                &#39;syz&#39; : :math:`\\tau_{yz}` stress</span>
-
-<span class="sd">                &#39;svm&#39; : :math:`\\sigma_{VM}` Von-Mises stress</span>
-
-<span class="sd">                &#39;s1&#39; : :math:`\\sigma_{1}` 1st principal stress</span>
-
-<span class="sd">                &#39;s2&#39; : :math:`\\sigma_{2}` 2nd principal stress</span>
-
-<span class="sd">                &#39;as&#39; : :math:`\\alpha` principal direction angle</span>
+<span class="sd">            * &#39;sxx&#39; : :math:`\\sigma_{x}` stress</span>
+<span class="sd">            * &#39;syy&#39; : :math:`\\sigma_{y}` stress</span>
+<span class="sd">            * &#39;sxy&#39; : :math:`\\tau_{xy}` stress</span>
+<span class="sd">            * &#39;sxz&#39; : :math:`\\tau_{xz}` stress</span>
+<span class="sd">            * &#39;syz&#39; : :math:`\\tau_{yz}` stress</span>
+<span class="sd">            * &#39;svm&#39; : :math:`\\sigma_{VM}` Von-Mises stress</span>
+<span class="sd">            * &#39;s1&#39; : :math:`\\sigma_{1}` 1st principal stress</span>
+<span class="sd">            * &#39;s2&#39; : :math:`\\sigma_{2}` 2nd principal stress</span>
+<span class="sd">            * &#39;as&#39; : :math:`\\alpha` principal direction angle</span>
 
 <span class="sd">            Default is &#39;sxx_m_t&#39; for XLAM domains &#39;sxx&#39; otherwise.</span>
-
-<span class="sd">        source : str, Optional</span>
-<span class="sd">            Specifies the source of the possibe agents. Possible values are </span>
-<span class="sd">            &#39;m&#39; for bending and &#39;n&#39; for normal action. Only for XLAM domains. </span>
+<span class="sd">        source: str, Optional</span>
+<span class="sd">            Specifies the source of the possibe agents. Possible values are</span>
+<span class="sd">            &#39;m&#39; for bending and &#39;n&#39; for normal action. Only for XLAM domains.</span>
 <span class="sd">            Default is None.</span>
-
-<span class="sd">        z : str, Optional</span>
-<span class="sd">            Specifies the location along the thickness. Possible values are </span>
+<span class="sd">        z: str, Optional</span>
+<span class="sd">            Specifies the location along the thickness. Possible values are</span>
 <span class="sd">            &#39;t&#39; for top, &#39;b&#39; for bottom, &#39;m&#39; for middle and &#39;max&#39; for the location</span>
-<span class="sd">            where the value takes its maximum (only for shear stresses). </span>
+<span class="sd">            where the value takes its maximum (only for shear stresses).</span>
 <span class="sd">            Default is None.</span>
+<span class="sd">        **mpl_kw: dict, Optional</span>
+<span class="sd">            Parameters to pass to :func:`~sigmaepsilon.mesh.plotting.mpl.triplot_mpl_data`</span>
 
-<span class="sd">        **mpl_kw : dict, Optional</span>
-<span class="sd">            Parameters to pass to :func:`dewloosh.mpl.triplot`</span>
-<span class="sd">            </span>
 <span class="sd">        Import the necessary stuff,</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        </span>
 <span class="sd">        &gt;&gt;&gt; from axisvm.com.client import start_AxisVM</span>
 <span class="sd">        &gt;&gt;&gt; from axisvm import examples</span>
 <span class="sd">        &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
@@ -506,7 +900,6 @@
 <span class="sd">        Finally, close the application.</span>
 
 <span class="sd">        &gt;&gt;&gt; axvm.Quit()</span>
-<span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">smoothen</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">assert</span> <span class="ow">not</span> <span class="n">smoothen</span><span class="p">,</span> <span class="s2">&quot;Smoothing is not available at the moment.&quot;</span>
@@ -515,229 +908,295 @@
         <span class="n">topo</span><span class="p">,</span> <span class="n">stresses</span> <span class="o">=</span> <span class="n">triang</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">stresses</span><span class="p">)</span>  <span class="c1"># triangulate with data</span>
         <span class="n">triobj</span> <span class="o">=</span> <span class="n">tri</span><span class="o">.</span><span class="n">Triangulation</span><span class="p">(</span><span class="n">coords</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">triangles</span><span class="o">=</span><span class="n">topo</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mpl_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">mpl_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">nlevels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;on&#39;</span><span class="p">,</span>
-                          <span class="n">offset</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">cbpad</span><span class="o">=</span><span class="s1">&#39;10%&#39;</span><span class="p">,</span> <span class="n">cbsize</span><span class="o">=</span><span class="s1">&#39;10%&#39;</span><span class="p">,</span>
-                          <span class="n">cbpos</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+            <span class="n">mpl_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">nlevels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;jet&quot;</span><span class="p">,</span>
+                <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;on&quot;</span><span class="p">,</span>
+                <span class="n">offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                <span class="n">cbpad</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">,</span>
+                <span class="n">cbsize</span><span class="o">=</span><span class="s2">&quot;10%&quot;</span><span class="p">,</span>
+                <span class="n">cbpos</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">IsXLAM</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">component</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">component</span> <span class="o">+=</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+                <span class="n">component</span> <span class="o">+=</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">component</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">component</span> <span class="o">+=</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="n">component</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;sxx_m_t&#39;</span>
+                <span class="n">component</span> <span class="o">+=</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="n">component</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;sxx_m_t&quot;</span>
             <span class="n">ci</span> <span class="o">=</span> <span class="n">xlmscomp2int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">component</span> <span class="k">if</span> <span class="n">component</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;sxx&#39;</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">component</span> <span class="k">if</span> <span class="n">component</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;sxx&quot;</span>
             <span class="n">ci</span> <span class="o">=</span> <span class="n">scomp2int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
         <span class="n">compstr</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Index</span><span class="p">,</span> <span class="n">compstr</span><span class="p">,</span> <span class="n">z</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
         <span class="n">tmpl</span> <span class="o">=</span> <span class="s2">&quot;Domain </span><span class="si">{}</span><span class="s2"> - </span><span class="si">{}</span><span class="s2"> - </span><span class="si">{}</span><span class="s2">&quot;</span>
-        <span class="n">mpl_kw</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
-        <span class="n">triplot</span><span class="p">(</span><span class="n">triobj</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">stresses</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">ci</span><span class="p">],</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">)</span></div>
+        <span class="n">mpl_kw</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">triplot_mpl_data</span><span class="p">(</span><span class="n">triobj</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">stresses</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">ci</span><span class="p">],</span> <span class="o">**</span><span class="n">mpl_kw</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">surface_stresses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span>
-                         <span class="n">LoadCaseId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">LoadCombinationId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                         <span class="n">DisplacementSystem</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">surface_stresses</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">case</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">combination</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
+        <span class="n">load_case_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">load_combination_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">displacement_system</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">load_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mode_shape</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">time_step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">IsXLAM</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlam_surface_stresses</span><span class="p">(</span><span class="n">case</span><span class="o">=</span><span class="n">case</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="n">combination</span><span class="p">,</span>
-                                              <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">LoadCaseId</span><span class="p">,</span>
-                                              <span class="n">LoadCombinationId</span><span class="o">=</span><span class="n">LoadCombinationId</span><span class="p">,</span>
-                                              <span class="n">DisplacementSystem</span><span class="o">=</span><span class="n">DisplacementSystem</span><span class="p">,</span>
-                                              <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlam_surface_stresses</span><span class="p">(</span>
+                <span class="n">case</span><span class="o">=</span><span class="n">case</span><span class="p">,</span>
+                <span class="n">combination</span><span class="o">=</span><span class="n">combination</span><span class="p">,</span>
+                <span class="n">load_case_id</span><span class="o">=</span><span class="n">load_case_id</span><span class="p">,</span>
+                <span class="n">load_combination_id</span><span class="o">=</span><span class="n">load_combination_id</span><span class="p">,</span>
+                <span class="n">displacement_system</span><span class="o">=</span><span class="n">displacement_system</span><span class="p">,</span>
+                <span class="n">load_level</span><span class="o">=</span><span class="n">load_level</span><span class="p">,</span>
+                <span class="n">mode_shape</span><span class="o">=</span><span class="n">mode_shape</span><span class="p">,</span>
+                <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="n">axm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
-        <span class="n">stresses</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Stresses</span>
+        <span class="n">stresses</span><span class="p">:</span> <span class="n">AxisVMResultItem</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Stresses</span>
         <span class="n">sids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MeshSurfaceIds</span>
 
-        <span class="n">LoadCaseId</span><span class="p">,</span> <span class="n">LoadCombinationId</span> <span class="o">=</span> \
-            <span class="n">stresses</span><span class="o">.</span><span class="n">_get_case_or_component</span><span class="p">(</span><span class="n">case</span><span class="o">=</span><span class="n">case</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="n">combination</span><span class="p">,</span>
-                                            <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">LoadCaseId</span><span class="p">,</span>
-                                            <span class="n">LoadCombinationId</span><span class="o">=</span><span class="n">LoadCombinationId</span><span class="p">)</span>
+        <span class="n">load_case_id</span><span class="p">,</span> <span class="n">load_combination_id</span> <span class="o">=</span> <span class="n">stresses</span><span class="o">.</span><span class="n">_get_case_or_component</span><span class="p">(</span>
+            <span class="n">case</span><span class="o">=</span><span class="n">case</span><span class="p">,</span>
+            <span class="n">combination</span><span class="o">=</span><span class="n">combination</span><span class="p">,</span>
+            <span class="n">load_case_id</span><span class="o">=</span><span class="n">load_case_id</span><span class="p">,</span>
+            <span class="n">load_combination_id</span><span class="o">=</span><span class="n">load_combination_id</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">LoadCaseId</span><span class="p">,</span>
-            <span class="n">LoadCombinationId</span><span class="o">=</span><span class="n">LoadCombinationId</span><span class="p">,</span>
-            <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
-            <span class="n">DisplacementSystem</span><span class="o">=</span><span class="n">DisplacementSystem</span>
+            <span class="n">load_case_id</span><span class="o">=</span><span class="n">load_case_id</span><span class="p">,</span>
+            <span class="n">load_combination_id</span><span class="o">=</span><span class="n">load_combination_id</span><span class="p">,</span>
+            <span class="n">load_level</span><span class="o">=</span><span class="n">load_level</span><span class="p">,</span>
+            <span class="n">mode_shape</span><span class="o">=</span><span class="n">mode_shape</span><span class="p">,</span>
+            <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+            <span class="n">displacement_system</span><span class="o">=</span><span class="n">displacement_system</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">stresses</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">LoadCaseId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">def</span> <span class="nf">getter</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="n">stresses</span><span class="o">.</span><span class="n">SurfaceStressesByLoadCaseId</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">LoadCombinationId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">def</span> <span class="nf">getter</span><span class="p">(</span>
-                <span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="n">stresses</span><span class="o">.</span><span class="n">SurfaceStressesByLoadCombinationId</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">load_case_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="nf">getter</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">stresses</span><span class="o">.</span><span class="n">SurfaceStressesByLoadCaseId</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="n">load_combination_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="nf">getter</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">stresses</span><span class="o">.</span><span class="n">SurfaceStressesByLoadCombinationId</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
         <span class="n">foo</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">RSurfaceStresses2list</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">z</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="n">getter</span><span class="p">,</span> <span class="n">sids</span><span class="p">))))</span>
 
-<div class="viewcode-block" id="IAxisVMDomain.xlam_surface_stresses"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.xlam_surface_stresses">[docs]</a>    <span class="k">def</span> <span class="nf">xlam_surface_stresses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                              <span class="n">LoadCaseId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">LoadCombinationId</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                              <span class="n">DisplacementSystem</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                              <span class="n">AnalysisType</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">frmt</span><span class="o">=</span><span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="IAxisVMDomain.xlam_surface_stresses"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomain.xlam_surface_stresses">[docs]</a>    <span class="k">def</span> <span class="nf">xlam_surface_stresses</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">case</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">combination</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">load_case_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">load_combination_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">load_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mode_shape</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">time_step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">displacement_system</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">analysis_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">frmt</span><span class="o">=</span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+        <span class="n">factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns XLAM stresses either as a :class:`numpy.ndarray` or as a dictionary.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        DisplacementSystem : int, Optional</span>
-<span class="sd">            0 for local, 1 for global. Default is 1.</span>
-<span class="sd">        </span>
-<span class="sd">        LoadCaseId : int, Optional</span>
+<span class="sd">        displacement_system: int, Optional</span>
+<span class="sd">            0 or &#39;local&#39; for local, 1 or &#39;global&#39; for global. Default is 1.</span>
+<span class="sd">        load_case_id: int, Optional</span>
 <span class="sd">            Default is None.</span>
-<span class="sd">            </span>
-<span class="sd">        LoadLevelOrModeShapeOrTimeStep : int, Optional</span>
+<span class="sd">        load_level: int, Optional</span>
 <span class="sd">            Default is None.</span>
-<span class="sd">            </span>
-<span class="sd">        LoadCombinationId : int, Optional</span>
+<span class="sd">        mode_shape: int, Optional</span>
 <span class="sd">            Default is None.</span>
-<span class="sd">            </span>
-<span class="sd">        case : Union[str, Iterable], Optional</span>
-<span class="sd">            The name of a loadcase or an iterable of indices. </span>
+<span class="sd">        time_step: int, Optional</span>
 <span class="sd">            Default is None.</span>
-<span class="sd">        </span>
-<span class="sd">        combination : str, Optional</span>
+<span class="sd">        load_combination_id: int, Optional</span>
+<span class="sd">            Default is None.</span>
+<span class="sd">        case: Union[str, Iterable], Optional</span>
+<span class="sd">            The name of a loadcase or an iterable of indices.</span>
+<span class="sd">            Default is None.</span>
+<span class="sd">        combination: str, Optional</span>
 <span class="sd">            The name of a load combination. Default is None.</span>
-<span class="sd">            </span>
-<span class="sd">        AnalysisType : int, Optional</span>
+<span class="sd">        analysis_type: int, Optional</span>
 <span class="sd">            Default is 0.</span>
-<span class="sd">            </span>
-<span class="sd">        frmt : str, Optional</span>
+<span class="sd">        frmt: str, Optional</span>
 <span class="sd">            Controls the type of the result. With &#39;array&#39; it is a</span>
-<span class="sd">            3d NumPy array, otherwise a dictionary. Default is &#39;array&#39;.</span>
-<span class="sd">        </span>
-<span class="sd">        factor : Iterable, Optional</span>
+<span class="sd">            3d Awkward array, otherwise a dictionary. Default is &#39;array&#39;.</span>
+<span class="sd">        factor: Iterable, Optional</span>
 <span class="sd">            Linear coefficients for the different load cases specified with &#39;case&#39;.</span>
 <span class="sd">            If &#39;case&#39; is an Iterable, &#39;factor&#39; must be an Iterable of the same shape.</span>
 <span class="sd">            Default is None.</span>
-<span class="sd">            </span>
+
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 <span class="sd">        1) It is the user who has to make sure that this call is only called on surfaces,</span>
 <span class="sd">        that belong to an XLAM domain.</span>
 <span class="sd">        2) The returned stresses do not belong to the same position.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        :class:`numpy.ndarray` or dict</span>
-<span class="sd">            If frmt is &#39;array&#39;, the result is a 2d float NumPy array of shape (nN, nX),</span>
+<span class="sd">        awkward.Array or dict</span>
+<span class="sd">            If frmt is &#39;array&#39;, the result is a 2d float Awkward array of shape (nN, nX),</span>
 <span class="sd">            where nN is the number of nodes of the surface and nX is the number of stress</span>
 <span class="sd">            components, which are:</span>
-<span class="sd">            </span>
-<span class="sd">                0 : :math:`\\sigma_{x}` stress at the top, from bending</span>
-<span class="sd">                </span>
-<span class="sd">                1 : :math:`\\sigma_{y}` stress at the top, from bending</span>
-<span class="sd">                </span>
-<span class="sd">                2 : :math:`\\tau_{xy}` stress at the top, from bending</span>
-<span class="sd">                </span>
-<span class="sd">                3 : :math:`\\sigma_{x}` stress at the bottom, from bending</span>
-<span class="sd">                </span>
-<span class="sd">                4 : :math:`\\sigma_{y}` stress at the bottom, from bending</span>
-<span class="sd">                </span>
-<span class="sd">                5 : :math:`\\tau_{xy}` stress at the bottom, from bending</span>
-<span class="sd">                </span>
-<span class="sd">                6 : max :math:`\\sigma_{x}` stress from stretching</span>
-<span class="sd">                </span>
-<span class="sd">                7 : max :math:`\\sigma_{y}` stress from stretching</span>
-<span class="sd">                </span>
-<span class="sd">                8 : max :math:`\\tau_{xy}` stress from stretching</span>
-<span class="sd">                </span>
-<span class="sd">                9 : max :math:`\\tau_{xz}` shear stress </span>
-<span class="sd">                </span>
-<span class="sd">                10 : max :math:`\\tau_{yz}` shear stress</span>
-<span class="sd">                </span>
-<span class="sd">                11 : max :math:`\\tau_{xz,r}` rolling shear stress </span>
-<span class="sd">                </span>
-<span class="sd">                12 : max :math:`\\tau_{yz,r}` rolling shear stress </span>
-<span class="sd">            </span>
+
+<span class="sd">            * 0 : :math:`\\sigma_{x}` stress at the top, from bending</span>
+<span class="sd">            * 1 : :math:`\\sigma_{y}` stress at the top, from bending</span>
+<span class="sd">            * 2 : :math:`\\tau_{xy}` stress at the top, from bending</span>
+<span class="sd">            * 3 : :math:`\\sigma_{x}` stress at the bottom, from bending</span>
+<span class="sd">            * 4 : :math:`\\sigma_{y}` stress at the bottom, from bending</span>
+<span class="sd">            * 5 : :math:`\\tau_{xy}` stress at the bottom, from bending</span>
+<span class="sd">            * 6 : max :math:`\\sigma_{x}` stress from stretching</span>
+<span class="sd">            * 7 : max :math:`\\sigma_{y}` stress from stretching</span>
+<span class="sd">            * 8 : max :math:`\\tau_{xy}` stress from stretching</span>
+<span class="sd">            * 9 : max :math:`\\tau_{xz}` shear stress</span>
+<span class="sd">            * 10 : max :math:`\\tau_{yz}` shear stress</span>
+<span class="sd">            * 11 : max :math:`\\tau_{xz,r}` rolling shear stress</span>
+<span class="sd">            * 12 : max :math:`\\tau_{yz,r}` rolling shear stress</span>
+
 <span class="sd">            If frmt is &#39;dict&#39;, the stresses are returned as a dictionary of 1d NumPy arrays,</span>
 <span class="sd">            where indices from 0 to 12 are the keys of the values at the corders.</span>
-<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">IsXLAM</span><span class="p">,</span> <span class="s2">&quot;This is not an XLAM domain!&quot;</span>
 
-        <span class="k">def</span> <span class="nf">ak2np</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span> <span class="k">return</span> <span class="n">ak</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">r</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-        <span class="k">def</span> <span class="nf">ad2d</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span> <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">ak2np</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">)}</span>
+        <span class="k">def</span> <span class="nf">ak2np</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ak</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">r</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">ad2d</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">ak2np</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">)}</span>
 
         <span class="k">if</span> <span class="n">issequence</span><span class="p">(</span><span class="n">case</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">assert</span> <span class="n">issequence</span><span class="p">(</span><span class="n">factor</span><span class="p">),</span> \
-                    <span class="s2">&quot;If &#39;case&#39; is an Iterable, &#39;factor&#39; must be an Iterable of the same shape.&quot;</span>
-                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">case</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">factor</span><span class="p">),</span> \
-                    <span class="s2">&quot;Lists &#39;case&#39; and &#39;factor&#39; must have equal lengths.&quot;</span>
-                <span class="n">res</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">xlam_surface_stresses</span><span class="p">(</span>
-                    <span class="n">case</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
-                    <span class="n">frmt</span><span class="o">=</span><span class="s1">&#39;array&#39;</span><span class="p">,</span>
-                    <span class="n">factor</span><span class="o">=</span><span class="n">f</span><span class="p">,</span>
-                    <span class="n">AnalysisType</span><span class="o">=</span><span class="n">AnalysisType</span><span class="p">,</span>
-                    <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
-                    <span class="n">DisplacementSystem</span><span class="o">=</span><span class="n">DisplacementSystem</span>
-                <span class="p">)</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">factor</span><span class="p">)])</span>
+                <span class="k">assert</span> <span class="n">issequence</span><span class="p">(</span>
+                    <span class="n">factor</span>
+                <span class="p">),</span> <span class="s2">&quot;If &#39;case&#39; is an Iterable, &#39;factor&#39; must be an Iterable of the same shape.&quot;</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">case</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span>
+                    <span class="n">factor</span>
+                <span class="p">),</span> <span class="s2">&quot;Lists &#39;case&#39; and &#39;factor&#39; must have equal lengths.&quot;</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">xlam_surface_stresses</span><span class="p">(</span>
+                            <span class="n">case</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                            <span class="n">frmt</span><span class="o">=</span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+                            <span class="n">factor</span><span class="o">=</span><span class="n">f</span><span class="p">,</span>
+                            <span class="n">analysis_type</span><span class="o">=</span><span class="n">analysis_type</span><span class="p">,</span>
+                            <span class="n">load_level</span><span class="o">=</span><span class="n">load_level</span><span class="p">,</span>
+                            <span class="n">mode_shape</span><span class="o">=</span><span class="n">mode_shape</span><span class="p">,</span>
+                            <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+                            <span class="n">displacement_system</span><span class="o">=</span><span class="n">displacement_system</span><span class="p">,</span>
+                        <span class="p">)</span>
+                        <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">xlam_surface_stresses</span><span class="p">(</span>
-                    <span class="n">case</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
-                    <span class="n">frmt</span><span class="o">=</span><span class="n">frmt</span><span class="p">,</span>
-                    <span class="n">factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-                    <span class="n">AnalysisType</span><span class="o">=</span><span class="n">AnalysisType</span><span class="p">,</span>
-                    <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
-                    <span class="n">DisplacementSystem</span><span class="o">=</span><span class="n">DisplacementSystem</span>
-                <span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">case</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">frmt</span> <span class="o">==</span> <span class="s1">&#39;dict&#39;</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">xlam_surface_stresses</span><span class="p">(</span>
+                        <span class="n">case</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                        <span class="n">frmt</span><span class="o">=</span><span class="n">frmt</span><span class="p">,</span>
+                        <span class="n">factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                        <span class="n">analysis_type</span><span class="o">=</span><span class="n">analysis_type</span><span class="p">,</span>
+                        <span class="n">load_level</span><span class="o">=</span><span class="n">load_level</span><span class="p">,</span>
+                        <span class="n">mode_shape</span><span class="o">=</span><span class="n">mode_shape</span><span class="p">,</span>
+                        <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+                        <span class="n">displacement_system</span><span class="o">=</span><span class="n">displacement_system</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">case</span>
+                <span class="p">]</span>
+            <span class="k">if</span> <span class="n">frmt</span> <span class="o">==</span> <span class="s2">&quot;dict&quot;</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">ad2d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">res</span>
 
-        <span class="n">axm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
-        <span class="n">stresses</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Stresses</span>
+        <span class="n">axm</span><span class="p">:</span> <span class="n">AxWrapper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+        <span class="n">stresses</span><span class="p">:</span> <span class="n">IAxisVMStresses</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Stresses</span>
         <span class="n">sids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MeshSurfaceIds</span>
 
-        <span class="n">LoadCaseId</span><span class="p">,</span> <span class="n">LoadCombinationId</span> <span class="o">=</span> \
-            <span class="n">stresses</span><span class="o">.</span><span class="n">_get_case_or_component</span><span class="p">(</span><span class="n">case</span><span class="o">=</span><span class="n">case</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="n">combination</span><span class="p">,</span>
-                                            <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">LoadCaseId</span><span class="p">,</span>
-                                            <span class="n">LoadCombinationId</span><span class="o">=</span><span class="n">LoadCombinationId</span><span class="p">)</span>
+        <span class="n">load_case_id</span><span class="p">,</span> <span class="n">load_combination_id</span> <span class="o">=</span> <span class="n">stresses</span><span class="o">.</span><span class="n">_get_case_or_component</span><span class="p">(</span>
+            <span class="n">case</span><span class="o">=</span><span class="n">case</span><span class="p">,</span>
+            <span class="n">combination</span><span class="o">=</span><span class="n">combination</span><span class="p">,</span>
+            <span class="n">load_case_id</span><span class="o">=</span><span class="n">load_case_id</span><span class="p">,</span>
+            <span class="n">load_combination_id</span><span class="o">=</span><span class="n">load_combination_id</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">LoadCaseId</span><span class="o">=</span><span class="n">LoadCaseId</span><span class="p">,</span>
-            <span class="n">LoadCombinationId</span><span class="o">=</span><span class="n">LoadCombinationId</span><span class="p">,</span>
-            <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="o">=</span><span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
-            <span class="n">DisplacementSystem</span><span class="o">=</span><span class="n">DisplacementSystem</span>
+            <span class="n">load_case_id</span><span class="o">=</span><span class="n">load_case_id</span><span class="p">,</span>
+            <span class="n">load_combination_id</span><span class="o">=</span><span class="n">load_combination_id</span><span class="p">,</span>
+            <span class="n">load_level</span><span class="o">=</span><span class="n">load_level</span><span class="p">,</span>
+            <span class="n">mode_shape</span><span class="o">=</span><span class="n">mode_shape</span><span class="p">,</span>
+            <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+            <span class="n">displacement_system</span><span class="o">=</span><span class="n">displacement_system</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">stresses</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">LoadCaseId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">getter</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get_xlam_strs_case</span><span class="p">,</span> <span class="n">stresses</span><span class="p">,</span> <span class="n">LoadCaseId</span><span class="p">,</span>
-                             <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span> <span class="n">AnalysisType</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">LoadCombinationId</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">getter</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get_xlam_strs_comb</span><span class="p">,</span> <span class="n">stresses</span><span class="p">,</span> <span class="n">LoadCombinationId</span><span class="p">,</span>
-                             <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span> <span class="n">AnalysisType</span><span class="p">)</span>
+        <span class="n">LoadLevelOrModeShapeOrTimeStep</span> <span class="o">=</span> <span class="n">_LoadLevelOrModeShapeOrTimeStep</span><span class="p">(</span>
+            <span class="n">load_level</span><span class="o">=</span><span class="n">load_level</span><span class="p">,</span>
+            <span class="n">mode_shape</span><span class="o">=</span><span class="n">mode_shape</span><span class="p">,</span>
+            <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">load_case_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">getter</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+                <span class="n">get_xlam_strs_case</span><span class="p">,</span>
+                <span class="n">stresses</span><span class="p">,</span>
+                <span class="n">load_case_id</span><span class="p">,</span>
+                <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
+                <span class="n">analysis_type</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">load_combination_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">getter</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+                <span class="n">get_xlam_strs_comb</span><span class="p">,</span>
+                <span class="n">stresses</span><span class="p">,</span>
+                <span class="n">load_combination_id</span><span class="p">,</span>
+                <span class="n">LoadLevelOrModeShapeOrTimeStep</span><span class="p">,</span>
+                <span class="n">analysis_type</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="n">foo</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">RXLAMSurfaceStresses2list</span><span class="p">)</span>
         <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="k">if</span> <span class="n">factor</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span>
         <span class="n">res</span> <span class="o">=</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="n">getter</span><span class="p">,</span> <span class="n">sids</span><span class="p">))))</span>
-        <span class="k">if</span> <span class="n">frmt</span> <span class="o">==</span> <span class="s1">&#39;dict&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">frmt</span> <span class="o">==</span> <span class="s2">&quot;dict&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">ad2d</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span></div>
 
-    <span class="k">def</span> <span class="nf">critical_xlam_surface_efficiencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">CombinationType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                           <span class="n">AnalysisType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Component</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                           <span class="n">MinMaxType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">critical_xlam_surface_efficiencies</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">combination_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">analysis_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">component</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">minmax_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">__</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="n">axm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
         <span class="n">stresses</span> <span class="o">=</span> <span class="n">axm</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Stresses</span>
 
         <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">sid</span><span class="p">):</span>
             <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-                <span class="n">SurfaceId</span><span class="o">=</span><span class="n">sid</span><span class="p">,</span> <span class="n">MinMaxType</span><span class="o">=</span><span class="n">MinMaxType</span><span class="p">,</span>
-                <span class="n">CombinationType</span><span class="o">=</span><span class="n">CombinationType</span><span class="p">,</span>
-                <span class="n">AnalysisType</span><span class="o">=</span><span class="n">AnalysisType</span><span class="p">,</span> <span class="n">Component</span><span class="o">=</span><span class="n">Component</span><span class="p">,</span>
+                <span class="n">SurfaceId</span><span class="o">=</span><span class="n">sid</span><span class="p">,</span>
+                <span class="n">MinMaxType</span><span class="o">=</span><span class="n">minmax_type</span><span class="p">,</span>
+                <span class="n">CombinationType</span><span class="o">=</span><span class="n">combination_type</span><span class="p">,</span>
+                <span class="n">AnalysisType</span><span class="o">=</span><span class="n">analysis_type</span><span class="p">,</span>
+                <span class="n">Component</span><span class="o">=</span><span class="n">component</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">rec</span> <span class="o">=</span> <span class="n">get_xlam_effs_crit</span><span class="p">(</span><span class="n">stresses</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">RXLAMSurfaceEfficiencies2list</span><span class="p">(</span><span class="n">rec</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">ak</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">inner</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">MeshSurfaceIds</span><span class="p">)))</span>
 
-    <span class="k">def</span> <span class="nf">critical_xlam_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">CombinationType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                           <span class="n">AnalysisType</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">critical_xlam_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">combination_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">analysis_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">__</span><span class="p">):</span>
         <span class="n">Surfaces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">Surfaces</span>
         <span class="n">dparams</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">MinMaxType</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">CombinationType</span><span class="o">=</span><span class="n">CombinationType</span><span class="p">,</span>
-            <span class="n">AnalysisType</span><span class="o">=</span><span class="n">AnalysisType</span><span class="p">,</span>
-            <span class="n">Component</span><span class="o">=</span><span class="mi">4</span>  <span class="c1"># xse_Max</span>
+            <span class="n">minmax_type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">combination_type</span><span class="o">=</span><span class="n">combination_type</span><span class="p">,</span>
+            <span class="n">analysis_type</span><span class="o">=</span><span class="n">analysis_type</span><span class="p">,</span>
+            <span class="n">component</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># xse_Max</span>
         <span class="p">)</span>
 
         <span class="n">sid</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">lc</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,)</span> <span class="o">*</span> <span class="mi">4</span>
@@ -747,24 +1206,24 @@
         <span class="n">imax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">eff_max</span><span class="p">)</span>
         <span class="n">csum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">cuts</span><span class="p">)</span>
         <span class="n">iS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">csum</span> <span class="o">&gt;</span> <span class="n">imax</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">iN</span> <span class="o">=</span> <span class="n">imax</span> <span class="o">-</span> <span class="n">csum</span><span class="p">[</span><span class="n">iS</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">iN</span> <span class="o">=</span> <span class="n">imax</span> <span class="o">-</span> <span class="n">csum</span><span class="p">[</span><span class="n">iS</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">sid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MeshSurfaceIds</span><span class="p">[</span><span class="n">iS</span><span class="p">]</span>
         <span class="n">nid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">topology</span><span class="p">()[</span><span class="n">iS</span><span class="p">,</span> <span class="n">iN</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">cuts</span><span class="p">[</span><span class="n">iS</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
-            <span class="n">SurfaceVertexType</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">iN</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">surface_vertex_type</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">iN</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="mi">1</span>
         <span class="k">elif</span> <span class="n">cuts</span><span class="p">[</span><span class="n">iS</span><span class="p">]</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
-            <span class="n">SurfaceVertexType</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">iN</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">surface_vertex_type</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">iN</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="k">else</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
         <span class="n">sparams</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">SurfaceVertexType</span><span class="o">=</span><span class="n">SurfaceVertexType</span><span class="p">,</span>
-            <span class="n">SurfaceVertexId</span><span class="o">=</span><span class="n">nid</span><span class="p">,</span>
-            <span class="n">MinMaxType</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">CombinationType</span><span class="o">=</span><span class="n">CombinationType</span><span class="p">,</span>
-            <span class="n">AnalysisType</span><span class="o">=</span><span class="n">AnalysisType</span><span class="p">,</span>
-            <span class="n">Component</span><span class="o">=</span><span class="mi">4</span>
+            <span class="n">surface_vertex_type</span><span class="o">=</span><span class="n">surface_vertex_type</span><span class="p">,</span>
+            <span class="n">surface_vertex_id</span><span class="o">=</span><span class="n">nid</span><span class="p">,</span>
+            <span class="n">minmax_type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">combination_type</span><span class="o">=</span><span class="n">combination_type</span><span class="p">,</span>
+            <span class="n">analysis_type</span><span class="o">=</span><span class="n">analysis_type</span><span class="p">,</span>
+            <span class="n">component</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">lc</span> <span class="o">=</span> <span class="n">Surfaces</span><span class="p">[</span><span class="n">sid</span><span class="p">]</span><span class="o">.</span><span class="n">critical_xlam_efficiency</span><span class="p">(</span><span class="o">**</span><span class="n">sparams</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">lc</span><span class="p">,</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">nid</span><span class="p">)</span>
@@ -782,7 +1241,7 @@
         <span class="k">return</span> <span class="n">attrs</span></div>
 
 
-<div class="viewcode-block" id="IAxisVMDomains"><a class="viewcode-back" href="../../../api_axisvm.html#axisvm.com.axdomain.IAxisVMDomains">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMDomains</span><span class="p">(</span><span class="n">AxisVMModelItems</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="IAxisVMDomains"><a class="viewcode-back" href="../../../api/api_axisvm.html#axisvm.com.axdomain.IAxisVMDomains">[docs]</a><span class="k">class</span> <span class="nc">IAxisVMDomains</span><span class="p">(</span><span class="n">AxisVMModelItems</span><span class="p">,</span> <span class="n">SurfaceMixin</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for the `IAxisVMDomains` COM interface.&quot;&quot;&quot;</span>
 
     <span class="n">__itemcls__</span> <span class="o">=</span> <span class="n">IAxisVMDomain</span>
@@ -792,11 +1251,11 @@
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrices</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">frames</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">frames</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_matrices</span><span class="p">()</span>
 
     <span class="nd">@property</span>
@@ -808,18 +1267,18 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_domain_attributes</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">XLAMItems</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">XLAMItems</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">IAxisVMDomain</span><span class="p">]:</span>
         <span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">IsXLAM</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">Index</span><span class="p">],</span> <span class="bp">self</span><span class="p">[:])</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">XLAMCount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">XLAMCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">XLAMItems</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">topology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span>  <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopologyArray</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">topology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopologyArray</span><span class="p">:</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">topology</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ndarray</span><span class="p">):</span>
             <span class="n">ids</span> <span class="o">=</span> <span class="n">i</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
@@ -832,7 +1291,7 @@
         <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">BulkGetDomains</span><span class="p">([</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ndarray</span><span class="p">):</span>
             <span class="n">ids</span> <span class="o">=</span> <span class="n">i</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
@@ -841,10 +1300,11 @@
                 <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Count</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">BulkGetDomains</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_domain_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                              <span class="n">rec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxisVMAttributes</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_domain_attributes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxisVMAttributes</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">fields</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">fields</span> <span class="o">=</span> <span class="n">surface_attr_fields</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;LineIdCounts&#39;</span><span class="p">,</span> <span class="s1">&#39;BulkLineIds&#39;</span><span class="p">]</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="n">surface_attr_fields</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;LineIdCounts&quot;</span><span class="p">,</span> <span class="s2">&quot;BulkLineIds&quot;</span><span class="p">]</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">fields</span><span class="p">]</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
@@ -856,12 +1316,13 @@
             <span class="k">return</span> <span class="n">rec</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">LineIdCounts</span><span class="p">,</span> <span class="n">BulkLineIds</span><span class="p">,</span> <span class="n">SurfaceAttrs</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">rec</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">get_surface_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="n">SurfaceAttrs</span><span class="p">,</span>
-                                          <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="k">if</span> <span class="s1">&#39;LineIdCounts&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
-                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;LineIdCounts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">LineIdCounts</span>
-            <span class="k">if</span> <span class="s1">&#39;BulkLineIds&#39;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
-                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;BulkLineIds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">BulkLineIds</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">get_surface_attributes</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="n">SurfaceAttrs</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;LineIdCounts&quot;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;LineIdCounts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">LineIdCounts</span>
+            <span class="k">if</span> <span class="s2">&quot;BulkLineIds&quot;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;BulkLineIds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">BulkLineIds</span>
             <span class="k">return</span> <span class="n">AxisVMAttributes</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AxisVMAttributes</span><span class="p">:</span>
@@ -874,31 +1335,74 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_domain_attributes</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 </pre></div>
 
-           </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
           </div>
-          <footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2014-2023, Bence Balogh.</p>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
   </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
 
-</footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+  <p class="copyright">
+    
+      © Copyright 2014-2023, Bence Balogh.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
 
-</body>
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>
